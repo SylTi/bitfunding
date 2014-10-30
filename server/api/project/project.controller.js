@@ -104,7 +104,6 @@ exports.contribute = function(req, res)
               });
           });
         });
-      
     }
     else
     {
