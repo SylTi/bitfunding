@@ -11,7 +11,7 @@ angular.module('bitCrowdFundsApp')
     $scope.contribute = function(contribAmount)
     {
     	console.log("test");
-    	$http.post('api/projects/'+$scope.projectName+'/contrib', {user: currentUser, amount: $scope.contribAmount})
+    	$http.post('api/projects/'+$scope.projectName+'/contrib', {userId: currentUser._id, amount: $scope.contribAmount})
     	.success(function(data, status, headers, config)
     	{
     		$scope.resContrib = 'Vous avez contribué '+$scope.contribAmount+' BTC to ' + $scope.projectName;

@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 var ProjectSchema = new Schema({
   name: String,
@@ -10,6 +11,8 @@ var ProjectSchema = new Schema({
   dateEndCampaign: Date,
   amoutToRaise: Number,
   amountRaised: Number,
+  contributors: [{contribId: ObjectId, amount: Number}],
+  OwnerBTCKey: { type: String, default: ""},
   Owner: String,
   active: Boolean
 });
