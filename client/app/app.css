@@ -49,12 +49,33 @@ a.navbar-brand img {
 }
 
 .hero-unit {
-    background-color: #F89D30 !important;
+    background-color: transparent !important;
+    background-image:url('/assets/images/hero-bg.jpg') !important;
+    background-size: cover !important;
+    background-position-y: 70% !important;
+
 }
 
+.hero-unit .container {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
 .hero-unit .container h1 {
     color:white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .hero-unit .container .fa-4x {
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
 }

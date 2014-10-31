@@ -3,5 +3,5 @@
 angular.module('bitCrowdFundsApp')
   .controller('ProjectsCtrl', function ($scope, ProjectRes) {
     $scope.message = 'Hello';
-    $scope.projectsList = ProjectRes.query_featured();
+    $scope.projectsList = ProjectRes.query();
   });

@@ -1,9 +1,10 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-  .row
+  .row.row-centered
     .col-sm-12
       h1 Sign up
-    .col-sm-12
+      br
+    .col-sm-4.col-centered.well.col-sm-offset-4
       form.form(name='form', ng-submit='register(form)', novalidate='')
         .form-group(ng-class='{ "has-success": form.name.$valid && submitted,\
         "has-error": form.name.$invalid && submitted }')
@@ -31,13 +32,12 @@ div(ng-include='"components/navbar/navbar.html"')
             | Password must be at least 3 characters.
           p.help-block(ng-show='form.password.$error.mongoose')
             | {{ errors.password }}
-
+        br
         div
-          button.btn.btn-inverse.btn-lg.btn-login(type='submit')
-            | Sign up
-          = ' '
-          a.btn.btn-default.btn-lg.btn-register(href='/login')
-            | Login
+          button.btn.btn-warning.btn-login.btn-block(type='submit')
+            |  Sign up and get funded
+    .col-sm-4.col-centered.col-sm-offset-4.text-center
+      a(href='/login') Already have an account ?
 
-
+  br
   hr

@@ -16,11 +16,6 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
 
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/projects")}')
           a(ng-href='/projects') Projects
-        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/addproject")}')
-          a(ng-href='/addproject') Add Project
-
-        li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}')
-          a(href='/admin') Admin
 
       ul.nav.navbar-nav.navbar-right
         li(ng-hide='isLoggedIn()', ng-class='{active: isActive("/signup")}')
@@ -30,11 +25,22 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
           a(href='/login') Login
 
         li(ng-show='isLoggedIn()')
-          p.navbar-text Hello {{ getCurrentUser().name }}
+          p.navbar-text 
+            span Welcome, {{ getCurrentUser().name }} 
+            span.text-muted(ng-show='isAdmin()') [admin]
 
-        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}')
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/addproject")}', tooltip-placement="bottom", tooltip="New project")
+          a(ng-href='/addproject')
+            span.glyphicon.glyphicon-plus.text-warning
+
+        li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}', tooltip-placement="bottom", tooltip="Admin Control Panel")
+          a(href='/admin')
+            span.glyphicon.glyphicon-lock
+
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}', tooltip-placement="bottom", tooltip="Settings")
           a(href='/settings')
             span.glyphicon.glyphicon-cog
 
-        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/logout")}')
-          a(href='', ng-click='logout()') Logout
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/logout")}', tooltip-placement="bottom", tooltip="Sign out")
+          a(href='', ng-click='logout()')
+            span.glyphicon.glyphicon-log-out
