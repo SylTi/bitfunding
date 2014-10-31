@@ -1,27 +1,40 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 header#banner.hero-unit
+  br
+  br
   .container
-    h1 Crowdfund your business. with Bitcoins.
+    h1 Crowdfund your project. With Bitcoins.
     p.lead Sign up, create your project, share it, and get BTC funds.
-    i.fa.fa-btc.fa-4x
+    //- i.fa.fa-btc.fa-4x
+  br
+  br
+  a.btn.btn-default.btn-lg(href='/signup') Get funded
+  br
+  br
 
 .container
   .row
     .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in awesomeThings')
-        li
-          a(href='#', tooltip='{{thing.info}}')
-            | {{thing.name}}
-            button.close(type='button', ng-click='deleteThing(thing)') ×
+      h1.page-header Featured Projects
+      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6
+        li(ng-repeat="proj in projectsList")
+          .panel.panel-warning
+            .panel-heading
+                h3.panel-title {{proj.name}}
+              .panel-body
+                | Panel content
+         
+    //-       a(href='#', tooltip='{{thing.info}}')
+    //-         | {{thing.name}}
+    //-         button.close(type='button', ng-click='deleteThing(thing)') ×
 
-  form.thing-form
-    label Syncs in realtime across clients
-    p.input-group
-      input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
+  //- form.thing-form
+  //-   label Syncs in realtime across clients
+  //-   p.input-group
+  //-     input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
+  //-     span.input-group-btn
+  //-       button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
 
 footer.footer
   .container

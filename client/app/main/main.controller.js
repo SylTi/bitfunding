@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('bitCrowdFundsApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, ProjectRes) {
+    $scope.projectsList = ProjectRes.query();
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
