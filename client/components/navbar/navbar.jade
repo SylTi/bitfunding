@@ -14,8 +14,10 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
           a(ng-href='{{item.link}}') {{item.title}}
 
-        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}')
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/projects")}')
           a(ng-href='/projects') Projects
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/addproject")}')
+          a(ng-href='/addproject') Add Project
 
         li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}')
           a(href='/admin') Admin

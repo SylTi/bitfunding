@@ -11,13 +11,16 @@ angular.module('bitCrowdFundsApp')
     $scope.contribute = function(contribAmount)
     {
     	console.log("test");
-    	$http.post('api/projects/'+$scope.projectName+'/contrib', {userId: currentUser._id, amount: $scope.contribAmount})
+    	$http.post('api/projects/'+$scope.projectName+'/contrib', {userId: currentUser._id, userName: currentUser.name, amount: $scope.contribAmount})
     	.success(function(data, status, headers, config)
     	{
-    		$scope.resContrib = 'Vous avez contribué '+$scope.contribAmount+' BTC to ' + $scope.projectName;
+    		$scope.resContrib = 'You just contributed '+$scope.contribAmount+' XBT to ' + $scope.projectName;
+    		//$scope.$apply();
+    		$scope.currentProject = data;
+    		console.log("contrib ok ");
     	}).error(function(data, status, headers, config)
     	{
-    		$scope.resContrib = 'Une erreur est survenue !';
+    		$scope.resContrib = 'Something wrong happend';
     	});
     }
   });
