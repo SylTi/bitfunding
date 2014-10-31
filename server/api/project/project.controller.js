@@ -29,9 +29,10 @@ exports.show = function(req, res) {
 
 // Creates a new project in the DB.
 exports.create = function(req, res) {
-  console.log(req.body);
   Project.create(req.body, function(err, project) {
-    if(err) { console.log(err); return handleError(res, err); }
+    if (err) { return handleError(res, err); }
+    if (!project) 
+      return handleError(res, err);
     return res.json(201, project);
   });
 };
@@ -53,10 +54,10 @@ exports.update = function(req, res) {
 // Deletes a project from the DB.
 exports.destroy = function(req, res) {
   Project.findById(req.params.id, function (err, project) {
-    if(err) { return handleError(res, err); }
-    if(!project) { return res.send(404); }
+    if(err) { console.log("find error : "+ err);return handleError(res, err); }
+    if(!project) { console.log("project error  ");return res.send(404); }
     project.remove(function(err) {
-      if(err) { return handleError(res, err); }
+      if(err) { console.log('==================='); console.log(err); return handleError(res, err); }
       return res.send(204);
     });
   });
