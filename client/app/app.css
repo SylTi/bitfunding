@@ -37,3 +37,24 @@
     color: #000;
     padding: 0.2em 0;
 }
+
+/**
+**  Customs
+**/
+
+a.navbar-brand img {
+    height:40px;
+    width:auto;
+    margin-top: -8px;
+}
+
+.hero-unit {
+    background-color: #F89D30 !important;
+}
+
+.hero-unit .container h1 {
+    color:white;
+}
+
+.hero-unit .container .fa-4x {
+}
