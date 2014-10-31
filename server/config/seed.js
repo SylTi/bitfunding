@@ -56,17 +56,19 @@ Project.find({}).remove(function() {
     name : 'Development Tools',
     description : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
     dateEndCampaign: '01/01/2018',
-    amoutToRaise: 100,
+    amountToRaise: 100,
     amountRaised: 0,
     Owner: 'admin',
+    OwnerBTCKey: '1Bfdfeeeffeefsefes',
     active: true
   }, {
     name : 'Server and Client integration',
     description : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.',
     dateEndCampaign: '01/01/2015',
-    amoutToRaise: 1000,
+    amountToRaise: 1000,
     amountRaised: 50,
     Owner: 'admin',
+    OwnerBTCKey: '1Bfdfeeeffeefsefes',
     active: true
   });
 });

@@ -5,16 +5,16 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.ObjectId;
 
 var ProjectSchema = new Schema({
-  name: String,
+  name: {type: String, required: true},
   description: String,
   dateCreat: { type: Date, default: Date.now },
-  dateEndCampaign: Date,
-  amoutToRaise: Number,
-  amountRaised: Number,
+  dateEndCampaign: {type: Date, required: true},
+  amountToRaise: {type: Number, required: true},
+  amountRaised: {type: Number, default: 0},
   contributors: [{contribId: ObjectId, amount: Number}],
-  OwnerBTCKey: { type: String, default: ""},
-  Owner: String,
-  active: Boolean
+  OwnerBTCKey: { type: String, default: "", required: true},
+  Owner: {type: String, required: true},
+  active: {type: Boolean, default: true}
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
