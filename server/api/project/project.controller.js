@@ -7,19 +7,28 @@ var User = require('../user/user.model');
 
 // Get list of projects
 exports.index = function(req, res) {
+
+  // Featured projects
+  if (req.query.hasOwnProperty('type') && req.query.type === 'featured')
+    return featured(req, res);
+
   Project.find(function (err, projects) {
     if(err) { return handleError(res, err); }
     return res.json(200, projects);
   });
 };
 
+// featured project list
+var featured = function(req, res) {
+  Project.find().sort({amountRaised : -1}).limit(3).exec(function (err, projects) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, projects);
+  });
+
+}
+
 // Get a single project
 exports.show = function(req, res) {
-/*  Project.findById(req.params.id, function (err, project) {
-    if(err) { return handleError(res, err); }
-    if(!project) { return res.send(404); }
-    return res.json(project);
-  });*/
   Project.findOne({name: req.params.id}, function (err, project) {
     if(err) { return handleError(res, err); }
     if(!project) { return res.send(404); }

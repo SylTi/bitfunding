@@ -20,7 +20,12 @@ angular.module('bitCrowdFundsApp')
       query:
       {
         method:'GET',
-        //params:{name:'index', currency2:'ltc'},
+        isArray:true
+      },
+      featured:
+      {
+        method:'GET',
+        params:{type:'featured'},
         isArray:true
       },
       update:

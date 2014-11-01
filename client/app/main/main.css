@@ -28,3 +28,14 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+.panel .panel-heading span.pull-right {
+    width:auto;
+}
+
+.panel .panel-heading .progress {
+    display: inline-block;
+    margin: 0 10px 0 10px;
+    vertical-align: bottom;
+    width: 300px;
+}

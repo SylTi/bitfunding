@@ -17,14 +17,31 @@ header#banner.hero-unit
   .row
     .col-lg-12
       h1.page-header Featured Projects
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6
-        li(ng-repeat="proj in projectsList")
-          .panel.panel-warning
-            .panel-heading
-                h3.panel-title {{proj.name}}
-              .panel-body
-                | Panel content
-         
+      .panel.panel-default(ng-repeat="proj in projectsList")
+        .panel-heading
+            h3.panel-title 
+              a(ng-href="/projects/{{proj.name}}") {{proj.name}}
+              &nbsp;
+              span.text-muted by {{proj.Owner}}
+              &nbsp;
+              span.label.label-warning Goal : {{proj.amountToRaise}} BTC
+              &nbsp;
+              span.label.label-success Raised {{proj.amountRaised}} BTC
+              span.pull-right
+                div.progress
+                  .progress-bar.progress-bar-success(style='width: {{100 * proj.amountRaised / proj.amountToRaise}}%;') {{100 * proj.amountRaised / proj.amountToRaise}}%
+          .panel-body
+            span {{proj.description}}
+            br
+            br
+            span.text-muted
+              span Project started 
+              b(am-time-ago="proj.dateCreat")
+              &nbsp;
+              span and finishing in 
+              b(am-time-ago="proj.dateEndCampaign")
+              &nbsp;
+              a.pull-right.btn.btn-default.btn-xs(ng-href="/projects/{{proj.name}}") See project page
     //-       a(href='#', tooltip='{{thing.info}}')
     //-         | {{thing.name}}
     //-         button.close(type='button', ng-click='deleteThing(thing)') ×
@@ -35,10 +52,6 @@ header#banner.hero-unit
   //-     input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
   //-     span.input-group-btn
   //-       button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
-
-.container
-    h1.page-header They talk about BitFunding.
-    #disqus_thread
 
 footer.footer
   .container
