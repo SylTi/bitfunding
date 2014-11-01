@@ -21,11 +21,11 @@ header#banner.hero-unit
         .panel-heading
             h3.panel-title 
               a(ng-href="/projects/{{proj.name}}") {{proj.name}}
-              &nbsp;
+               &nbsp;
               span.text-muted by {{proj.Owner}}
-              &nbsp;
+               &nbsp;
               span.label.label-warning Goal : {{proj.amountToRaise}} BTC
-              &nbsp;
+               &nbsp;
               span.label.label-success Raised {{proj.amountRaised}} BTC
               span.pull-right
                 div.progress
@@ -37,10 +37,10 @@ header#banner.hero-unit
             span.text-muted
               span Project started 
               b(am-time-ago="proj.dateCreat")
-              &nbsp;
+               &nbsp;
               span and finishing in 
               b(am-time-ago="proj.dateEndCampaign")
-              &nbsp;
+               &nbsp;
               a.pull-right.btn.btn-default.btn-xs(ng-href="/projects/{{proj.name}}") See project page
     //-       a(href='#', tooltip='{{thing.info}}')
     //-         | {{thing.name}}
