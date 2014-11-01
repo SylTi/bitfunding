@@ -2,7 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "/Users/hugolafitte/bitcrowfunding"
+			"follow_symlinks": true,
+			"path": "."
 		}
 	]
 }
