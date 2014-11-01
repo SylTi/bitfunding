@@ -16,5 +16,9 @@ angular.module('bitCrowdFundsApp')
         templateUrl: 'app/projects/project/project.html',
         controller: 'ProjectCtrl',
         authenticate: true
+      })
+      .when('/projects/:name/edit', {
+        templateUrl: 'app/projects/EditProject/EditProject.html',
+        controller: 'EditprojectCtrl'
       });
   });
