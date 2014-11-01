@@ -32,7 +32,7 @@ div(ng-include='"components/navbar/navbar.html"')
         div.project-state.well.text-center
           h2.text-success {{currentProject.amountRaised | toBTC}} BTC
           small raised of {{currentProject.amountToRaise | toBTC}} BTC goal.
-     .row
+    .row
         .col-md-12
           h2.page-header Contribute to this project
         .col-md-12
@@ -44,6 +44,8 @@ div(ng-include='"components/navbar/navbar.html"')
               button.btn.btn-default(type='button', ng-click="contribute()") Contribute
           div.alert.alert-info(ng-show="resContrib", style="margin-top:10px;") {{resContrib}}
     //- span(class="error", ng-show="myForm.input.$error.required") Required!<br>
-
-
-
+    .row
+      .col-lg-12
+        h2.page-header Discuss this project
+      .col-lg-12
+        div(disqus="('project' + currentProject._id)")

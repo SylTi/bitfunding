@@ -55,7 +55,11 @@ header#banner.hero-unit
                 h2.text-success {{proj.amountRaised | toBTC}} BTC
                 small raised of {{proj.amountToRaise | toBTC}} BTC goal.
               a.project-fund-btn.btn.btn-block.btn-warning(ng-href="/projects/{{proj.name}}") Fund this project.
-
+  .row
+    .col-lg-12
+      h1.page-header They talk about BitFunding.
+    .col-lg-12
+      div(disqus="'mainpage'")
 footer.footer
   .container
     p

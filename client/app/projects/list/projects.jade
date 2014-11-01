@@ -38,6 +38,11 @@ div(ng-include='"components/navbar/navbar.html"')
                 h2.text-success {{proj.amountRaised | toBTC}} BTC
                 small raised of {{proj.amountToRaise | toBTC}} BTC goal.
               a.project-fund-btn.btn.btn-block.btn-warning(ng-href="/projects/{{proj.name}}") Fund this project.
+  .row
+    .col-lg-12
+      h1.page-header Any project idea you want to discuss ?
+    .col-lg-12
+      div(disqus="'explore_projects'")
 
 footer.footer
   .container

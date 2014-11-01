@@ -9,18 +9,21 @@ angular.module('bitCrowdFundsApp', [
   'ui.bootstrap',
   'angularMoment',
   'ui.gravatar',
-  'angular-loading-bar'
+  'angular-loading-bar',
+  'ngDisqus'
 ])
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
   }])
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, $disqusProvider) {
     $routeProvider
       .otherwise({
         redirectTo: '/'
       });
 
+    $locationProvider.hashPrefix('!');
     $locationProvider.html5Mode(true);
+    $disqusProvider.setShortname('bitfunding')
     $httpProvider.interceptors.push('authInterceptor');
   })
 
@@ -50,7 +53,8 @@ angular.module('bitCrowdFundsApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, $window) {
+    $window.disqus_shortname = 'bitfunding';
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
