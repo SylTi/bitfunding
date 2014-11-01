@@ -8,7 +8,7 @@ div(ng-include='"components/navbar/navbar.html"')
     .col-md-12
       .panel.panel-default(ng-repeat="proj in projectsList")
         .panel-heading
-            h3.panel-title 
+            h3.panel-title
               i.fa.fa-folder-open.text-muted
               &nbsp;&nbsp;
               a(ng-href="/projects/{{proj.name}}") {{proj.name}}
@@ -20,14 +20,18 @@ div(ng-include='"components/navbar/navbar.html"')
           .panel-body
             div.row
             .col-lg-8
-              span {{proj.description}}
+              span {{proj.description | limitTo: 1000}}.
+              &nbsp;
+              a(ng-href="/projects/{{proj.name}}") See project page.
               br
               br
               span.text-muted
-                span Project started 
+                span Project started
+                &nbsp;
                 b(am-time-ago="proj.dateCreat")
                 &nbsp;
-                span and finishing in 
+                span and finishing
+                &nbsp;
                 b(am-time-ago="proj.dateEndCampaign")
             .col-lg-3.text-right
               div.project-state.well.text-center

@@ -37,14 +37,18 @@ header#banner.hero-unit
           .panel-body
             div.row
             .col-lg-8
-              span {{proj.description}}
+              span {{proj.description | limitTo: 1000}}.
+              &nbsp;
+              a(ng-href="/projects/{{proj.name}}") See project page.
               br
               br
               span.text-muted
                 span Project started
+                &nbsp;
                 b(am-time-ago="proj.dateCreat")
                 &nbsp;
-                span and finishing in
+                span and finishing
+                &nbsp;
                 b(am-time-ago="proj.dateEndCampaign")
             .col-lg-3.text-right
               div.project-state.well.text-center
