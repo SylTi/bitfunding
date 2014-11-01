@@ -48,13 +48,21 @@ exports.create = function(req, res) {
 
 // Updates an existing project in the DB.
 exports.update = function(req, res) {
-  console.log(req.body._id);
+  console.log(req.body);
  // if(req.body._id) { delete req.body._id; }
-  Project.findById(req.body._id, function (err, project) {
+  Project.findById(req.body.project._id, function (err, project) {
     if (err) { return handleError(res, err); }
     if(!project) { return res.send(404); }
-    var updated = _.merge(project, req.body);
-    updated.save(function (err) {
+    //var updated = _.merge(project, req.body);
+    console.log('================ HERE================');
+    if ((req.body.user.role != 'admin') && (req.body.user.name != project.Owner))
+      return res.send(550);
+    project.description = req.body.project.description;
+    project.dateEndCampaign = req.body.project.dateEndCampaign;
+    project.amountToRaise = req.body.project.amountToRaise;
+    project.OwnerBTCKey = req.body.project.OwnerBTCKey;
+
+    project.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, project);
     });

@@ -1,13 +1,17 @@
 'use strict';
 
 angular.module('bitCrowdFundsApp')
- .controller('EditprojectCtrl', function ($scope, $routeParams, $http, ProjectRes) 
+ .controller('EditprojectCtrl', function ($scope, $routeParams, $http, $location, ProjectRes, Auth) 
  {
 	$scope.message = '';
 	$scope.nameProject = $routeParams.name;
-	console.log($scope.nameProject);
+	var currentUser = Auth.getCurrentUser();
 	$scope.currentProject = ProjectRes.get({name: $scope.nameProject});
-	console.log($scope.currentProject);
+	
+	//var $scope.asAccess = false;
+	if (!(currentUser.role == 'admin') && !(currentUser.name == $scope.currentProject.name))
+		$location.path( "/projects" );
+
 	$scope.editProject = function ()
 	{
 		console.log($scope.currentProject);
@@ -16,7 +20,16 @@ angular.module('bitCrowdFundsApp')
 			return $scope.message = "Fail to update";
 		$scope.message = "Project updated";*/
 
-		$http.put('api/projects/'+$scope.nameProject, $scope.currentProject)
+		var obj = 
+		{
+			user: {
+				name: currentUser.name,
+				id: currentUser._id,
+				role: currentUser.role
+			},
+			project: $scope.currentProject
+		};
+		$http.put('api/projects/'+$scope.nameProject, obj)
 		.success(function(data, status, headers, config)
 		{
 			$scope.message = "Project updated";
