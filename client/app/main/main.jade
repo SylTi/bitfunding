@@ -1,6 +1,6 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-//- Fork me on github 
+//- Fork me on github
 a.hidden-xs(href='https://github.com/SylTi/bitcrowfunding', target='_blank')
   img(style='position: absolute; top: 50px; left: 0; border: 0; z-index: 1000;', src='https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67', alt='Fork me on GitHub', data-canonical-src='https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png')
 
@@ -14,6 +14,8 @@ header#banner.hero-unit
   br
   br
   a.btn.btn-default.btn-lg(href='/signup') Get funded
+  &nbsp;&nbsp;
+  a.btn.btn-warning.btn-lg(href='/projects') Explore projects
   br
   br
 
@@ -23,39 +25,32 @@ header#banner.hero-unit
       h1.page-header Featured Projects
       .panel.panel-default(ng-repeat="proj in projectsList")
         .panel-heading
-            h3.panel-title 
+            h3.panel-title
+              i.fa.fa-folder-open.text-muted
+              &nbsp;&nbsp;
               a(ng-href="/projects/{{proj.name}}") {{proj.name}}
-               &nbsp;
-              span.text-muted by {{proj.Owner}}
-               &nbsp;
-              span.label.label-warning Goal : {{proj.amountToRaise}} BTC
-               &nbsp;
-              span.label.label-success Raised {{proj.amountRaised}} BTC
+              &nbsp;
+              small.text-muted by {{proj.Owner}}
               span.pull-right
                 div.progress
                   .progress-bar.progress-bar-success(style='width: {{100 * proj.amountRaised / proj.amountToRaise}}%;') {{100 * proj.amountRaised / proj.amountToRaise}}%
           .panel-body
-            span {{proj.description}}
-            br
-            br
-            span.text-muted
-              span Project started 
-              b(am-time-ago="proj.dateCreat")
-               &nbsp;
-              span and finishing in 
-              b(am-time-ago="proj.dateEndCampaign")
-               &nbsp;
-              a.pull-right.btn.btn-default.btn-xs(ng-href="/projects/{{proj.name}}") See project page
-    //-       a(href='#', tooltip='{{thing.info}}')
-    //-         | {{thing.name}}
-    //-         button.close(type='button', ng-click='deleteThing(thing)') ×
-
-  //- form.thing-form
-  //-   label Syncs in realtime across clients
-  //-   p.input-group
-  //-     input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
-  //-     span.input-group-btn
-  //-       button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
+            div.row
+            .col-lg-8
+              span {{proj.description}}
+              br
+              br
+              span.text-muted
+                span Project started
+                b(am-time-ago="proj.dateCreat")
+                &nbsp;
+                span and finishing in
+                b(am-time-ago="proj.dateEndCampaign")
+            .col-lg-3.text-right
+              div.project-state.well.text-center
+                h2.text-success {{proj.amountRaised | toBTC}} BTC
+                small raised of {{proj.amountRaised | toBTC}} BTC goal.
+              a.project-fund-btn.btn.btn-block.btn-warning(ng-href="/projects/{{proj.name}}") Fund this project.
 
 footer.footer
   .container

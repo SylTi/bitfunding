@@ -87,3 +87,15 @@ a.navbar-brand img {
     border:1px solid #555;
     border-radius:2px;
 }
+
+div.well.project-state {
+    margin-top:1%;
+    width: 330px;
+    padding-bottom: 40px;
+    margin-bottom: 10px;
+}
+
+
+a.project-fund-btn {
+    width: 330px;
+}
