@@ -29,10 +29,18 @@ var featured = function(req, res) {
 
 // Get a single project
 exports.show = function(req, res) {
-  Project.findOne({name: req.params.id}, function (err, project) {
-    if(err) { return handleError(res, err); }
-    if(!project) { return res.send(404); }
-    return res.json(project);
+  Project.findOne({name: req.params.id}).lean().exec(function (err, project) {
+    // Attach user datas
+    User.findOne({name: project.Owner}, function(err_user, user) {
+      if (err || err_user) return next(err);
+      if (!project || !user) return res.json(401);
+      project.OwnerDatas = {
+        name : (user.name || ""),
+        email : (user.email || ""),
+        role : (user.role || "")
+      };
+      res.json(200, project);
+    });
   });
 };
 
@@ -40,7 +48,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Project.create(req.body, function(err, project) {
     if (err) { return handleError(res, err); }
-    if (!project) 
+    if (!project)
       return handleError(res, err);
     return res.json(201, project);
   });
@@ -86,7 +94,7 @@ function handleError(res, err) {
 }
 
 
-exports.contribute = function(req, res) 
+exports.contribute = function(req, res)
 {
   console.log("I CONTRIBUTE :!!!!!");
   var toContrib = Number(req.body.amount);

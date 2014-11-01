@@ -8,7 +8,7 @@ div(ng-include='"components/navbar/navbar.html"')
 			form.form(name='editProjectForm', novalidate='')
 				.form-group
 					label Description
-					textarea.form-control(name="description", ng-model='currentProject.description')
+					textarea.form-control(name="description", ng-model='currentProject.description', rows=10)
 				.form-group
 					label End date
 					input.form-control(type='text', name="dateEndCampaign", ng-model='currentProject.dateEndCampaign')

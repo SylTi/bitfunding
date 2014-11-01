@@ -2,12 +2,12 @@
 
 angular.module('bitCrowdFundsApp')
   .controller('ProjectCtrl', function ($scope, $http, $routeParams, ProjectRes, Auth) {
-    $scope.message = 'Hello';
-    $scope.projectName = $routeParams.projectName; 
-    $scope.currentProject = ProjectRes.get({name: $routeParams.projectName});
-    $scope.resContrib = "";
     var currentUser = Auth.getCurrentUser();
-    console.log(currentUser);
+    var datas = ProjectRes.get({name: $routeParams.projectName});
+    $scope.projectName = $routeParams.projectName;
+    $scope.currentProject = datas;
+    $scope.resContrib = "";
+
     $scope.contribute = function(contribAmount)
     {
     	console.log("test");

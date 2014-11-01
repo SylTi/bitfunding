@@ -99,3 +99,7 @@ div.well.project-state {
 a.project-fund-btn {
     width: 330px;
 }
+
+h1.page-header .btn {
+  margin-top: 10px;
+}

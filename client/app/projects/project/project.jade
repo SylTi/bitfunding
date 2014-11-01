@@ -1,16 +1,49 @@
 div(ng-include='"components/navbar/navbar.html"')
-.container
- .row		
-  .col-md-12(ng-controller="ProjectCtrl")
-   p.
-    Project name : {{projectName}}<br />
-    project data : {{currentProject}}
-   p  
-    form(no validate)
-     input(type="text", ng-model="contribAmount" required)
-     button(ng-click="contribute()") Contribute !
+.container(ng-controller="ProjectCtrl")
+ .row
+  .col-md-12
+    h1.page-header
+      i.fa.fa-book.text-muted
+      &nbsp;&nbsp;
+      span {{currentProject.name}}
+      &nbsp;
+      small by {{currentProject.Owner}}
+      &nbsp;
+      img.avatar(gravatar-src="'{{currentProject.OwnerDatas.email}}'", width=20)
+      a.pull-right.btn.btn-xs.btn-primary(ng-href="mailto:{{currentProject.Owner}}")
+        i.fa.fa-envelope
+        &nbsp;&nbsp;
+        span Contact {{currentProject.OwnerDatas.name}}
+    span.text-muted
+      span Project started
+      &nbsp;
+      b(am-time-ago="currentProject.dateCreat")
+      &nbsp;
+      span and finishing
+      &nbsp;
+      b(am-time-ago="currentProject.dateEndCampaign")
+      br
+      br
+    .row
+      .col-md-8
+        div.well
+          span {{currentProject.description}}
+      .col-md-4
+        div.project-state.well.text-center
+          h2.text-success {{currentProject.amountRaised | toBTC}} BTC
+          small raised of {{currentProject.amountToRaise | toBTC}} BTC goal.
+     .row
+        .col-md-12
+          h2.page-header Contribute to this project
+        .col-md-12
+          .input-group.col-md-6
+            span.input-group-addon
+              i.fa.fa-btc
+            input.form-control(type="text", ng-model="contribAmount" required, style="height: 37px;border-bottom-width:3px")
+            span.input-group-btn
+              button.btn.btn-default(type='button', ng-click="contribute()") Contribute
+          div.alert.alert-info(ng-show="resContrib", style="margin-top:10px;") {{resContrib}}
+    //- span(class="error", ng-show="myForm.input.$error.required") Required!<br>
 
-   span(class="error", ng-show="myForm.input.$error.required") Required!<br>
-   p {{resContrib}}
 
 

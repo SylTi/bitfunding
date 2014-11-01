@@ -26,7 +26,7 @@ header#banner.hero-unit
       .panel.panel-default(ng-repeat="proj in projectsList")
         .panel-heading
             h3.panel-title
-              i.fa.fa-folder-open.text-muted
+              i.fa.fa-book.text-muted
               &nbsp;&nbsp;
               a(ng-href="/projects/{{proj.name}}") {{proj.name}}
               &nbsp;
@@ -53,7 +53,7 @@ header#banner.hero-unit
             .col-lg-3.text-right
               div.project-state.well.text-center
                 h2.text-success {{proj.amountRaised | toBTC}} BTC
-                small raised of {{proj.amountRaised | toBTC}} BTC goal.
+                small raised of {{proj.amountToRaise | toBTC}} BTC goal.
               a.project-fund-btn.btn.btn-block.btn-warning(ng-href="/projects/{{proj.name}}") Fund this project.
 
 footer.footer

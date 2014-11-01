@@ -11,7 +11,7 @@ div(ng-include='"components/navbar/navbar.html"')
 					input.form-control(type='text', name='nameProject', ng-model='project.name', required='')
 				.form-group
 					label Project Description
-					textarea.form-control(name='descriptionProject', ng-model='project.description', required='')
+					textarea.form-control(name='descriptionProject', ng-model='project.description', required='', rows=10)
 				.form-group
 					label Project end date
 					input.form-control(name='dateEndCampaign', ng-model='project.dateEndCampaign', required='')
