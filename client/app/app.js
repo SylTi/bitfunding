@@ -7,7 +7,8 @@ angular.module('bitCrowdFundsApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'angularMoment'
+  'angularMoment',
+  'ui.gravatar'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

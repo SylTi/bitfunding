@@ -79,3 +79,11 @@ a.navbar-brand img {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.navbar img.avatar {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border:1px solid #555;
+    border-radius:2px;
+}
