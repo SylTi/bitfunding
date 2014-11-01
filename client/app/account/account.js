@@ -15,5 +15,10 @@ angular.module('bitCrowdFundsApp')
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .when('/dashboard', {
+        templateUrl: 'app/account/dashboard/dashboard.html',
+        controller: 'DashboardCtrl',
+        authenticate: true
       });
   });
