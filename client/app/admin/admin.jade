@@ -1,21 +1,47 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-  p
-    | The delete user and user index api routes are restricted to users with the 'admin' role.
-    ul.list-group
-      li.list-group-item(ng-repeat='user in users')
-        strong {{user.name}}
+  h1.page-header Admin Control Panel
+  h2.page-header Manage Users
+  ul.list-group
+    li.list-group-item(ng-repeat='user in users | orderBy:"role"')
+      span.pull-left
+        img.avatar(gravatar-src="'{{user.email}}'", width=40)
+        &nbsp;&nbsp;&nbsp;
+      span
+        strong
+          span {{user.name}}
+          &nbsp;
+          span.label.label-danger(ng-show="user.role == 'admin'") Admin
+          span.label.label-info(ng-show="user.role == 'user'") User
         br
-        span.text-muted {{user.email}}
+        small.text-warning {{user.balance | toBTC}} BTC
+        small.text-muted
+          &nbsp;&nbsp;
+          {{user.email}}
         a.trash(ng-click='delete(user)')
           span.glyphicon.glyphicon-trash.pull-right
-  p
-    | Delete Project
-    ul.list-group
-      li.list-group-item(ng-repeat='project in projects')
-        strong {{project.name}}
-        br
-        span.text-muted {{project.dateEndCampaign}}
+  h2.page-header Manage Projects
+  ul.list-group
+    li.list-group-item(ng-repeat='project in projects')
+      strong
+        span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
+        span.label.label-warning(ng-show="project.amountRaised !== 0 && project.amountRaised < project.amountToRaise") Ongoing
+        span.label.label-default(ng-show="project.amountRaised === 0") Not started
+        &nbsp;&nbsp;
+        span {{project.name}} ({{project.amountRaised | toBTC}} / {{project.amountToRaise | toBTC}})
+      br
+      small.text-muted
+        span Project created
+        &nbsp;
+        b(am-time-ago="project.dateCreat")
+        &nbsp;
+        span and finishing
+        &nbsp;
+        b(am-time-ago="project.dateEndCampaign")
+      .pull-right
+        a(ng-href='/projects/{{project.name}}/edit')
+          span.glyphicon.glyphicon-pencil
+        &nbsp;&nbsp;&nbsp;&nbsp;
         a.trash(ng-click='deleteProject(project)')
-          span.glyphicon.glyphicon-trash.pull-right
+          span.glyphicon.glyphicon-trash
     span.help-block  {{ message }}
