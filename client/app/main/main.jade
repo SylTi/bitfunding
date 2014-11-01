@@ -20,7 +20,9 @@ header#banner.hero-unit
       .panel.panel-default(ng-repeat="proj in projectsList")
         .panel-heading
             h3.panel-title 
-              span {{proj.name}}
+              a(ng-href="/projects/{{proj.name}}") {{proj.name}}
+              &nbsp;
+              span.text-muted by {{proj.Owner}}
               &nbsp;
               span.label.label-warning Goal : {{proj.amountToRaise}} BTC
               &nbsp;
@@ -30,6 +32,16 @@ header#banner.hero-unit
                   .progress-bar.progress-bar-success(style='width: {{100 * proj.amountRaised / proj.amountToRaise}}%;') {{100 * proj.amountRaised / proj.amountToRaise}}%
           .panel-body
             span {{proj.description}}
+            br
+            br
+            span.text-muted
+              span Project started 
+              b(am-time-ago="proj.dateCreat")
+              &nbsp;
+              span and finishing in 
+              b(am-time-ago="proj.dateEndCampaign")
+              &nbsp;
+              a.pull-right.btn.btn-default.btn-xs(ng-href="/projects/{{proj.name}}") See project page
     //-       a(href='#', tooltip='{{thing.info}}')
     //-         | {{thing.name}}
     //-         button.close(type='button', ng-click='deleteThing(thing)') ×
