@@ -8,8 +8,12 @@ angular.module('bitCrowdFundsApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'angularMoment',
-  'ui.gravatar'
+  'ui.gravatar',
+  'angular-loading-bar'
 ])
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .otherwise({
