@@ -3,7 +3,12 @@ div(ng-include='"components/navbar/navbar.html"')
 .container(ng-controller="DashboardCtrl")
   .row
     .col-md-12
-      h1.page-header Dashboard
+      h1.page-header
+        span Dashboard
+        a.pull-right.btn.btn-default.btn-sm(ng-href="/settings")
+          i.fa.fa-cog
+          &nbsp;&nbsp;
+          span Settings
       .col-md-6
         h2
           span My contributions
@@ -29,37 +34,51 @@ div(ng-include='"components/navbar/navbar.html"')
               &nbsp;&nbsp;
               i.fa.fa-btc
       .col-md-6
-        h2
-          span My Projects
-          span.text-success(ng-show="projects.length != 0") &nbsp;({{projects.length}} projects)
-        br
-        div.panel.panel-default(ng-show="projects.length == 0")
-          div.panel-heading
-            span No projects yet.
-          div.panel-body.text-center
-            span You have not created any projects.
+        .row
+          .col-md-12
+            h2
+              span My balance
             br
+            div.panel.panel-default
+              div.panel-heading Current BTC balance
+              div.panel-body.text-center
+                h2.text-default
+                  span {{userData.balance | toBTC}}
+                  &nbsp;
+                  i.fa.fa-btc.text-muted
+                br
+          .col-md-12
+            h2
+              span My projects
+              span.text-success(ng-show="projects.length != 0") &nbsp;({{projects.length}} projects)
             br
-            a.btn.btn-success(ng-href="/addproject") Create a project.
-        table.table.table-bordered.table-striped.table-hover(ng-show="projects.length != 0")
-          thead
-            tr
-              td Project name
-              td Status
-              td Funds
-              td Actions
-          tbody
-            tr(ng-repeat="proj in projects")
-              td
-                i.fa.fa-book.text-muted
-                &nbsp;&nbsp;
-                a(ng-href="/projects/{{proj.name}}") {{proj.name}}
-              td
-                span.label.label-success(ng-show="proj.amountRaised >= proj.amountToRaise") Finished
-                span.label.label-warning(ng-show="proj.amountRaised !== 0 && proj.amountRaised < proj.amountToRaise") Ongoing
-                span.label.label-default(ng-show="proj.amountRaised === 0") Not started
-              td
-                {{proj.amountRaised | toBTC}} / {{proj.amountToRaise | toBTC}} BTC
-              td.text-center
-                a(ng-href='/projects/{{proj.name}}/edit')
-                  span.glyphicon.glyphicon-pencil
+            div.panel.panel-default(ng-show="projects.length == 0")
+              div.panel-heading
+                span No projects yet.
+              div.panel-body.text-center
+                span You have not created any projects.
+                br
+                br
+                a.btn.btn-success(ng-href="/addproject") Create a project.
+            table.table.table-bordered.table-striped.table-hover(ng-show="projects.length != 0")
+              thead
+                tr
+                  td Project name
+                  td Status
+                  td Funds
+                  td Actions
+              tbody
+                tr(ng-repeat="proj in projects")
+                  td
+                    i.fa.fa-book.text-muted
+                    &nbsp;&nbsp;
+                    a(ng-href="/projects/{{proj.name}}") {{proj.name}}
+                  td
+                    span.label.label-success(ng-show="proj.amountRaised >= proj.amountToRaise") Finished
+                    span.label.label-warning(ng-show="proj.amountRaised !== 0 && proj.amountRaised < proj.amountToRaise") Ongoing
+                    span.label.label-default(ng-show="proj.amountRaised === 0") Not started
+                  td
+                    {{proj.amountRaised | toBTC}} / {{proj.amountToRaise | toBTC}} BTC
+                  td.text-center
+                    a(ng-href='/projects/{{proj.name}}/edit')
+                      span.glyphicon.glyphicon-pencil

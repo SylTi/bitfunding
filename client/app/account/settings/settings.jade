@@ -2,11 +2,7 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
   .row
     .col-sm-12
-      h1 Infos :
-      p.
-        Bitcoin Deposit Adress :<br />
-        <b>{{userData.bitcoinAddr}}</b>
-      p Balance : {{userData.balance | toBTC}} BTC
+      h1 My bitcoin payment address : {{userData.bitcoinAddr}}
   .row
     .col-sm-12
       h1 Change Password
