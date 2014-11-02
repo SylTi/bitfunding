@@ -30,7 +30,8 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li(ng-show='isLoggedIn()')
           p.navbar-text
             img.avatar(gravatar-src="'{{getCurrentUser().email}}'")
-            span Welcome, {{ getCurrentUser().name }} 
+            a(ng-href="/dashboard") {{ getCurrentUser().name }}
+            &nbsp;
             span.text-muted(ng-show='isAdmin()') [admin]
 
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/addproject")}', tooltip-placement="bottom", tooltip="New project")
