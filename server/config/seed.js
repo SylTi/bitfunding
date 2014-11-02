@@ -48,6 +48,14 @@ User.find({}).remove(function() {
   }, {
     provider: 'local',
     role: 'admin',
+    name: 'Admin',
+    email: 'admin@admin.com',
+    bitcoinAddr: '1Bssfhhghijfskdf',
+    balance: 25325400000,
+    password: 'admin'
+  }, {
+    provider: 'local',
+    role: 'admin',
     name: 'SylTi',
     email: 'sylti@gogs.fr',
     bitcoinAddr: '1Bssfhhghijfskdf',
