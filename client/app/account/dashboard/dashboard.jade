@@ -6,8 +6,15 @@ div(ng-include='"components/navbar/navbar.html"')
       h1.page-header Dashboard
       .col-md-6
         h2 My contributions
+        br
         div.panel.panel-default(ng-repeat="contrib in datas")
           div.panel-heading
-            span.badge.badge-success {{contrib.value.contributionAmount}} BTC
-            b {{contrib.value.name}}
-            span project
+            i.fa.fa-book.text-muted
+            &nbsp;&nbsp;
+            a(ng-href="/projects/{{contrib.value.name}}") {{contrib.value.name}}
+          div.panel-body
+            span.badge.badge-success(ng-repeat="value in contrib.value.contributions", style="margin-right:5px;")
+              span {{value}}
+              &nbsp;&nbsp;
+              i.fa.fa-btc
+

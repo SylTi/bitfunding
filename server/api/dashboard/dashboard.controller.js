@@ -19,10 +19,10 @@ exports.index = function(req, res) {
 
   // MapReduce options
   o.map = function () {
-    var amount = -1;
+    var contribs = [];
     for(var i = 0; i < this.contributors.length; i++) {
       if (this.contributors[i].contribId.toString() == user_id.toString())
-        var amount = this.contributors[i].amount;
+        contribs.push(this.contributors[i].amount);
     };
 
     var projects = {
@@ -30,7 +30,7 @@ exports.index = function(req, res) {
       amountRaised : this.amountRaised,
       amountToRaise : this.amountToRaise,
       contributors : this.contributors,
-      contributionAmount : amount,
+      contributions : contribs,
     };
 
     emit(this._id, projects);
