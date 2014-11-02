@@ -61,5 +61,5 @@ div(ng-include='"components/navbar/navbar.html"')
               td
                 {{proj.amountRaised | toBTC}} / {{proj.amountToRaise | toBTC}} BTC
               td.text-center
-                a(ng-href='/projects/{{project.name}}/edit')
+                a(ng-href='/projects/{{proj.name}}/edit')
                   span.glyphicon.glyphicon-pencil
