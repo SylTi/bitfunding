@@ -8,14 +8,12 @@ var router = express.Router();
 
 
 router.get('/', controller.index);
+router.get('/my/projects', auth.isAuthenticated(), controller.myProjects);
 router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
+router.post('/:name/contrib', controller.contribute);
 router.put('/:id', auth.isAuthenticated(), controller.update);
 router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
-
-router.post('/:name/contrib', controller.contribute);
-//router.get('/:name/contrib/:amount', controller.contribute);
-
 
 module.exports = router;

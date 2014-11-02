@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bitCrowdFundsApp')
-  .controller('MainCtrl', function ($scope, $http, socket, ProjectRes) {
+  .controller('MainCtrl', function ($scope, $http, socket, ProjectRes, $location) {
     $scope.projectsList = ProjectRes.featured();
     $scope.awesomeThings = [];
 

@@ -5,16 +5,61 @@ div(ng-include='"components/navbar/navbar.html"')
     .col-md-12
       h1.page-header Dashboard
       .col-md-6
-        h2 My contributions
+        h2
+          span My contributions
+          span.text-warning(ng-show="datas.length != 0") &nbsp;({{datas.length}} projects)
         br
-        div.panel.panel-default(ng-repeat="contrib in datas")
+        div.panel.panel-default(ng-show="datas.length == 0")
+          div.panel-heading
+            span No contributions yet.
+          div.panel-body.text-center
+            span You have not contributed to any project yet.
+            br
+            br
+            a.btn.btn-warning(ng-href="/projects") Explore projects.
+        div.panel.panel-default(ng-repeat="contrib in datas", ng-show="datas.length != 0")
           div.panel-heading
             i.fa.fa-book.text-muted
             &nbsp;&nbsp;
             a(ng-href="/projects/{{contrib.value.name}}") {{contrib.value.name}}
+            span.pull-right.label.label-default {{contrib.value.contributions.length}} contributions
           div.panel-body
             span.badge.badge-success(ng-repeat="value in contrib.value.contributions", style="margin-right:5px;")
               span {{value}}
               &nbsp;&nbsp;
               i.fa.fa-btc
-
+      .col-md-6
+        h2
+          span My Projects
+          span.text-success(ng-show="projects.length != 0") &nbsp;({{projects.length}} projects)
+        br
+        div.panel.panel-default(ng-show="projects.length == 0")
+          div.panel-heading
+            span No projects yet.
+          div.panel-body.text-center
+            span You have not created any projects.
+            br
+            br
+            a.btn.btn-success(ng-href="/addproject") Create a project.
+        table.table.table-bordered.table-striped.table-hover(ng-show="projects.length != 0")
+          thead
+            tr
+              td Project name
+              td Status
+              td Funds
+              td Actions
+          tbody
+            tr(ng-repeat="proj in projects")
+              td
+                i.fa.fa-book.text-muted
+                &nbsp;&nbsp;
+                a(ng-href="/projects/{{proj.name}}") {{proj.name}}
+              td
+                span.label.label-success(ng-show="proj.amountRaised >= proj.amountToRaise") Finished
+                span.label.label-warning(ng-show="proj.amountRaised !== 0 && proj.amountRaised < proj.amountToRaise") Ongoing
+                span.label.label-default(ng-show="proj.amountRaised === 0") Not started
+              td
+                {{proj.amountRaised | toBTC}} / {{proj.amountToRaise | toBTC}} BTC
+              td.text-center
+                a(ng-href='/projects/{{project.name}}/edit')
+                  span.glyphicon.glyphicon-pencil

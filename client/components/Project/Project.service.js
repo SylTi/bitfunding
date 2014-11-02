@@ -1,18 +1,6 @@
 'use strict';
 
 angular.module('bitCrowdFundsApp')
-  .factory('Project', function Proj() 
-  {
-    function Project(name, dateCreat, dateEnd, description, amount)
-      {
-        this.name = name;
-        this.dateCreat = dateCreat;
-        this.description = description;
-        this.dateEndCampaign = dateEnd;
-        this.amountToRaise = amount;
-      }
-      return Project;
-  })
   .factory('ProjectRes', function ($resource)
   {
     return $resource('api/projects/:name', {},
@@ -28,10 +16,27 @@ angular.module('bitCrowdFundsApp')
         params:{type:'featured'},
         isArray:true
       },
+      me:
+      {
+        method:'GET',
+        params:{type:'me'},
+        isArray:true
+      },
       update:
       {
         method:'PUT',
         isArray:false
+      }
+    });
+  })
+  .factory('MyProjects', function ($resource)
+  {
+    return $resource('api/projects/my/projects', {},
+    {
+      query:
+      {
+        method:'GET',
+        isArray:true
       }
     });
   });

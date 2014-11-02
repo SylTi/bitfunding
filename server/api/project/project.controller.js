@@ -22,6 +22,14 @@ exports.index = function(req, res) {
     });
 };
 
+// Get logged user projects
+exports.myProjects = function(req, res) {
+  Project.find({Owner: req.user.name}).exec(function (err, projects) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, projects);
+  });
+};
+
 // Get a single project
 exports.show = function(req, res) {
   Project.findOne({name: req.params.id}).lean().exec(function (err, project) {
