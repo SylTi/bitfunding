@@ -6,7 +6,7 @@ angular.module('bitCrowdFundsApp')
     // Use the User $resource to fetch all users
     $scope.users = User.query();
     $scope.projects = ProjectRes.query();
-    $scope.message = "";
+    $scope.message = '';
     $scope.delete = function(user) {
       User.remove({ id: user._id });
       angular.forEach($scope.users, function(u, i) {
@@ -15,21 +15,21 @@ angular.module('bitCrowdFundsApp')
         }
       });
     };
-    
+
     $scope.deleteProject = function (project)
     {
       $http.delete('api/projects/'+project._id)
-      .success(function(data, status, headers, config)
+      .success(function()
       {
         angular.forEach($scope.projects, function(p, i) {
-          if (p === project) 
+          if (p === project)
           {
             $scope.projects.splice(i, 1);
           }
         });
-        $scope.message = 'The selected project has been deleted'
+        $scope.message = 'The selected project has been deleted';
       })
-      .error(function(data, status, headers, config)
+      .error(function(data)
         {
           console.log(data);
           $scope.message = 'Something wrong happend: can\'t delete project';
@@ -37,5 +37,5 @@ angular.module('bitCrowdFundsApp')
       );
 
       //ProjectRes.remove({id: project._id});
-    }
+    };
   });

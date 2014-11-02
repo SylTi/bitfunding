@@ -1,5 +1,13 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.container
-  .col-md-12
-    h1 Dashboard
+.container(ng-controller="DashboardCtrl")
+  .row
+    .col-md-12
+      h1.page-header Dashboard
+      .col-md-6
+        h2 My contributions
+        div.panel.panel-default(ng-repeat="contrib in datas")
+          div.panel-heading
+            span.badge.badge-success {{contrib.value.contributionAmount}} BTC
+            b {{contrib.value.name}}
+            span project

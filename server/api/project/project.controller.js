@@ -27,7 +27,7 @@ exports.show = function(req, res) {
   Project.findOne({name: req.params.id}).lean().exec(function (err, project) {
     // Attach user datas
     User.findOne({name: project.Owner}, function(err_user, user) {
-      if (err || err_user) return next(err);
+      if (err || err_user) return res.redirect('/projects');
       if (!project || !user) return res.json(401);
       project.OwnerDatas = {
         name : (user.name || ""),

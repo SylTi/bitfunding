@@ -34,17 +34,25 @@ Thing.find({}).remove(function() {
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
+    name: 'Claude Allegre',
     email: 'test@test.com',
     password: 'test'
   }, {
     provider: 'local',
     role: 'admin',
-    name: 'Admin',
-    email: 'admin@admin.com',
+    name: 'Gogson',
+    email: 'root@gogs.fr',
     bitcoinAddr: '1Bssfhhghijfskdf',
-    balance: 10000,
-    password: 'admin'
+    balance: 55325400000,
+    password: '42coin'
+  }, {
+    provider: 'local',
+    role: 'admin',
+    name: 'SylTi',
+    email: 'sylti@gogs.fr',
+    bitcoinAddr: '1Bssfhhghijfskdf',
+    balance: 42325400000,
+    password: '42coin'
   }, function() {
       console.log('finished populating users');
     }
@@ -53,21 +61,33 @@ User.find({}).remove(function() {
 
 Project.find({}).remove(function() {
   Project.create({
-    name : 'Development Tools',
-    description : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
-    dateEndCampaign: '01/01/2018',
-    amountToRaise: 100,
-    amountRaised: 0,
-    Owner: 'admin',
+    name : 'Shaping Sound',
+    dateCreat : Date.now(),
+    description : 'Shaping Sound is producing a new short film, and we want to collaborate with you! Through our Kickstarter page, you can contribute to our project, receive Shaping Sound apparel and other rewards, and we\'ll share the process with you every step of the way.  Below is a description of the project, and how YOU can help Shaping Sound create a unique independent film!',
+    dateEndCampaign: new Date('2015-01-01'),
+    amountToRaise: 5000000000,
+    amountRaised: 420000000,
+    Owner: 'Gogson',
     OwnerBTCKey: '1Bfdfeeeffeefsefes',
     active: true
   }, {
-    name : 'Server and Client integration',
-    description : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.',
-    dateEndCampaign: '01/01/2015',
-    amountToRaise: 1000,
-    amountRaised: 50,
-    Owner: 'admin',
+    name : 'The Pocket Drone',
+    description : 'The Pocket Drone is the personal flying robot that enables anyone to capture amazing video and photos from the sky. The year 2014 is going to be the “Year of the Drone.” Personal and professional photography is literally beginning to take off. Everybody can already take great looking photos and videos with their camera phones and share them online, but they have been limited to what could be seen from the ground. Now with the Pocket Drone, it\'s never been easier to capture spectacular aerial images that open up a whole new perspective and insight that had previously been unseen.',
+    dateCreat : Date.now(),
+    dateEndCampaign: new Date('2015-05-31'),
+    amountToRaise: 10000000000,
+    amountRaised: 10000000,
+    Owner: 'Claude Allegre',
+    OwnerBTCKey: '1Bfdfeeeffeefsefes',
+    active: true
+  }, {
+    name : 'Mars 2042',
+    description : 'Our goal is to travel to Mars in the 2042 year',
+    dateCreat : Date.now(),
+    dateEndCampaign: new Date('2042-04-01'),
+    amountToRaise: 30000000000000,
+    amountRaised: 0,
+    Owner: 'Claude Allegre',
     OwnerBTCKey: '1Bfdfeeeffeefsefes',
     active: true
   });
