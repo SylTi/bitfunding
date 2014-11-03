@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/bitcrowdfunds-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };
