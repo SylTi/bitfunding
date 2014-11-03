@@ -106,11 +106,8 @@ function handleError(res, err) {
 
 exports.contribute = function(req, res)
 {
-  console.log("I CONTRIBUTE :!!!!!");
   var toContrib = Number(req.body.amount);
   var nameProj = req.params.name.replace("%20", " ");
-  console.log(req.body.userId);
-  console.log(toContrib);
   User.findById(req.body.userId, function (err, user)
   {
     if (err)
