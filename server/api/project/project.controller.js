@@ -32,7 +32,7 @@ exports.myProjects = function(req, res) {
 
 // Get a single project
 exports.show = function(req, res) {
-  Project.findOne({name: req.params.id}).lean().exec(function (err, project) {
+  Project.findOne({slug: req.params.id}).lean().exec(function (err, project) {
     // Attach user datas
     User.findOne({name: project.Owner}, function(err_user, user) {
       if (err || err_user) return res.redirect('/projects');
@@ -49,11 +49,18 @@ exports.show = function(req, res) {
 
 // Creates a new project in the DB.
 exports.create = function(req, res) {
-  Project.create(req.body, function(err, project) {
-    if (err) { return handleError(res, err); }
-    if (!project)
-      return handleError(res, err);
-    return res.json(201, project);
+  var datas = req.body
+  Project.findOne({name: datas.name}, function (err_existing, existing) {
+    if (err_existing) { return res.json(500) }
+    if (existing != null)
+      return res.json(500, {reason:'Existing project with this name.'});
+    else
+      Project.create(datas, function(err, project) {
+        if (err) { res.json(500, {reason:'Missing parameters.'}); }
+        if (!project)
+          return handleError(res, err);
+        return res.json(201, project);
+      });
   });
 };
 

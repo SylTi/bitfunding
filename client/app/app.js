@@ -10,7 +10,8 @@ angular.module('bitCrowdFundsApp', [
   'angularMoment',
   'ui.gravatar',
   'angular-loading-bar',
-  'ngDisqus'
+  'ngDisqus',
+  'slugifier'
 ])
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;

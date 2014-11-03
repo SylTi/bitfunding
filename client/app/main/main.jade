@@ -28,7 +28,7 @@ header#banner.hero-unit
             h3.panel-title
               i.fa.fa-book.text-muted
               &nbsp;&nbsp;
-              a(ng-href="/projects/{{proj.name}}") {{proj.name}}
+              a(ng-href="/projects/{{proj.slug}}") {{proj.name}}
               &nbsp;
               small.text-muted by {{proj.Owner}}
               span.pull-right
@@ -39,7 +39,7 @@ header#banner.hero-unit
             .col-lg-8
               span {{proj.description | limitTo: 1000}}.
               &nbsp;
-              a(ng-href="/projects/{{proj.name}}") See project page.
+              a(ng-href="/projects/{{proj.slug}}") See project page.
               br
               br
               span.text-muted
@@ -54,7 +54,7 @@ header#banner.hero-unit
               div.project-state.well.text-center
                 h2.text-success {{proj.amountRaised | toBTC}} BTC
                 small raised of {{proj.amountToRaise | toBTC}} BTC goal.
-              a.project-fund-btn.btn.btn-block.btn-warning(ng-href="/projects/{{proj.name}}") Fund this project.
+              a.project-fund-btn.btn.btn-block.btn-warning(ng-href="/projects/{{proj.slug}}") Fund this project.
   .row
     .col-lg-12
       h1.page-header They talk about BitFunding.

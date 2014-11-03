@@ -72,7 +72,7 @@ div(ng-include='"components/navbar/navbar.html"')
                   td
                     i.fa.fa-book.text-muted
                     &nbsp;&nbsp;
-                    a(ng-href="/projects/{{proj.name}}") {{proj.name}}
+                    a(ng-href="/projects/{{proj.slug}}") {{proj.name}}
                   td
                     span.label.label-success(ng-show="proj.amountRaised >= proj.amountToRaise") Finished
                     span.label.label-warning(ng-show="proj.amountRaised !== 0 && proj.amountRaised < proj.amountToRaise") Ongoing

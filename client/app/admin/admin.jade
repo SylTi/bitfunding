@@ -39,7 +39,7 @@ div(ng-include='"components/navbar/navbar.html"')
         &nbsp;
         b(am-time-ago="project.dateEndCampaign")
       .pull-right
-        a(ng-href='/projects/{{project.name}}/edit')
+        a(ng-href='/projects/{{project.slug}}/edit')
           span.glyphicon.glyphicon-pencil
         &nbsp;&nbsp;&nbsp;&nbsp;
         a.trash(ng-click='deleteProject(project)')

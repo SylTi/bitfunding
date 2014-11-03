@@ -70,6 +70,7 @@ User.find({}).remove(function() {
 Project.find({}).remove(function() {
   Project.create({
     name : 'Shaping Sound',
+    slug : 'shaping-sound',
     dateCreat : Date.now(),
     description : 'Shaping Sound is producing a new short film, and we want to collaborate with you! Through our Kickstarter page, you can contribute to our project, receive Shaping Sound apparel and other rewards, and we\'ll share the process with you every step of the way.  Below is a description of the project, and how YOU can help Shaping Sound create a unique independent film!',
     dateEndCampaign: new Date('2015-01-01'),
@@ -80,6 +81,7 @@ Project.find({}).remove(function() {
     active: true
   }, {
     name : 'The Pocket Drone',
+    slug : 'the-pocket-drone',
     description : 'The Pocket Drone is the personal flying robot that enables anyone to capture amazing video and photos from the sky. The year 2014 is going to be the “Year of the Drone.” Personal and professional photography is literally beginning to take off. Everybody can already take great looking photos and videos with their camera phones and share them online, but they have been limited to what could be seen from the ground. Now with the Pocket Drone, it\'s never been easier to capture spectacular aerial images that open up a whole new perspective and insight that had previously been unseen.',
     dateCreat : Date.now(),
     dateEndCampaign: new Date('2015-05-31'),
@@ -90,6 +92,7 @@ Project.find({}).remove(function() {
     active: true
   }, {
     name : 'Mars 2042',
+    slug : 'mars-2042',
     description : 'Our goal is to travel to Mars in the 2042 year',
     dateCreat : Date.now(),
     dateEndCampaign: new Date('2042-04-01'),

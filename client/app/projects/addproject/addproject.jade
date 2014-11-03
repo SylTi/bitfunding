@@ -1,28 +1,33 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-	.row.row-centered
-		.col-sm-12
-			h1 Create your project, set your goal, and get cash.
-			br
-		.col-sm-6.col-centered.well.col-sm-offset-3
-			form.form(name='addProjectForm', novalidate='')
-				.form-group
-					label Project Name
-					input.form-control(type='text', name='nameProject', ng-model='project.name', required='')
-				.form-group
-					label Project Description
-					textarea.form-control(name='descriptionProject', ng-model='project.description', required='', rows=10)
-				.form-group
-					label Project end date
-					input.form-control(name='dateEndCampaign', ng-model='project.dateEndCampaign', required='')
-				.form-group
-					label Amount to raise
-					input.form-control(name='amountToRaise', ng-model='project.amountToRaise', required='')
-				.form-group
-					label Payout Adress
-					input.form-control(name='OwnerBTCKey', ng-model='project.OwnerBTCKey', required='')
-				br
-				button.btn.btn-success.btn-block(name='buttonValidate', ng-click='addProject()') Create Project!
-			p.help-block  {{ message }}
-	br
-	hr
+  .row.row-centered
+    .col-sm-12
+      h1 Create your project, set your goal, and get cash.
+      br
+    .col-sm-6.col-centered.col-sm-offset-3(ng-show="message")
+      .alert.alert-dismissable.alert-warning(ng-show="message.type == 'warning'")
+        p {{message.text}}
+      .alert.alert-dismissable.alert-success(ng-show="message.type == 'success'")
+        p {{message.text}}
+    .col-sm-6.col-centered.well.col-sm-offset-3
+      form.form(name='addProjectForm', novalidate='')
+        .form-group
+          label Project Name
+          input.form-control(type='text', name='nameProject', ng-model='project.name', required='')
+        .form-group
+          label Project Description
+          textarea.form-control(name='descriptionProject', ng-model='project.description', required='', rows=10)
+        .form-group
+          label Project end date
+          input.form-control(name='dateEndCampaign', ng-model='project.dateEndCampaign', required='')
+        .form-group
+          label Amount to raise
+          input.form-control(name='amountToRaise', ng-model='project.amountToRaise', required='')
+        .form-group
+          label Payout Adress
+          input.form-control(name='OwnerBTCKey', ng-model='project.OwnerBTCKey', required='')
+        br
+        button.btn.btn-success.btn-block(name='buttonValidate', ng-click='addProject()') Create Project!
+      //- p.help-block  {{ message }}
+  br
+  hr

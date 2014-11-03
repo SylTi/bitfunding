@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 
 var ProjectSchema = new Schema({
   name: {type: String, required: true},
+  slug : {type: String, required: true},
   description: String,
   dateCreat: { type: Date, default: Date.now },
   dateEndCampaign: {type: Date, required: true},

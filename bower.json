@@ -19,7 +19,8 @@
     "angular-moment": "~0.8.2",
     "angular-gravatar": "~0.2.2",
     "angular-loading-bar": "~0.6.0",
-    "angular-disqus": "~1.1.0"
+    "angular-disqus": "~1.1.0",
+    "angular-slugify": "~1.0.0"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
