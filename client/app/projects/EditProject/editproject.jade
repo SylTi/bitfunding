@@ -1,26 +1,26 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-	.row.row-centered
-		.col-sm-12
-			h1 {{currentProject.name}}
-			br
-		.col-sm-6.col-centered.well.col-sm-offset-3
-			form.form(name='editProjectForm', novalidate='')
-				.form-group
-					label Description
-					textarea.form-control(name="description", ng-model='currentProject.description', rows=10)
-				.form-group
-					label End date
-					input.form-control(type='text', name="dateEndCampaign", ng-model='currentProject.dateEndCampaign')
-				.form-group
-					label Amount to raise
-					input.form-control(type='text', name="amountToRaise", ng-model='currentProject.amountToRaise')
-				.form-group
-					label Payout Adress
-					input.form-control(type='text', name="payoutAddr", ng-model='currentProject.OwnerBTCKey')
-				br
-				button.btn.btn-success.btn-block(name='buttonValidate', ng-click='editProject()') Update Project!
-			p.help-block  {{ message }}
-	br
-	hr
+  .row.row-centered
+    .col-sm-12
+      h1 {{currentProject.name}}
+      br
+    .col-sm-6.col-centered.well.col-sm-offset-3
+      form.form(name='editProjectForm', novalidate='')
+        .form-group
+          label Description
+          textarea.form-control(name="description", ng-model='currentProject.description', rows=10)
+        .form-group
+          label End date
+          input.form-control(type='text', name="dateEndCampaign", ng-model='currentProject.dateEndCampaign')
+        .form-group
+          label Amount to raise
+          input.form-control(type='text', name="amountToRaise", ng-model='currentProject.amountToRaise')
+        .form-group
+          label Payout Adress
+          input.form-control(type='text', name="payoutAddr", ng-model='currentProject.OwnerBTCKey')
+        br
+        button.btn.btn-success.btn-block(name='buttonValidate', ng-click='editProject()') Update Project!
+      p.help-block  {{ message }}
+  br
 
+div(ng-include='"components/footer/footer.html"')

@@ -60,13 +60,5 @@ header#banner.hero-unit
       h1.page-header They talk about BitFunding.
     .col-lg-12
       div(disqus="'mainpage'")
-footer.footer
-  .container
-    p
-      | BitFunding project is powered with MEAN stack.
-      = ' '
-      a(href='https://github.com/gogson') @gogson
-      = ', '
-      a(href='https://github.com/SylTi') @SylTi
-      = ', '
-      a(href='https://github.com/SylTi/bitcrowfunding') @Github
+
+div(ng-include='"components/footer/footer.html"')
