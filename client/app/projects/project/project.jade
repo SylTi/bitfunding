@@ -40,7 +40,7 @@ div(ng-include='"components/navbar/navbar.html"')
         div.project-state.well.text-center
           h2.text-success {{currentProject.amountRaised | toBTC}} BTC
           small raised of {{currentProject.amountToRaise | toBTC}} BTC goal.
-    .row
+    .row(ng-show="currentUser.name")
         .col-md-12
           h2.page-header Contribute to this project
         .col-md-12
