@@ -40,7 +40,7 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
 
         li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}', tooltip-placement="bottom", tooltip="Admin Control Panel")
           a(href='/admin')
-            span.glyphicon.glyphicon-lock
+            span.glyphicon.glyphicon-lock.text-danger
 
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}', tooltip-placement="bottom", tooltip="Settings")
           a(href='/settings')
