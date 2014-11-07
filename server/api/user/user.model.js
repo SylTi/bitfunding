@@ -14,7 +14,8 @@ var UserSchema = new Schema({
   salt: String,
   bitcoinAddr: {type: String, default: ""},
   balance: {type: Number, default: 0},
-  transactions: Array
+  unconfirmedBalance: {type: Number, default: 0},
+  transactions: [{}]
 });
 
 /**
