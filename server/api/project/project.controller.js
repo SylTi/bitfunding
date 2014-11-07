@@ -107,9 +107,8 @@ function handleError(res, err) {
 
 exports.contribute = function(req, res)
 {
-  console.log(req.body);
   var toContrib = Number(req.body.amount);
-  var nameProj = req.params.name.replace("%20", " ");
+  var nameProj = req.params.name;//.replace("%20", " ");
   User.findById(req.body.userId, function (err, user)
   {
     if (err)
@@ -125,17 +124,17 @@ exports.contribute = function(req, res)
         {
           if (err)
             return handleError(res, err);
-          Project.findOne({name: nameProj}, function (err, project)
+          Project.findOne({slug: nameProj}, function (err, project)
           {
             if (err)
               return handleError(res, err);
             if (!project)
               return handleError(res, err);
             project.amountRaised += toContrib;
-            console.log(user);
             project.contributors.push({contribId: user._id, amount: toContrib});
             project.save(function (err)
               {
+                console.log(err);
                 if (err)
                   return handleError(res, err);
                 return res.json(200, project);
