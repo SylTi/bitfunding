@@ -132,26 +132,25 @@ exports.authCallback = function(req, res, next) {
 exports.receiveDeposit = function(req, res, next)
 {
   var obj = {
-    transactionHash: req.params.transaction_hash,
-    inputTransactionHash: req.params.input_transaction_hash,
-    inputAddress: req.params.input_address,
-    value: req.params.value,
+    transactionHash: req.query.transaction_hash,
+    inputTransactionHash: req.query.input_transaction_hash,
+    inputAddress: req.query.input_address,
+    value: parseInt(req.query.value),
   };
   var id = req.params.id;
-  var secret = req.params.secret;
-  var confirmations = req.params.confirmations;
-
-  if (secret === process.env.SECRET_KEY)
+  var secret = req.query.secret;
+  var confirmations = parseInt(req.query.confirmations);
+  if (secret === process.env.SECRET_KEY || !req.params.test)
   {
     if (confirmations >= 6)
     {
-      User.find({_id: id}, function(err, user)
+      User.findById(id, function(err, user)
       {
         if (err || !user)
           return res.json(500, err);
         user.transactions.push(obj);
         user.unconfirmedBalance = user.unconfirmedBalance - obj.value;
-        user.balance = user.balance + obj.value;
+        user.balance = parseInt(user.balance + obj.value);
         user.save(function (err)
         {
           if (err)
@@ -162,18 +161,20 @@ exports.receiveDeposit = function(req, res, next)
     }
     else
     {
-      User.find({_id: id}, function(err, user)
+      User.findById(id, function(err, user)
       {
         if (err || !user)
           return res.json(500, err);
-        user.unconfirmedBalance = user.unconfirmedBalance + obj.value;
+        user.unconfirmedBalance = parseInt(user.unconfirmedBalance + obj.value);
         user.save(function (err)
         {
           if (err)
             return res.json(500, err);
-          res.send("*ok*");
+          res.send(200);
         });
       });
     }
   }
+  else
+    res.send(500);
 };
