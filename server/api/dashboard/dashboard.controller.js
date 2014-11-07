@@ -27,6 +27,7 @@ exports.index = function(req, res) {
       amountToRaise : this.amountToRaise,
       contributors : this.contributors,
       contributions : contribs,
+      slug: this.slug
     };
     emit(this._id, projects);
   }

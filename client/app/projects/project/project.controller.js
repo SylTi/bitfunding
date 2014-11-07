@@ -13,7 +13,7 @@ angular.module('bitCrowdFundsApp')
     $scope.contribute = function()
     {
     	console.log("test");
-      var contribSatoshi = (parseInt($scope.contribAmount)/100000000);
+      var contribSatoshi = (parseInt($scope.contribAmount)*100000000);
     	$http.post('api/projects/'+$scope.projectName+'/contrib', {userId: currentUser._id, userName: currentUser.name, amount: contribSatoshi})
     	.success(function(data, status, headers, config)
     	{

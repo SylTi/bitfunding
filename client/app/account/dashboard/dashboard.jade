@@ -23,14 +23,12 @@ div(ng-include='"components/navbar/navbar.html"')
             a.btn.btn-warning(ng-href="/projects") Explore projects.
         div.panel.panel-default(ng-repeat="contrib in datas", ng-show="datas.length != 0")
           div.panel-heading
-            i.fa.fa-book.text-muted
-            &nbsp;&nbsp;
+            i.fa.fa-book.text-muted &nbsp;&nbsp;
             a(ng-href="/projects/{{contrib.value.name}}") {{contrib.value.name}}
             span.pull-right.label.label-default {{contrib.value.contributions.length}} contributions
           div.panel-body
             span.badge.badge-success(ng-repeat="value in contrib.value.contributions", style="margin-right:5px;")
-              span {{value}}
-              &nbsp;&nbsp;
+              span {{value}} &nbsp;&nbsp;
               i.fa.fa-btc
       .col-md-6
         .row
@@ -44,8 +42,7 @@ div(ng-include='"components/navbar/navbar.html"')
 
               div.panel-body.text-center
                 h2.text-default
-                  span {{userData.balance | toBTC}}
-                  &nbsp;
+                  span {{userData.balance | toBTC}} &nbsp;
                   i.fa.fa-btc.text-muted
                 br
 
