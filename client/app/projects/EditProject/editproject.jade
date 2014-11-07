@@ -2,13 +2,13 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
 	.row.row-centered
 		.col-sm-12
-			h1 {{nameProject}}
+			h1 {{currentProject.name}}
 			br
 		.col-sm-6.col-centered.well.col-sm-offset-3
 			form.form(name='editProjectForm', novalidate='')
 				.form-group
 					label Description
-					textarea.form-control(name="description", ng-model='currentProject.description')
+					textarea.form-control(name="description", ng-model='currentProject.description', rows=10)
 				.form-group
 					label End date
 					input.form-control(type='text', name="dateEndCampaign", ng-model='currentProject.dateEndCampaign')
