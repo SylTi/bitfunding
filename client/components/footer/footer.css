@@ -1,0 +1,18 @@
+footer .sticky-footer {
+  position: fixed;
+  bottom: 0; left: 0;
+  background-color: #EEE;
+  width: 100%;
+  padding:10px;
+  border-top: 2px solid #CCC;
+  text-align: left;
+}
+
+footer .sticky-footer ul {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+footer .sticky-footer ul li {
+  margin-right: 10px;
+}
