@@ -111,12 +111,10 @@ exports.contribute = function(req, res)
   var nameProj = req.params.name;//.replace("%20", " ");
   User.findById(req.body.userId, function (err, user)
   {
-    if (err)
+    if (err || !user)
       return handleError(res, err);
-    if (!user)
-    {
-      return handleError(res, err);
-    }
+    if (toContrib <= 0.0)
+      return handleError(res, 'Bad amount');
     if (toContrib <= user.balance)
     {
       user.balance -= toContrib;
