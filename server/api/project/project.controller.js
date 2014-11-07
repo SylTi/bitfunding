@@ -32,7 +32,9 @@ exports.myProjects = function(req, res) {
 
 // Get a single project
 exports.show = function(req, res) {
-  Project.findOne({slug: req.params.id}).lean().exec(function (err, project) {
+  Project.findOne({slug: req.params.name}).lean().exec(function (err, project) {
+    if (err) { return handleError(res, err); }
+    if(!project) { return res.send(404); }
     // Attach user datas
     User.findOne({name: project.Owner}, function(err_user, user) {
       if (err || err_user) return res.redirect('/projects');
@@ -72,7 +74,6 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!project) { return res.send(404); }
     //var updated = _.merge(project, req.body);
-    console.log('================ HERE================');
     if ((req.body.user.role !== 'admin') && (req.body.user.name !== project.Owner))
       return res.send(550);
     project.description = req.body.project.description;
@@ -106,6 +107,7 @@ function handleError(res, err) {
 
 exports.contribute = function(req, res)
 {
+  console.log(req.body);
   var toContrib = Number(req.body.amount);
   var nameProj = req.params.name.replace("%20", " ");
   User.findById(req.body.userId, function (err, user)

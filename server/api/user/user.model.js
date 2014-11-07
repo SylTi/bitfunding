@@ -5,17 +5,16 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
 var UserSchema = new Schema({
-  name: String,
-  email: { type: String, lowercase: true },
-  role: {
-    type: String,
-    default: 'user'
+  name: {type: String, required: true, unique: true},
+  email: { type: String, lowercase: true, required: true, unique: true },
+  role: { type: String, default: 'user'
   },
   hashedPassword: String,
   provider: String,
   salt: String,
   bitcoinAddr: {type: String, default: ""},
-  balance: {type: Number, default: 0}
+  balance: {type: Number, default: 0},
+  transactions: Array
 });
 
 /**

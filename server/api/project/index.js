@@ -9,7 +9,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/my/projects', auth.isAuthenticated(), controller.myProjects);
-router.get('/:id', controller.show);
+router.get('/:name', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.post('/:name/contrib', controller.contribute);
 router.put('/:id', auth.isAuthenticated(), controller.update);

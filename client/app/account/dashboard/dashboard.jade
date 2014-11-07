@@ -6,8 +6,7 @@ div(ng-include='"components/navbar/navbar.html"')
       h1.page-header
         span Dashboard
         a.pull-right.btn.btn-default.btn-sm(ng-href="/settings")
-          i.fa.fa-cog
-          &nbsp;&nbsp;
+          i.fa.fa-cog &nbsp;&nbsp;
           span Settings
       .col-md-6
         h2
@@ -37,16 +36,19 @@ div(ng-include='"components/navbar/navbar.html"')
         .row
           .col-md-12
             h2
-              span My balance
+              span My balance / Deposit Address
             br
             div.panel.panel-default
               div.panel-heading Current BTC balance
+                span.text-right.pull-right {{userData.bitcoinAddr}}
+
               div.panel-body.text-center
                 h2.text-default
                   span {{userData.balance | toBTC}}
                   &nbsp;
                   i.fa.fa-btc.text-muted
                 br
+
           .col-md-12
             h2
               span My projects
