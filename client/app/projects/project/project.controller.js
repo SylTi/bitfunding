@@ -2,7 +2,7 @@
 
 angular.module('bitCrowdFundsApp')
   .controller('ProjectCtrl', function ($scope, $http, $routeParams, ProjectRes, Auth, $location) {
-    var currentUser = Auth.getCurrentUser();
+    $scope.currentUser = Auth.getCurrentUser();
     $scope.currentProject =  false;
     $scope.resContrib = '';
     $scope.projectName = '';
@@ -21,7 +21,7 @@ angular.module('bitCrowdFundsApp')
     {
         var repl = $scope.contribAmount.replace(',', '.');
         var contribSatoshi = parseFloat(repl*100000000);
-    	$http.post('api/projects/'+$scope.currentProject.slug+'/contrib', {userId: currentUser._id, userName: currentUser.name, amount: contribSatoshi})
+    	$http.post('api/projects/'+$scope.currentProject.slug+'/contrib', {userId: $scope.currentUser._id, userName: $scope.currentUser.name, amount: contribSatoshi})
     	.success(function(data, status, headers, config)
     	{
     		$scope.resContrib = 'You just contributed '+$scope.contribAmount+' BTC to ' + $scope.projectName;
