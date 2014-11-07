@@ -1,6 +1,8 @@
 div(ng-include='"components/navbar/navbar.html"')
-.container(ng-controller="ProjectCtrl")
- .row
+.container(ng-controller="ProjectCtrl", ng-init="init()")
+ .row.text-center(ng-show="currentProject === false")
+    i.fa.fa-spinner.fa-refresh.fa-5x
+ .row(ng-show="currentProject !== false")
   .col-md-12
     h1.page-header
       i.fa.fa-book.text-muted
