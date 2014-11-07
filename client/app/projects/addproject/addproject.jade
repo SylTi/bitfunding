@@ -22,12 +22,15 @@ div(ng-include='"components/navbar/navbar.html"')
           input.form-control(name='dateEndCampaign', ng-model='project.dateEndCampaign', required='')
         .form-group
           label Amount to raise
-          input.form-control(name='amountToRaise', ng-model='project.amountToRaise', required='')
+          .input-group
+            input.form-control(name='amountToRaise', ng-model='project.amountToRaise', required='')
+            span.input-group-addon
+              i.fa.fa-btc
         .form-group
           label Payout Adress
           input.form-control(name='OwnerBTCKey', ng-model='project.OwnerBTCKey', required='')
         br
         button.btn.btn-success.btn-block(name='buttonValidate', ng-click='addProject()') Create Project!
       //- p.help-block  {{ message }}
-  br
-  hr
+
+div(ng-include='"components/footer/footer.html"')

@@ -12,10 +12,16 @@ div(ng-include='"components/navbar/navbar.html"')
       small by {{currentProject.Owner}}
       &nbsp;
       img.avatar(gravatar-src="'{{currentProject.OwnerDatas.email}}'", width=20)
-      a.pull-right.btn.btn-xs.btn-primary(ng-href="mailto:{{currentProject.Owner}}")
-        i.fa.fa-envelope
+      span.pull-right
+        a.btn.btn-xs.btn-default(ng-show="currentProject.OwnerDatas.name == currentUser.name", ng-href="/projects/{{currentProject.slug}}/edit")
+          i.fa.fa-edit
+          &nbsp;&nbsp;
+          span Edit project
         &nbsp;&nbsp;
-        span Contact {{currentProject.OwnerDatas.name}}
+        a.btn.btn-xs.btn-primary(ng-href="mailto:{{currentProject.Owner}}", ng-show="currentProject.OwnerDatas.name != currentUser.name")
+          i.fa.fa-envelope
+          &nbsp;&nbsp;
+          span Contact {{currentProject.OwnerDatas.name}}
     span.text-muted
       span Project started
       &nbsp;
@@ -51,3 +57,5 @@ div(ng-include='"components/navbar/navbar.html"')
         h2.page-header Discuss this project
       .col-lg-12
         div(disqus="('project' + currentProject._id)")
+
+div(ng-include='"components/footer/footer.html"')
