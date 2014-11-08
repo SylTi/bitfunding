@@ -15,7 +15,6 @@ angular.module('bitCrowdFundsApp')
       .when('/projects/:projectName', {
         templateUrl: 'app/projects/project/project.html',
         controller: 'ProjectCtrl',
-        authenticate: true
       })
       .when('/projects/:name/edit', {
         templateUrl: 'app/projects/EditProject/editproject.html',
