@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "server/app.js",
   "dependencies": {
+    "bitcoin-address": "^0.3.0",
     "bitcoinjs-lib": "^1.2.0",
     "body-parser": "~1.5.0",
     "composable-middleware": "^0.3.0",

@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Project = require('./project.model');
 var User = require('../user/user.model');
+var bitcoin = require('bitcoin-address');
 //var UserC = require('../user/user.controller');
 
 
@@ -57,11 +58,14 @@ exports.create = function(req, res) {
     if (existing != null)
       return res.json(500, {reason:'Existing project with this name.'});
     else
-      Project.create(datas, function(err, project) {
-        if (err) { res.json(500, {reason:'Missing parameters.'}); }
-        if (!project)
-          return handleError(res, err);
-        return res.json(201, project);
+      if(!bitcoin.validate(datas.OwnerBTCKey))
+        res.json(500, 'Invalid Bitcoin Address');
+      else
+        Project.create(datas, function(err, project) {
+          if (err) { res.json(500, {reason:'Missing parameters.'}); }
+          if (!project)
+            return handleError(res, err);
+          return res.json(201, project);
       });
   });
 };
@@ -79,7 +83,10 @@ exports.update = function(req, res) {
     project.description = req.body.project.description;
     project.dateEndCampaign = req.body.project.dateEndCampaign;
     project.amountToRaise = req.body.project.amountToRaise;
-    project.OwnerBTCKey = req.body.project.OwnerBTCKey;
+    if(!bitcoin.validate(req.body.project.OwnerBTCKey))
+      res.json(500, 'Invalid Bitcoin Address');
+    else
+      project.OwnerBTCKey = req.body.project.OwnerBTCKey;
 
     project.save(function (err) {
       if (err) { return handleError(res, err); }
