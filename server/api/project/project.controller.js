@@ -53,6 +53,7 @@ exports.show = function(req, res) {
 // Creates a new project in the DB.
 exports.create = function(req, res) {
   var datas = req.body
+  datas.amountToRaise *= 100000000;
   Project.findOne({name: datas.name}, function (err_existing, existing) {
     if (err_existing) { return res.json(500) }
     if (existing != null)
