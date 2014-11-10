@@ -116,10 +116,9 @@ function handleError(res, err) {
 
 exports.contribute = function(req, res)
 {
-  console.log("FUCKIT");
   var toContrib = Number(req.body.amount);
   var nameProj = req.params.name;//.replace("%20", " ");
-  console.log(nameProj);
+
   User.findById(req.body.userId, function (err, user)
   {
     if (err || !user)
@@ -143,8 +142,6 @@ exports.contribute = function(req, res)
             project.contributors.push({contribId: user._id, amount: toContrib});
             project.save(function (err)
               {
-                console.log("TAMERELACHIENNE");
-                console.log(err);
                 if (err)
                   return handleError(res, err);
                 return res.json(200, project);
@@ -174,13 +171,39 @@ exports.returnFunds = function(req, res)
     {
       console.log('here');
       console.log(element);
-      User.findById(element.contribId, function (err, user)
-      {
-        if (err || !user)
-          callback(err);
-        user.balance += element.amount;
-        user.save(callback(err));
-      });
+
+      async.waterfall([
+        function(cb)
+        {
+          User.findById(element.contribId, function (err, user)
+            {
+              if (err)
+                cb(err);
+              cb(null, user);
+            });
+        },
+        function (user, cb)
+        {
+          user.balance += element.amount;
+          user.save(function (err)
+            {
+              cb(err, user);
+            });
+        }], function(error, result)
+        {
+          if (error)
+            callback(error);
+          callback(null, result)
+        });
+      // User.findById(element.contribId, function (err, user)
+      // {
+      //   if (err || !user)
+      //     callback(err);
+      //   console.log(user.balance);
+      //   user.balance += element.amount;
+      //   console.log(user.balance);
+      //   user.save(callback(err));
+      // });
     }, function (err)
     {
       if (err)

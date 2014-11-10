@@ -11,7 +11,7 @@ router.get('/', controller.index);
 router.get('/my/projects', auth.isAuthenticated(), controller.myProjects);
 router.get('/:name', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
-router.post('/:name/contrib', auth.isAuthenticated, controller.contribute);
+router.post('/:name/contrib', auth.isAuthenticated(), controller.contribute);
 router.put('/:id', auth.isAuthenticated(), controller.update);
 router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
