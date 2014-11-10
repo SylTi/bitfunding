@@ -1,8 +1,8 @@
 Bitcoin Crowdfunding Platform
 =============================
 
-> MEAN Stack Technologies
-> Blochain.info API
+> MEAN Stack Technologies  
+> Blockchain.info API
 
 
 ### IN PROGRESS
