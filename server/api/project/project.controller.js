@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Project = require('./project.model');
 var User = require('../user/user.model');
 var bitcoin = require('bitcoin-address');
+var async = require('async');
 //var UserC = require('../user/user.controller');
 
 
@@ -115,8 +116,10 @@ function handleError(res, err) {
 
 exports.contribute = function(req, res)
 {
+  console.log("FUCKIT");
   var toContrib = Number(req.body.amount);
   var nameProj = req.params.name;//.replace("%20", " ");
+  console.log(nameProj);
   User.findById(req.body.userId, function (err, user)
   {
     if (err || !user)
@@ -140,6 +143,7 @@ exports.contribute = function(req, res)
             project.contributors.push({contribId: user._id, amount: toContrib});
             project.save(function (err)
               {
+                console.log("TAMERELACHIENNE");
                 console.log(err);
                 if (err)
                   return handleError(res, err);
@@ -153,5 +157,45 @@ exports.contribute = function(req, res)
       return handleError(res, 'Amout > Balance');
     }
   });
+};
 
-}
+exports.returnFunds = function(req, res)
+{
+  //TODO : check if project date is passed or do nothing ?
+
+  var name = req.params.name;
+  console.log('HERE');
+  Project.findOne({slug: name}, function (err, project)
+  {
+    if (err || !project)
+      return handleError(res, err);
+    console.log(project);
+    async.eachSeries(project.contributors, function (element, callback)
+    {
+      console.log('here');
+      console.log(element);
+      User.findById(element.contribId, function (err, user)
+      {
+        if (err || !user)
+          callback(err);
+        user.balance += element.amount;
+        user.save(callback(err));
+      });
+    }, function (err)
+    {
+      if (err)
+        return handleError(res, err);
+      project.contributorsOld = project.contributors.concat(project.contributors);
+      project.amountRaised = 0;
+      project.contributors = [];
+      //project.active = false;
+      project.save(function (err)
+      {
+        if (err)
+          return handleError(res, err);
+        res.json(200);
+      });
+    //res.json(200);
+    })
+  });
+};
