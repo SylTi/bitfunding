@@ -23,7 +23,8 @@ Bitcoin Crowdfunding Platform
 ##### Variables values
 * BLOCKCHAIN_API: The API code must be requested to blockchain.info
 * SECRET_KEY: Random key used to secure blockchain.info callbacks
-* BTC_ADDR: Your master Bitcoin addresse : every BTC send to user is forwarded there. This address should never touch the internet for increased security.
+* BTC_ADDR: Your master Bitcoin address : every BTC send to a user address is forwarded there. 
+  This address should never touch the internet for increased security.
 * MY_SITE: domain of you site
 
 
