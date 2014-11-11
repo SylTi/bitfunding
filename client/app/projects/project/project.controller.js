@@ -33,7 +33,6 @@ angular.module('bitCrowdFundsApp')
     {
       _.forEach(contribArray, function(item, key)
         {
-          console.log(item);
           $http.get('api/users/'+item.userId+'/privateContrib')
           .success(function(data, status, headers, config)
           {
