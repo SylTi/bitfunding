@@ -6,8 +6,30 @@ angular.module('bitCrowdFundsApp')
     $scope.currentProject =  false;
     $scope.resContrib = '';
     $scope.projectName = '';
-    $scope.filteredContributors = [];
 
+    var getContributors = function(contribArray)
+    {
+      $scope.filteredContributors = [];
+
+      var items = _.groupBy(contribArray, function(item)
+      {
+        return item.contribId;
+      });
+
+      _.forEach(items, function (item, key)
+      {
+        var privContrib;
+        var name;
+        var sum = _.reduce(item, function (sum, contrib)
+        {
+          privContrib = contrib.isPrivate;
+          name = contrib.userName;
+          return sum + contrib.amount;
+        }, 0);
+
+        $scope.filteredContributors.push({userId: key, total: sum, isPrivate: privContrib, userName: name});
+      });
+    };
 
     $scope.init = function() {
         ProjectRes.get({name: $routeParams.projectName}).
@@ -16,26 +38,7 @@ angular.module('bitCrowdFundsApp')
                 $scope.projectName = $routeParams.projectName;
 
                 //group contributors by id
-                var items = _.groupBy($scope.currentProject.contributors, function(item)
-                {
-                  return item.contribId;
-                });
-                console.log("ITEMS:", items);
-                _.forEach(items, function (item, key)
-                {
-                  var privContrib;
-                  var name;
-                  var sum = _.reduce(item, function (sum, contrib)
-                  {
-                    console.log("SUM:\n", sum, "\n\nAMOUNT:", contrib.amount);
-                    privContrib = contrib.isPrivate;
-                    name = contrib.userName;
-                    return sum + contrib.amount;
-                  }, 0);
-                  console.log("item:\n", item, "\n\nkey:\n", key);
-                  $scope.filteredContributors.push({userId: key, total: sum, isPrivate: privContrib, userName: name});
-                });
-                console.log("FILTERED_CONTRIB:\n", $scope.filteredContributors);
+                getContributors($scope.currentProject.contributors);
             }, function(err){
                 $location.path('/projects');
         });
@@ -55,8 +58,11 @@ angular.module('bitCrowdFundsApp')
     	.success(function(data, status, headers, config)
     	{
     		$scope.resContrib = 'You just contributed '+$scope.contribAmount+' BTC to ' + $scope.projectName;
-    		$scope.currentProject = data;
-        console.log(data);
+
+        //reload data into scope
+        $scope.currentProject = data;
+        getContributors(data.contributors);
+
     	}).error(function(data, status, headers, config)
     	{
     		$scope.resContrib = 'Something wrong happend : ' + data;
