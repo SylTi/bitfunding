@@ -111,6 +111,7 @@ exports.changeSettings = function(req, res, next) {
     user.bitcointalkLogin = bitcointalkLogin;
     user.githubLogin = githubLogin;
     user.stackexchangeLogin = stackexchangeLogin;
+    user.privateContrib = req.body.privateContrib;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);

@@ -51,6 +51,17 @@ div(ng-include='"components/navbar/navbar.html"')
                 &nbsp;
                 span login
               input.form-control(type='text', name='stackexchangeLogin', ng-model='user.stackexchangeLogin', mongoose-error='', placeholder='')
+            hr
+            h3 Options
+            br
+            .form-group
+              label
+                input(type='checkbox', ng-model="user.privateContrib")
+                &nbsp;&nbsp;
+                b Anonymous contributions
+              br
+              span If you enable this option, your contributions won't be displayed with your name along.
+            br
             p.help-block  {{ message_settings }}
             button.btn.btn-lg.btn-success.btn-sm(type='submit') Save my profile
     .col-sm-6

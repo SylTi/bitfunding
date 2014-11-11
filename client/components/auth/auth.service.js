@@ -117,7 +117,8 @@ angular.module('bitCrowdFundsApp')
           gravatarEmail: user.gravatarEmail,
           bitcointalkLogin: user.bitcointalkLogin,
           githubLogin: user.githubLogin,
-          stackexchangeLogin: user.stackexchangeLogin
+          stackexchangeLogin: user.stackexchangeLogin,
+          privateContrib : user.privateContrib
         }, function(user) {
           return cb(user);
         }, function(err) {
