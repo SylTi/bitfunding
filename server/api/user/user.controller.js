@@ -88,6 +88,37 @@ exports.destroy = function(req, res) {
 };
 
 /**
+ * Change a users settings
+ */
+exports.changeSettings = function(req, res, next) {
+  console.log(req.body);
+  var userId = req.user._id;
+  var firstname = req.body.firstname;
+  var lastname = String(req.body.lastname);
+  var location = String(req.body.location);
+  var phone = String(req.body.phone);
+  var gravatarEmail = String(req.body.gravatarEmail);
+  var bitcointalkLogin = String(req.body.bitcointalkLogin);
+  var githubLogin = String(req.body.githubLogin);
+  var stackexchangeLogin = String(req.body.stackexchangeLogin);
+
+  User.findById(userId, function (err, user) {
+    user.firstname = firstname;
+    user.lastname = lastname;
+    user.location = location;
+    user.phone = phone;
+    user.gravatarEmail = gravatarEmail;
+    user.bitcointalkLogin = bitcointalkLogin;
+    user.githubLogin = githubLogin;
+    user.stackexchangeLogin = stackexchangeLogin;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
  * Change a users password
  */
 exports.changePassword = function(req, res, next) {

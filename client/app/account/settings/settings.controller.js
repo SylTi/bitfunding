@@ -3,8 +3,7 @@
 angular.module('bitCrowdFundsApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
-    $scope.userData = Auth.getCurrentUser();
-    //console.log(User);
+    $scope.user = Auth.getCurrentUser();
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
@@ -20,4 +19,18 @@ angular.module('bitCrowdFundsApp')
         });
       }
 		};
+
+    $scope.changeSettings = function(form) {
+      $scope.submitted = true;
+        Auth.changeSettings( $scope.user )
+        .then( function() {
+          $scope.message_settings = 'Profile updated.';
+        })
+        .catch( function() {
+          form.password.$setValidity('mongoose', false);
+          $scope.errors.other = 'Unknown error';
+          $scope.message_settings = 'Unknown error';
+        });
+
+    };
   });

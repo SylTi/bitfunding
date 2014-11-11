@@ -12,6 +12,12 @@ angular.module('bitCrowdFundsApp')
           controller:'password'
         }
       },
+      changeSettings: {
+        method: 'PUT',
+        params: {
+          controller:'settings'
+        }
+      },
       get: {
         method: 'GET',
         params: {
