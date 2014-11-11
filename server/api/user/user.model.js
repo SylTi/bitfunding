@@ -15,7 +15,8 @@ var UserSchema = new Schema({
   bitcoinAddr: {type: String, default: ""},
   balance: {type: Number, default: 0},
   unconfirmedBalance: {type: Number, default: 0},
-  transactions: [{}]
+  transactions: [{}],
+  privateContrib: {type: Boolean, default: false}
 });
 
 /**

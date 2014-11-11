@@ -139,7 +139,7 @@ exports.contribute = function(req, res)
             if (!project)
               return handleError(res, err);
             project.amountRaised += toContrib;
-            project.contributors.push({contribId: user._id, amount: toContrib});
+            project.contributors.push({contribId: user._id, userName: user.name, amount: toContrib, isPrivate: user.privateContrib});
             project.save(function (err)
               {
                 if (err)

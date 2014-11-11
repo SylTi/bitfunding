@@ -40,6 +40,20 @@ div(ng-include='"components/navbar/navbar.html"')
         div.project-state.well.text-center
           h2.text-success {{currentProject.amountRaised | toBTC}} BTC
           small raised of {{currentProject.amountToRaise | toBTC}} BTC goal.
+    .row
+      .col-md-8
+      .col-md-4
+        .panel.panel-default(style="width: 330px")
+          .panel-heading Pledgers
+          .panel-body
+            div(ng-repeat="contributor in filteredContributors")
+              .col-sm-4
+                span(ng-show="contributor.isPrivate == false").badge.badge-success.pull-right {{contributor.userName}}
+              .col-sm-8.pull-left
+                span &nbsp; &nbsp; Amount: &nbsp;
+                span.text-warning {{contributor.total | toBTC}} &nbsp;
+                i.fa.fa-btc
+
     .row(ng-show="currentUser.name")
         .col-md-12
           h2.page-header Contribute to this project
