@@ -45,5 +45,7 @@ Bitcoin Crowdfunding Platform
 
 * Fork and make pull request.
 * Use generator to follow app conventions doc @ https://github.com/DaftMonk/generator-angular-fullstack
+* To lunch coding webserver : `grunt serve`
+* To publish the app on Heroku : `grunt build && cd dist && grunt buildcontrol:heroku`
 
 
