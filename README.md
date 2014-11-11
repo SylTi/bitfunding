@@ -15,10 +15,10 @@ Bitcoin Crowdfunding Platform
 #### Developpement
 
 1. rename /server/config/local.env.sample.js into local.env.js
-2. set the variable.
+2. set the variables.
 
 #### Production
-* Set the same variables in your env.
+* Set the same variables directly in your env.
 
 ##### Variables values
 * BLOCKCHAIN_API: The API code must be requested to blockchain.info
@@ -37,14 +37,14 @@ Bitcoin Crowdfunding Platform
 ## Platform Workflow : Project
 1. Create a user.
 2. Create a project, enter details and valid BTC Address
-3. Wait for contribution
-4. When the deadline is met, admin manually either send the bitcoin from is offline wallet to the address specified on the project if the goal are met. Or send back the money to the contributors.
+3. Wait for a contribution
+4. When the deadline is met, admin manually either send the bitcoin from is offline wallet to the address specified on the project if the goal is met. Or send back the money to the contributors.
 
 
 ## Coding / Contributing
 
 * Fork and make pull request.
-* Use generator to follow app conventions doc @ https://github.com/DaftMonk/generator-angular-fullstack
+* Use the generator to follow the app conventions doc @ https://github.com/DaftMonk/generator-angular-fullstack
 * To lunch coding webserver : `grunt serve`
 * To publish the app on Heroku : `grunt build && cd dist && grunt buildcontrol:heroku`
 
