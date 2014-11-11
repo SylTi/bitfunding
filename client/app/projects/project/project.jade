@@ -54,6 +54,7 @@ div(ng-include='"components/navbar/navbar.html"')
               .col-sm-4
                 span(ng-show="contributor.isPrivate == false").badge.badge-success.pull-right
                   a(ng-href="/users/{{contributor.userName}}", style="color: white;"){{contributor.userName}}
+                span(ng-show="contributor.isPrivate == true").badge.badge-success.pull-right Private
               .col-sm-8.pull-left
                 span &nbsp; &nbsp; Amount: &nbsp;
                 span.text-warning {{contributor.total | toBTC}} &nbsp;

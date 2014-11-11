@@ -210,3 +210,20 @@ exports.receiveDeposit = function(req, res, next)
   else
     res.send(500);
 };
+
+exports.privateContrib = function (req, res)
+{
+  var id = req.params.id;
+
+  User.findById(id, function (err, user)
+  {
+    if (err || !user)
+      res.send(500, err);
+    var obj =
+    {
+      name: user.name,
+      isPrivate: user.privateContrib
+    };
+    res.send(200, obj);
+  });
+};

@@ -19,18 +19,33 @@ angular.module('bitCrowdFundsApp')
 
       _.forEach(items, function (item, key)
       {
-        var privContrib;
-        var name;
         var sum = _.reduce(item, function (sum, contrib)
         {
-          privContrib = contrib.isPrivate;
-          name = contrib.userName;
           return sum + contrib.amount;
         }, 0);
 
-        $scope.filteredContributors.push({userId: key, total: sum, isPrivate: privContrib, userName: name});
+        $scope.filteredContributors.push({userId: key, total: sum});
       });
       $scope.nbBackers = Object.keys($scope.filteredContributors).length
+    };
+
+    var setPrivateInfos = function (contribArray)
+    {
+      _.forEach(contribArray, function(item, key)
+        {
+          console.log(item);
+          $http.get('api/users/'+item.userId+'/privateContrib')
+          .success(function(data, status, headers, config)
+          {
+            item.isPrivate = data.isPrivate;
+            item.userName = data.name;
+
+          }).error(function(data, status, headers, config)
+          {
+            console.log("ERROR");
+          });
+
+        });
     };
 
     $scope.init = function() {
@@ -41,6 +56,7 @@ angular.module('bitCrowdFundsApp')
 
                 //group contributors by id
                 getContributors($scope.currentProject.contributors);
+                setPrivateInfos($scope.filteredContributors);
 
                 //set days to go
                 var m = moment($scope.currentProject.dateEndCampaign);
@@ -60,9 +76,8 @@ angular.module('bitCrowdFundsApp')
       var contribSatoshi = parseFloat(repl*100000000);
       var obj = {
         userId: $scope.currentUser._id,
-        userName: $scope.currentUser.name,
-        amount: contribSatoshi,
-        isPrivate: $scope.currentUser.privateContrib};
+        amount: contribSatoshi
+      };
 
     	$http.post('api/projects/'+$scope.currentProject.slug+'/contrib', obj)
     	.success(function(data, status, headers, config)
