@@ -161,17 +161,12 @@ exports.returnFunds = function(req, res)
   //TODO : check if project date is passed or do nothing ?
 
   var name = req.params.name;
-  console.log('HERE');
   Project.findOne({slug: name}, function (err, project)
   {
     if (err || !project)
       return handleError(res, err);
-    console.log(project);
     async.eachSeries(project.contributors, function (element, callback)
     {
-      console.log('here');
-      console.log(element);
-
       async.waterfall([
         function(cb)
         {

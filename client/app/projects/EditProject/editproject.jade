@@ -2,8 +2,11 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
   .row.row-centered
     .col-sm-12
-      h1 {{currentProject.name}} &nbsp;
-        button.btn-danger(ng-click='returnFunds()', ng-show='isAdmin()') Return Funds
+      .col-sm-4
+      .col-sm-4
+        h1 {{currentProject.name}} &nbsp;
+      .col-sm-4
+        button.btn-danger.text-right.pull-right(ng-click='returnFunds()', ng-show='isAdmin()') Return Funds
       br
     .col-sm-6.col-centered.well.col-sm-offset-3
       form.form(name='editProjectForm', novalidate='')
