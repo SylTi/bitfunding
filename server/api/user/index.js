@@ -15,6 +15,5 @@ router.put('/:id/settings', auth.isAuthenticated(), controller.changeSettings);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.get('/:id/receiveDeposit', controller.receiveDeposit);
-//router.put('/:id', auth.isAuthenticated(), controller.changeSettings);
 
 module.exports = router;
