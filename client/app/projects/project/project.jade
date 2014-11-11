@@ -38,8 +38,12 @@ div(ng-include='"components/navbar/navbar.html"')
           span {{currentProject.description}}
       .col-md-4
         div.project-state.well.text-center
+          h2.text-success {{nbBackers}}
+          small backers
           h2.text-success {{currentProject.amountRaised | toBTC}} BTC
           small raised of {{currentProject.amountToRaise | toBTC}} BTC goal.
+          h2.text-success {{daysToGo}}
+          small Days to go
     .row
       .col-md-8
       .col-md-4
