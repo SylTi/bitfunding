@@ -25,6 +25,7 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function (req, res, next) {
+  console.log()
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
@@ -55,7 +56,7 @@ exports.create = function (req, res, next) {
     }
     else if (result.statusCode === 500)
     {
-
+      return res.send(500);
     }
     //console.log("Got response: " + res.statusCode);
   }).on('error', function(e) { return validationError(res, e);});
