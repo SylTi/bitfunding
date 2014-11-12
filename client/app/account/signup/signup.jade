@@ -9,9 +9,12 @@ div(ng-include='"components/navbar/navbar.html"')
         .form-group(ng-class='{ "has-success": form.name.$valid && submitted,\
         "has-error": form.name.$invalid && submitted }')
           label Name
-          input.form-control(type='text', name='name', ng-model='user.name', required='')
+          input.form-control(type='text', name='name', ng-model='user.name', required='', ng-pattern="/^[a-zA-Z0-9]*$/")
           p.help-block(ng-show='form.name.$error.required && submitted')
             | A name is required
+          p.help-block(ng-show='form.name.$error.pattern && submitted')
+            | Your username must not contain any special characters.
+
 
         .form-group(ng-class='{ "has-success": form.email.$valid && submitted,\
         "has-error": form.email.$invalid && submitted }')
