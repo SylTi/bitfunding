@@ -70,6 +70,9 @@ div(ng-include='"components/navbar/navbar.html"')
             input.form-control(type="text", ng-model="contribAmount" required, style="height: 37px;border-bottom-width:3px")
             span.input-group-btn
               button.btn.btn-default(type='button', ng-click="contribute()") Contribute
+          div.alert.alert-warning(style="margin-top: 10px;")
+            i.fa.fa-exclamation-circle &nbsp;You cannot get back your pledges unless the project expire. &nbsp;
+            i.fa.fa-exclamation-circle
           div.alert.alert-info(ng-show="resContrib", style="margin-top:10px;") {{resContrib}}
     //- span(class="error", ng-show="myForm.input.$error.required") Required!<br>
     .row
