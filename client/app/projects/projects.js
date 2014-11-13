@@ -27,7 +27,7 @@ angular.module('bitCrowdFundsApp')
       })
       .when('/projects/search/:name', {
         title: 'Search',
-        templateUrl: 'app/projects/search/search.html',
+        templateUrl: 'app/projects/list/projects.html',
         controller: 'SearchCtrl'
       });
   });
