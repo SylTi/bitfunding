@@ -16,7 +16,7 @@ angular.module('bitCrowdFundsApp', [
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
   }])
-  .config(function ($routeProvider, $locationProvider, $httpProvider, $disqusProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, $disqusProvider, gravatarServiceProvider) {
     $routeProvider
       .otherwise({
         redirectTo: '/'
@@ -26,6 +26,14 @@ angular.module('bitCrowdFundsApp', [
     $locationProvider.html5Mode(true);
     $disqusProvider.setShortname('bitfunding')
     $httpProvider.interceptors.push('authInterceptor');
+
+    gravatarServiceProvider.defaults = {
+      size     : 500,
+      "default": 'mm'  // Mystery man as default for missing avatars
+    };
+
+    // Use https endpoint
+    gravatarServiceProvider.secure = true;
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {

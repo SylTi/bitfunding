@@ -56,9 +56,9 @@ User.find({}).remove(function() {
     firstname : 'Hugo',
     lastname : 'Lafitte',
     location : 'Paris, France',
-    phone : '',
+    phone : '+33645895246',
     gravatarEmail : 'root@gogs.fr',
-    bitcointalkLogin : '',
+    bitcointalkLogin : 'gogson',
     githubLogin : 'gogson',
     stackexchangeLogin : 'gogson'
   }, {
@@ -85,7 +85,7 @@ User.find({}).remove(function() {
     bitcoinAddr: '1Bssfhhghijfskdf',
     balance: 42325400000,
     password: '42coin',
-    firstname : 'Sylvain',
+    firstname : '',
     lastname : '',
     location : 'Paris, France',
     phone : '',

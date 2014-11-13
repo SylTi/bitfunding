@@ -16,5 +16,6 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.get('/:id/receiveDeposit', controller.receiveDeposit);
 router.get('/:id/privateContrib', auth.isAuthenticated(), controller.privateContrib);
+router.get('/profile/:name', controller.profile);
 
 module.exports = router;

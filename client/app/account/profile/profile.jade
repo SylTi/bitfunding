@@ -1,0 +1,45 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container#profile(ng-controller="ProfileCtrl", ng-init="init()")
+ .row.text-center(ng-show="user === {}")
+    i.fa.fa-spinner.fa-refresh.fa-5x
+ .row(ng-show="user !== {}")
+  .col-md-3
+    div
+      img.img-thumbnail.avatar(gravatar-src="user.gravatarEmail || user.email", width=250)
+    h2(ng-show="user.firstname != '' || user.lastname != ''")
+      div {{user.firstname}} {{user.lastname}}
+      small.text-muted {{user.name}}
+    h2(ng-show="user.firstname == '' && user.lastname == ''")
+      div {{user.name}}
+    hr
+    div#profile-infos
+      div(ng-show="user.role === 'admin'")
+        i.fa.fa-user.text-muted.space-right
+        span.space-right BitFunding
+        span.label.label-danger STAFF
+      div(ng-show="user.location != ''")
+        i.fa.fa-map-marker.text-muted.space-right
+        span {{user.location}}
+      div(ng-show="user.phone != ''")
+        i.fa.fa-phone.text-muted.space-right
+        span {{user.phone}}
+      div(ng-show="user.gravatarEmail != ''")
+        i.fa.fa-envelope.text-muted.space-right
+        a(href="mailto:{{user.gravatarEmail}}") {{user.gravatarEmail}}
+      hr
+      div(ng-show="user.bitcointalkLogin != ''")
+        i.fa.fa-comment.text-muted.space-right
+        span {{user.bitcointalkLogin}} @
+        &nbsp;&nbsp;
+        a(href="https://bitcointalk.org") BitcoinTalk
+      div(ng-show="user.githubLogin != ''")
+        i.fa.fa-github-alt.text-muted.space-right
+        span {{user.githubLogin}} @
+        &nbsp;&nbsp;
+        a(href="https://github.com/{{user.githubLogin}}") GitHub
+      div(ng-show="user.stackexchangeLogin != ''")
+        i.fa.fa-stack-exchange.text-muted.space-right
+        span {{user.stackexchangeLogin}} @
+        &nbsp;&nbsp;
+        a(href="http://stackexchange.com/") StackExchange
+  .col-md-9

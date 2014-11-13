@@ -103,3 +103,22 @@ a.project-fund-btn {
 h1.page-header .btn {
   margin-top: 10px;
 }
+
+#profile h2 {
+    margin-top: 10px;
+    line-height: 25px;
+}
+
+#profile img {
+    border-radius: 6px;
+}
+
+div#profile-infos {
+    font-size: 16px;
+}
+
+div#profile-infos div {
+    margin-bottom: 8px;
+}
+
+.space-right { margin-right: 10px}

@@ -78,6 +78,19 @@ exports.show = function (req, res, next) {
 };
 
 /**
+ * Get a single user from its unique profile name
+ */
+exports.profile = function (req, res, next) {
+  var userId = req.params.name;
+
+  User.findOne({name: userId}, function(err, user) {
+    if (err) return next(err);
+    if (!user) return res.json(500);
+    res.json(user);
+  });
+};
+
+/**
  * Deletes a user
  * restriction: 'admin'
  */

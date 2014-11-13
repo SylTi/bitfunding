@@ -25,4 +25,12 @@ angular.module('bitCrowdFundsApp')
         }
       }
 	  });
+  })
+  .factory('UserProfile', function ($resource) {
+    return $resource('/api/users/profile/:name', {},
+    {
+      get: {
+        method: 'GET',
+      }
+    });
   });

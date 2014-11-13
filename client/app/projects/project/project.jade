@@ -11,7 +11,7 @@ div(ng-include='"components/navbar/navbar.html"')
       &nbsp;
       small by {{currentProject.Owner}}
       &nbsp;
-      img.avatar(gravatar-src="'{{currentProject.OwnerDatas.email}}'", width=20)
+      img.avatar(gravatar-src="currentProject.OwnerDatas.email", width=20)
       span.pull-right
         a.btn.btn-xs.btn-default(ng-show="currentProject.OwnerDatas.name == currentUser.name", ng-href="/projects/{{currentProject.slug}}/edit")
           i.fa.fa-edit
@@ -44,7 +44,7 @@ div(ng-include='"components/navbar/navbar.html"')
           small raised of {{currentProject.amountToRaise | toBTC}} BTC goal.
           h2.text-success {{daysToGo}}
           small Days to go
-    .row
+    .row(ng-show="filteredContributors.length != 0")
       .col-md-8
       .col-md-4
         .panel.panel-default(style="width: 330px")
@@ -53,7 +53,7 @@ div(ng-include='"components/navbar/navbar.html"')
             div(ng-repeat="contributor in filteredContributors")
               .col-sm-4
                 span(ng-show="contributor.isPrivate == false").badge.badge-success.pull-right
-                  a(ng-href="/users/{{contributor.userName}}", style="color: white;"){{contributor.userName}}
+                  a(ng-href="/profile/{{contributor.userName}}", style="color: white;"){{contributor.userName}}
                 span(ng-show="contributor.isPrivate == true").badge.badge-success.pull-right Private
               .col-sm-8.pull-left
                 span &nbsp; &nbsp; Amount: &nbsp;

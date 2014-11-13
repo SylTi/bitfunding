@@ -30,17 +30,16 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li(ng-show='isLoggedIn()')
           p.navbar-text
             img.avatar(gravatar-src="'{{getCurrentUser().email}}'")
-            a(ng-href="/dashboard") {{ getCurrentUser().name }}
-            &nbsp;
-            span.text-muted(ng-show='isAdmin()') [admin]
-
+            a(ng-href="/profile/{{getCurrentUser().name}}") {{ getCurrentUser().name }}
+            &nbsp;&nbsp;
+            span.label.label-danger(ng-show='isAdmin()') STAFF
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/addproject")}', tooltip-placement="bottom", tooltip="New project")
           a(ng-href='/addproject')
             span.glyphicon.glyphicon-plus.text-warning
 
         li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}', tooltip-placement="bottom", tooltip="Admin Control Panel")
           a(href='/admin')
-            span.glyphicon.glyphicon-lock.text-danger
+            span.glyphicon.glyphicon-lock
 
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}', tooltip-placement="bottom", tooltip="Settings")
           a(href='/settings')
