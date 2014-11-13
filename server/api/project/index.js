@@ -16,5 +16,6 @@ router.put('/:id', auth.isAuthenticated(), controller.update);
 router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.put('/:name/returnFunds', auth.hasRole('admin'), controller.returnFunds);
+router.get('/search/:name', controller.search);
 
 module.exports = router;

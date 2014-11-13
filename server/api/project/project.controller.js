@@ -139,7 +139,7 @@ exports.contribute = function(req, res)
             if (!project)
               return handleError(res, err);
             project.amountRaised += toContrib;
-            project.contributors.push({contribId: user._id, userName: user.name, amount: toContrib, isPrivate: user.privateContrib});
+            project.contributors.push({contribId: user._id, amount: toContrib});
             project.save(function (err)
               {
                 if (err)
@@ -215,5 +215,23 @@ exports.returnFunds = function(req, res)
       });
     //res.json(200);
     })
+  });
+};
+
+exports.search = function(req, res)
+{
+  var value = req.params.name;
+  var re = new RegExp(value, 'i');
+
+  Project.find()
+  .or([{
+    'name': { $regex: re }},
+    { 'description': { $regex: re }
+  }])
+  .sort('name')
+  .exec(function(err, projects) {
+    if (err || !projects)
+      return handleError(res, err);
+    res.json(200, projects);
   });
 };

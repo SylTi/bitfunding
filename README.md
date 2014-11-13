@@ -6,7 +6,7 @@ Bitcoin Crowdfunding Platform
 
 
 ### IN PROGRESS
-
+* Demo @ http://bitfunding.herokuapp.com/
 
 ## Installation 
 
