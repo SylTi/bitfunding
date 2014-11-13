@@ -29,6 +29,7 @@ exports.create = function (req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
+  newUser.balance = 0;
 
   // BTC powered by blockchain.info
   var secret = process.env.SECRET_KEY;

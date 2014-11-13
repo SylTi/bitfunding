@@ -53,15 +53,20 @@ exports.show = function(req, res) {
 
 // Creates a new project in the DB.
 exports.create = function(req, res) {
-  var datas = req.body
+  var datas = req.body;
+  datas.amountRaised = 0;
+  datas.contributors = [];
+  //datas.dateCreat = Date.now;
   datas.amountToRaise *= 100000000;
+  if (datas.name === 'search')
+    return res.json(500, {reason: 'Forbidden name'});
   Project.findOne({name: datas.name}, function (err_existing, existing) {
     if (err_existing) { return res.json(500) }
     if (existing != null)
       return res.json(500, {reason:'Existing project with this name.'});
     else
       if(!bitcoin.validate(datas.OwnerBTCKey))
-        res.json(500, 'Invalid Bitcoin Address');
+        res.json(500, {reason:'Invalid Bitcoin Address'});
       else
         Project.create(datas, function(err, project) {
           if (err) { res.json(500, {reason:'Missing parameters.'}); }
