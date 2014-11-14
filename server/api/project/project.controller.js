@@ -56,6 +56,7 @@ exports.create = function(req, res) {
   var datas = req.body;
   datas.amountRaised = 0;
   datas.contributors = [];
+  datas.dateEndCampaign = new Date(datas.dateEndCampaign);
   //datas.dateCreat = Date.now;
   datas.amountToRaise *= 100000000;
   if (datas.name === 'search')
