@@ -6,6 +6,9 @@ var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var http = require('http'); //for blockchain
 
+// Hidden user fields
+var PRIVATE_FIELDS = '-salt -hashedPassword -unconfirmedBalance -email -transactions -balance';
+
 var validationError = function(res, err) {
   return res.json(422, err);
 };
@@ -84,7 +87,8 @@ exports.show = function (req, res, next) {
 exports.profile = function (req, res, next) {
   var userId = req.params.name;
 
-  User.findOne({name: userId}, function(err, user) {
+  User.findOne({name: userId}, PRIVATE_FIELDS, function(err, user) {
+    console.log(user);
     if (err) return next(err);
     if (!user) return res.json(500);
     res.json(user);
