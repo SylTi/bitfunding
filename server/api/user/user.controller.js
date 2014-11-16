@@ -125,9 +125,13 @@ exports.destroy = function(req, res) {
  */
 exports.changeSettings = function(req, res, next) {
   //console.log(req.body);
-  //var userId = req.user._id;
-  //console.log(req.user._id);
-  var userId = req.params.id;
+  var userId;
+  console.log(req.user._id);
+  if (req.user.role === 'admin')
+    userId = req.params.id;
+  else
+    userId = req.user._id;
+  console.log(userId);
   var firstname = req.body.firstname;
   var lastname = String(req.body.lastname);
   var location = String(req.body.location);

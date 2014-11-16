@@ -7,7 +7,6 @@ angular.module('bitCrowdFundsApp')
     $scope.resContrib = '';
     $scope.projectName = '';
 
-
     var getContributors = function(contribArray)
     {
       $scope.filteredContributors = [];
