@@ -109,7 +109,7 @@ angular.module('bitCrowdFundsApp')
       changeSettings: function(user, callback) {
         var cb = callback || angular.noop;
 
-        return User.changeSettings({ id: currentUser._id }, {
+        return User.changeSettings({ id: user/*currentUser*/._id }, {
           firstname: user.firstname,
           lastname: user.lastname,
           location: user.location,

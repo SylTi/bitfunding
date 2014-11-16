@@ -79,6 +79,20 @@ exports.show = function (req, res, next) {
 };
 
 /**
+ * Get a single user
+ */
+exports.getUserInfos = function (req, res, next) {
+  var userId = req.params.id;
+
+  User.findById(userId, '-salt -hashedPassword', function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.send(401);
+    res.json(user);
+  });
+};
+
+
+/**
  * Get a single user from its unique profile name
  */
 exports.profile = function (req, res, next) {
@@ -106,8 +120,10 @@ exports.destroy = function(req, res) {
  * Change a users settings
  */
 exports.changeSettings = function(req, res, next) {
-  console.log(req.body);
-  var userId = req.user._id;
+  //console.log(req.body);
+  //var userId = req.user._id;
+  //console.log(req.user._id);
+  var userId = req.params.id;
   var firstname = req.body.firstname;
   var lastname = String(req.body.lastname);
   var location = String(req.body.location);

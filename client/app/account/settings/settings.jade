@@ -1,13 +1,13 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
   .row
-    h1.page-header My settings
+    h1.page-header {{user.name}} settings
   .row
     .col-sm-6
       .panel.panel-default
         .panel-heading
           h3.panel-title
-            b.text-muted Edit my profile
+            b.text-muted Edit {{user.name}} profile
         .panel-body
           form.form(name='formSettings', ng-submit='changeSettings(formSettings)', novalidate='')
             .form-group
@@ -64,7 +64,7 @@ div(ng-include='"components/navbar/navbar.html"')
             br
             p.help-block  {{ message_settings }}
             button.btn.btn-lg.btn-success.btn-sm(type='submit') Save my profile
-    .col-sm-6
+    .col-sm-6(ng-show='changePassword')
       .panel.panel-default
         .panel-heading
           h3.panel-title

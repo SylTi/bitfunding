@@ -18,8 +18,11 @@ div(ng-include='"components/navbar/navbar.html"')
         small.text-muted
           &nbsp;&nbsp;
           {{user.email}}
-        a.trash(ng-click='delete(user)')
-          span.glyphicon.glyphicon-trash.pull-right
+        div.pull-right
+          a.trash(ng-href='/admin/{{user._id}}/editUser')
+            span.glyphicon.glyphicon-edit &nbsp;
+          a.trash(ng-click='delete(user)')
+            span.glyphicon.glyphicon-trash
   h2.page-header Manage Projects
   ul.list-group
     li.list-group-item(ng-repeat='project in projects')
