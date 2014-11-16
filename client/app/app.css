@@ -122,3 +122,15 @@ div#profile-infos div {
 }
 
 .space-right { margin-right: 10px}
+
+div#navbar-main input#search {
+    width:250px;
+    height:30px
+}
+
+div#navbar-main button {
+    margin-top: 5px
+}
+div#searchbar {
+    margin-top: 5px;
+}
