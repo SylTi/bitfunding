@@ -1,12 +1,20 @@
 'use strict';
 
 angular.module('bitCrowdFundsApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, ProjectRes) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, ProjectRes, $location) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
     $scope.projects = ProjectRes.query();
     $scope.message = '';
+    $scope.isAdmin = function ()
+    {
+      return (Auth.isAdmin());
+    };
+    if (!Auth.isAdmin())
+    {
+      $location.path('/');
+    }
     $scope.delete = function(user) {
       User.remove({ id: user._id });
       angular.forEach($scope.users, function(u, i) {

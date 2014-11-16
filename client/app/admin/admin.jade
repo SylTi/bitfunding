@@ -1,5 +1,5 @@
 div(ng-include='"components/navbar/navbar.html"')
-.container
+.container(ng-show='isAdmin()')
   h1.page-header Admin Control Panel
   h2.page-header Manage Users
   ul.list-group

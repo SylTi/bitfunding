@@ -16,14 +16,15 @@ var UserSchema = new Schema({
   unconfirmedBalance: {type: Number, default: 0},
   transactions: [{}],
   privateContrib: {type: Boolean, default: false},
-  firstname : String,
-  lastname : String,
-  location : String,
-  phone : String,
-  gravatarEmail : String,
-  bitcointalkLogin : String,
-  githubLogin : String,
-  stackexchangeLogin : String,
+  firstname : {type: String, default: ""},
+  lastname : {type: String, default: ""},
+  location : {type: String, default: ""},
+  phone : {type: String, default: ""},
+  gravatarEmail : {type: String, default: ""},
+  bitcointalkLogin : {type: String, default: ""},
+  githubLogin : {type: String, default: ""},
+  stackexchangeLogin : {type: String, default: ""},
+  active: {type: Boolean, default: true}
 });
 
 /**

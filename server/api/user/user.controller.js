@@ -114,9 +114,28 @@ exports.profile = function (req, res, next) {
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
-    return res.send(204);
+  // User.findByIdAndRemove(req.params.id, function(err, user) {
+  //   if(err) return res.send(500, err);
+  //   return res.send(204);
+  // });
+  console.log('here');
+  User.findById(req.params.id, function (err, user)
+  {
+    if (err || !user)
+    {
+      return res.json(500, err);
+    }
+    console.log('here');
+    user.active = false;
+    user.save(function (error)
+    {
+      if (error)
+      {
+        console.log(err);
+        return res.json(500, err);
+      }
+      res.send(200, {message: 'The Account has been deactivate'});
+    });
   });
 };
 
