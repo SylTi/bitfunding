@@ -25,22 +25,22 @@ angular.module('bitCrowdFundsApp')
 
         $scope.filteredContributors.push({userId: key, total: sum});
       });
-      $scope.nbBackers = Object.keys($scope.filteredContributors).length
+      $scope.nbBackers = Object.keys($scope.filteredContributors).length;
     };
 
     var setPrivateInfos = function (contribArray)
     {
-      _.forEach(contribArray, function(item, key)
+      _.forEach(contribArray, function(item)
         {
           $http.get('api/users/'+item.userId+'/privateContrib')
-          .success(function(data, status, headers, config)
+          .success(function(data)
           {
             item.isPrivate = data.isPrivate;
             item.userName = data.name;
 
-          }).error(function(data, status, headers, config)
+          }).error(function(data)
           {
-            console.log("ERROR");
+            console.log('ERROR', data);
           });
 
         });
@@ -61,9 +61,11 @@ angular.module('bitCrowdFundsApp')
                 var today = moment().startOf('day');
                 $scope.daysToGo = Math.round(moment.duration(m - today).asDays());
                 if ($scope.daysToGo < 0)
+                {
                   $scope.daysToGo = 0;
+                }
                 //End days to go
-            }, function(err){
+            }, function(){
                 $location.path('/projects');
         });
     };
@@ -78,7 +80,7 @@ angular.module('bitCrowdFundsApp')
       };
 
     	$http.post('api/projects/'+$scope.currentProject.slug+'/contrib', obj)
-    	.success(function(data, status, headers, config)
+    	.success(function(data)
     	{
     		$scope.resContrib = 'You just contributed '+$scope.contribAmount+' BTC to ' + $scope.projectName;
 
@@ -86,7 +88,7 @@ angular.module('bitCrowdFundsApp')
         $scope.currentProject = data;
         getContributors(data.contributors);
 
-    	}).error(function(data, status, headers, config)
+    	}).error(function(data)
     	{
     		$scope.resContrib = 'Something wrong happend : ' + data;
     	});

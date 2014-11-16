@@ -7,7 +7,7 @@ var http = require('http');
 // http://www.coindesk.com/api/
 exports.currentprice = function(req, res) {
   http.get("http://api.coindesk.com/v1/bpi/currentprice.json", function(result) {
-    if (result.statusCode == 200) {
+    if (result.statusCode === 200) {
       result.on("data", function(body) {
         res.json(200, JSON.parse(body));
       });

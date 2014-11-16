@@ -1,4 +1,5 @@
 'use strict';
+/*jshint undef:false*/
 
 var _ = require('lodash');
 var Project = require('../project/project.model');

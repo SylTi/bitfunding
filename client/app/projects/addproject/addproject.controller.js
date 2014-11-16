@@ -8,19 +8,21 @@ angular.module('bitCrowdFundsApp')
 	{
 		$scope.project.Owner = Auth.getCurrentUser().name;
     if ($scope.project.name)
+    {
       $scope.project.slug = Slug.slugify($scope.project.name);
+    }
     else
     {
-      console.log("error, no slug");
+      console.log('error, no slug');
       return ;
     }
 		$http.post('api/projects/', $scope.project)
-		.success(function(data, status, headers, config)
+		.success(function()
 		{
 			//$scope.message = {type:'success', text:'Your project has been added'};
       $location.path('/projects/'+$scope.project.slug);
 		})
-		.error(function(data, status, headers, config)
+		.error(function(data)
   	{
   		$scope.message = {type:'warning', text:('Something wrong happend : ' + data.reason)};
   	});

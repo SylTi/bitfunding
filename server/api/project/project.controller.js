@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint eqnull:true*/
+
 var _ = require('lodash');
 var Project = require('./project.model');
 var User = require('../user/user.model');

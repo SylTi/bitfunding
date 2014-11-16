@@ -1,7 +1,9 @@
 'use strict';
 
+/*jshint camelcase:false*/
+
 angular.module('bitCrowdFundsApp')
-  .controller('AdminedituserCtrl', function ($scope, $http, $routeParams, Auth) {
+  .controller('AdminedituserCtrl', function ($scope, $http, $routeParams) {
     $scope.errors = {};
 
     $http.get('/api/users/admin/' + $routeParams.userId)
@@ -16,16 +18,16 @@ angular.module('bitCrowdFundsApp')
 
     $scope.changeSettings = function(form) {
       $scope.submitted = true;
-        $http.put('/api/users/' + $scope.user._id + '/settings', $scope.user)
-        .success(function (data)
-        {
-          $scope.message_settings = 'Profile updated.';
-        })
-        .error( function() {
-          form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Unknown error';
-          $scope.message_settings = 'Unknown error';
-        });
+      $http.put('/api/users/' + $scope.user._id + '/settings', $scope.user)
+      .success(function ()
+      {
+        $scope.message_settings = 'Profile updated.';
+      })
+      .error( function() {
+        form.password.$setValidity('mongoose', false);
+        $scope.errors.other = 'Unknown error';
+        $scope.message_settings = 'Unknown error';
+      });
 
     };
 

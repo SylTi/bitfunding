@@ -7,10 +7,14 @@ angular.module('bitCrowdFundsApp')
         UserProfile.get({name: $routeParams.name}).
             $promise.then(function(datas) {
               if (!datas.name)
+              {
                 $location.path('/');
+              }
               else
+              {
                 $scope.user = datas;
-            }, function(err) {
+              }
+            }, function() {
               $location.path('/');
         });
     };

@@ -26,7 +26,9 @@ angular.module('bitCrowdFundsApp')
     $scope.search = function ()
     {
       if ($scope.valueSearch === '')
+      {
         return;
+      }
       $location.path('/projects/search/' + $scope.valueSearch);
     };
   });

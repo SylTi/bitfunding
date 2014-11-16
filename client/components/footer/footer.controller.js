@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint camelcase:false*/
+
 angular.module('bitCrowdFundsApp')
   .controller('FooterCtrl', function ($scope, $http, CoindeskAPI) {
     $scope.coindesk_error = false;

@@ -11,13 +11,17 @@ angular.module('bitCrowdFundsApp')
   $scope.isAdmin = function ()
   {
     if (currentUser.role === 'admin')
+    {
       return true;
+    }
     return false;
   };
 
 	//var $scope.asAccess = false;
-	if (!(currentUser.role == 'admin') && !(currentUser.name == $scope.currentProject.name))
-		$location.path( "/projects" );
+	if ((currentUser.role !== 'admin') && (currentUser.name !== $scope.currentProject.Owner))
+  {
+		$location.path('/projects');
+  }
 
 	$scope.editProject = function ()
 	{
@@ -36,13 +40,13 @@ angular.module('bitCrowdFundsApp')
 			project: $scope.currentProject
 		};
 		$http.put('api/projects/'+$scope.currentProject.slug, obj)
-		.success(function(data, status, headers, config)
+		.success(function()
 		{
-			$scope.message = "Project updated";
+			$scope.message = 'Project updated';
 		})
-		.error(function(data, status, headers, config)
+		.error(function()
 		{
-			$scope.message = "Fail to update";
+			$scope.message = 'Fail to update';
 		});
 	};
 
@@ -51,11 +55,11 @@ angular.module('bitCrowdFundsApp')
     if (currentUser.role === 'admin')
     {
       $http.put('api/projects/'+$scope.currentProject.slug+'/returnFunds', {})
-      .success(function(data, status, headers, config)
+      .success(function()
       {
         $scope.message = 'Funds returned';
       })
-      .error(function(data, status, headers, config)
+      .error(function()
       {
         $scope.message = 'Fail to return Funds';
       });

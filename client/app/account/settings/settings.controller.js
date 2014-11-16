@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint camelcase:false*/
+
 angular.module('bitCrowdFundsApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};

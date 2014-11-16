@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint unused:false, camelcase:false*/
+
 angular.module('bitCrowdFundsApp', [
   'ngCookies',
   'ngResource',
@@ -24,12 +26,12 @@ angular.module('bitCrowdFundsApp', [
 
     $locationProvider.hashPrefix('!');
     $locationProvider.html5Mode(true);
-    $disqusProvider.setShortname('bitfunding')
+    $disqusProvider.setShortname('bitfunding');
     $httpProvider.interceptors.push('authInterceptor');
 
     gravatarServiceProvider.defaults = {
       size     : 500,
-      "default": 'mm'  // Mystery man as default for missing avatars
+      'default': 'mm'  // Mystery man as default for missing avatars
     };
 
     // Use https endpoint
