@@ -34,6 +34,15 @@ exports.myProjects = function(req, res) {
   });
 };
 
+// Get given user name projects
+exports.userProjects = function(req, res) {
+  Project.find({Owner: req.params.name}).exec(function (err, projects) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, projects);
+  });
+};
+
+
 // Get a single project
 exports.show = function(req, res) {
   Project.findOne({slug: req.params.name}).lean().exec(function (err, project) {

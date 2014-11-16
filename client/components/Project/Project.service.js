@@ -39,4 +39,15 @@ angular.module('bitCrowdFundsApp')
         isArray:true
       }
     });
+  })
+  .factory('UserProjects', function ($resource)
+  {
+    return $resource('api/projects/user/:name', {name:'@name'},
+    {
+      query:
+      {
+        method:'GET',
+        isArray:true,
+      }
+    });
   });
