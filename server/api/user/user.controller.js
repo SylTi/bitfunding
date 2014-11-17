@@ -161,7 +161,7 @@ exports.destroy = function(req, res) {
             console.log(error);
             res.json(500, error);
           }
-          res.json(200, {message: 'The account and is project(s) are deactivated and funds contributed to thous projects have been returned'});
+          res.json(200, {message: 'The account and is project(s) are deactivated and funds contributed to those projects have been returned'});
         });
 
       });
