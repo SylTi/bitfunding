@@ -10,6 +10,7 @@ angular.module('bitCrowdFundsApp')
     if ($scope.project.name)
     {
       $scope.project.slug = Slug.slugify($scope.project.name);
+      $scope.project.dateEndCampaign = $scope.dt;
     }
     else
     {

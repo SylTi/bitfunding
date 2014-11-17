@@ -67,8 +67,10 @@ exports.create = function(req, res) {
   var datas = req.body;
   datas.amountRaised = 0;
   datas.contributors = [];
-  datas.dateEndCampaign = new Date(datas.dateEndCampaign);
-  //datas.dateCreat = Date.now;
+  console.log(datas.dateEndCampaign);
+  console.log(Date(datas.dateEndCampaign));
+  //datas.dateEndCampaign = new Date(datas.dateEndCampaign);
+  datas.dateCreat = new Date();
   datas.amountToRaise *= 100000000;
   if (datas.name === 'search')
     return res.json(500, {reason: 'Forbidden name'});
