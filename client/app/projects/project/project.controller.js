@@ -87,6 +87,7 @@ angular.module('bitCrowdFundsApp')
         //reload data into scope
         $scope.currentProject = data;
         getContributors(data.contributors);
+        setPrivateInfos($scope.filteredContributors);
 
     	}).error(function(data)
     	{
