@@ -138,7 +138,7 @@ exports.destroy = function(req, res) {
         console.log(err);
         return res.json(500, err);
       }
-
+      console.log(user.name);
       Project.find({Owner: user.name}, function (err, projects)
       {
         if (err)
@@ -146,7 +146,10 @@ exports.destroy = function(req, res) {
           return res.json(500, err);
         }
         if (!projects)
+        {
+          console.log('no projects for user');
           return res.json(200, {message: 'User deactivated'});
+        }
         async.eachSeries(projects, function(project, callback){
           if (!project)
           {

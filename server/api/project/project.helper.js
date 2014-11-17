@@ -4,6 +4,7 @@ var async = require('async');
 
 exports.hReturnFunds = function (project, res, flag)
 {
+  console.log("HRETURNFUNDS");
   async.eachSeries(project.contributors, function (element, callback)
   {
     async.waterfall([
@@ -34,15 +35,16 @@ exports.hReturnFunds = function (project, res, flag)
     if(flag)
     {
       if (err)
-        return res.json(res, err);
+        return res.json(500, err);
       project.contributorsOld = project.contributors.concat(project.contributors);
       project.amountRaised = 0;
       project.contributors = [];
       //project.active = false;
       project.save(function (err)
       {
+        console.log("END");
         if (err)
-          return res.json(res, err);
+          return res.json(500, err);
         res.json(200);
       });
     }
@@ -52,12 +54,18 @@ exports.hReturnFunds = function (project, res, flag)
       {
         res(err);
       }
+      console.log("END");
       project.contributorsOld = project.contributors.concat(project.contributors);
       project.amountRaised = 0;
       project.contributors = [];
       project.active = false;
       project.visible = false;
-      res();
+      project.save(function (err)
+      {
+        if (err)
+          res(err);
+        res();
+      });
     }
   });
 
