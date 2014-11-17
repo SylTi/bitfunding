@@ -43,3 +43,22 @@ div(ng-include='"components/navbar/navbar.html"')
         &nbsp;&nbsp;
         a(href="http://stackexchange.com/") StackExchange
   .col-md-9
+    .col-md-6
+      h3
+        i.fa.fa-book.text-muted.space-right
+        b Projects
+      br
+      div.well(ng-show="projects.length == 0")
+        div.text-center
+          br
+          i.fa.fa-thumbs-o-down.fa-5x.text-muted
+          br
+          br
+          div This user doesn't have any project.
+          br
+
+      .list-group(ng-show="projects.length != 0")
+        a.list-group-item(href='/projects/{{proj.slug}}', ng-repeat="proj in projects")
+            h4.list-group-item-heading
+              span.text-warning {{proj.name}}
+            p.list-group-item-text {{proj.description | limitTo: 200}}...
