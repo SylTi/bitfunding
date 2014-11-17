@@ -119,6 +119,10 @@ exports.destroy = function(req, res) {
   //   return res.send(204);
   // });
   console.log('here');
+  var Project = require('../project/project.model.js');
+  var helper = require('../project/project.helper');
+  var async = require('async');
+
   User.findById(req.params.id, function (err, user)
   {
     if (err || !user)
@@ -134,7 +138,35 @@ exports.destroy = function(req, res) {
         console.log(err);
         return res.json(500, err);
       }
-      res.send(200, {message: 'The Account has been deactivate'});
+
+      Project.find({Owner: user.name}, function (err, projects)
+      {
+        if (err)
+        {
+          return res.json(500, err);
+        }
+        if (!projects)
+          return res.json(200, {message: 'User deactivated'});
+        async.eachSeries(projects, function(project, callback){
+          if (!project)
+          {
+            callback('No project');
+          }
+          helper.hReturnFunds(project, callback, false);
+        },
+        function (error)
+        {
+          if (error)
+          {
+            console.log(error);
+            res.json(500, error);
+          }
+          res.json(200, {message: 'The account and is project(s) are deactivated and funds contributed to thous projects have been returned'});
+        });
+
+      });
+
+      //res.send(200, {message: 'The Account has been deactivate'});
     });
   });
 };

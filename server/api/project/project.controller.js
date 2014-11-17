@@ -6,7 +6,7 @@ var _ = require('lodash');
 var Project = require('./project.model');
 var User = require('../user/user.model');
 var bitcoin = require('bitcoin-address');
-var async = require('async');
+var helper = require('./project.helper');
 //var UserC = require('../user/user.controller');
 
 
@@ -173,56 +173,7 @@ exports.returnFunds = function(req, res)
   {
     if (err || !project)
       return handleError(res, err);
-    async.eachSeries(project.contributors, function (element, callback)
-    {
-      async.waterfall([
-        function(cb)
-        {
-          User.findById(element.contribId, function (err, user)
-            {
-              if (err)
-                cb(err);
-              cb(null, user);
-            });
-        },
-        function (user, cb)
-        {
-          user.balance += element.amount;
-          user.save(function (err)
-            {
-              cb(err, user);
-            });
-        }], function(error, result)
-        {
-          if (error)
-            callback(error);
-          callback(null, result)
-        });
-      // User.findById(element.contribId, function (err, user)
-      // {
-      //   if (err || !user)
-      //     callback(err);
-      //   console.log(user.balance);
-      //   user.balance += element.amount;
-      //   console.log(user.balance);
-      //   user.save(callback(err));
-      // });
-    }, function (err)
-    {
-      if (err)
-        return handleError(res, err);
-      project.contributorsOld = project.contributors.concat(project.contributors);
-      project.amountRaised = 0;
-      project.contributors = [];
-      //project.active = false;
-      project.save(function (err)
-      {
-        if (err)
-          return handleError(res, err);
-        res.json(200);
-      });
-    //res.json(200);
-    })
+    helper.hReturnFunds(project, res, true);
   });
 };
 
