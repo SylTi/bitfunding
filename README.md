@@ -16,6 +16,7 @@ Bitcoin Crowdfunding Platform
 
 1. rename /server/config/local.env.sample.js into local.env.js
 2. set the variables.
+3. if you want your database to be pre seeded open config/environment/developpement.js and set seedDB: true
 
 #### Production
 * Set the same variables directly in your env.

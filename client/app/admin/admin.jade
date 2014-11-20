@@ -21,8 +21,10 @@ div(ng-include='"components/navbar/navbar.html"')
         div.pull-right
           a.trash(ng-href='/admin/{{user._id}}/editUser')
             span.glyphicon.glyphicon-edit &nbsp;
-          a.trash(ng-click='delete(user)')
+          a.trash(ng-click='delete(user)', ng-show="user.active")
             span.glyphicon.glyphicon-trash
+          a(ng-click='activate(user)', ng-show="!user.active")
+            span.glyphicon.glyphicon-check
   h2.page-header Manage Projects
   ul.list-group
     li.list-group-item(ng-repeat='project in projects')
