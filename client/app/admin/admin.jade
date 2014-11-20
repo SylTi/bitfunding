@@ -30,7 +30,7 @@ div(ng-include='"components/navbar/navbar.html"')
     tab(heading='Manage Projects')
       ul.list-group.well
         tabset(justified='true', type="'pills'")
-          tab(heading='All')
+          tab(heading='All').tabText
             li.list-group-item(ng-repeat='project in projects')
               strong
                 span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
@@ -53,7 +53,7 @@ div(ng-include='"components/navbar/navbar.html"')
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 a.trash(ng-click='deleteProject(project)')
                   span.glyphicon.glyphicon-trash
-          tab(heading='Expired').label-danger
+          tab(heading='Expired').label-danger.tabText
             li.list-group-item(ng-repeat='project in projects', ng-if='project.amountRaised < project.amountToRaise && project.dateEndCampaign <= date')
               strong
                 span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
@@ -76,7 +76,7 @@ div(ng-include='"components/navbar/navbar.html"')
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 a.trash(ng-click='deleteProject(project)')
                   span.glyphicon.glyphicon-trash
-          tab(heading='Finished').label-success
+          tab(heading='Finished').label-success.tabText
             li.list-group-item(ng-repeat='project in projects', ng-if='project.amountRaised >= project.amountToRaise')
               strong
                 span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
@@ -99,7 +99,7 @@ div(ng-include='"components/navbar/navbar.html"')
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 a.trash(ng-click='deleteProject(project)')
                   span.glyphicon.glyphicon-trash
-          tab(heading='Ongoing').label-warning
+          tab(heading='Ongoing').label-warning.tabText
             li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised !== 0 && project.amountRaised < project.amountToRaise')
               strong
                 span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
@@ -122,7 +122,7 @@ div(ng-include='"components/navbar/navbar.html"')
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 a.trash(ng-click='deleteProject(project)')
                   span.glyphicon.glyphicon-trash
-          tab(heading='Not Started').label-default
+          tab(heading='Not Started').label-default.tabText
             li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised === 0')
               strong
                 span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
@@ -145,7 +145,7 @@ div(ng-include='"components/navbar/navbar.html"')
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 a.trash(ng-click='deleteProject(project)')
                   span.glyphicon.glyphicon-trash
-          tab(heading='Done').label-info
+          tab(heading='Done').label-info.tabText
             li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised >= project.amountToRaise && project.dateEndCampaign <= date')
               strong
                 span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished

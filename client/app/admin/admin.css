@@ -1,1 +1,6 @@
 .trash { color:rgb(209, 91, 71); }
+
+.tabText *
+{
+  color:black !important;
+}
