@@ -30,6 +30,11 @@ Bitcoin Crowdfunding Platform
 * FEE_WEBSITE: number, representing fee % for the service (at withdraw when project is done)
 * FEE_WITHDRAW: number, fee % on user withdraw 
 
+##### Client Configuration
+You can configure:
+
+* Google Analytics ID in the **/client/index.html**
+* Disquss App name in the **/client/app/app.js**
 
 ## Platform Workflow : User
 1. A user create is account
