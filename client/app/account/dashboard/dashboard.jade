@@ -44,6 +44,8 @@ div(ng-include='"components/navbar/navbar.html"')
                 h2.text-default
                   span {{userData.balance | toBTC}} &nbsp;
                   i.fa.fa-btc.text-muted
+                  &nbsp;
+                  span.text-muted {{currentPriceD | currency}}
                   br
                   span(ng-show="unconfirmed()").text-muted {{userData.unconfirmedBalance | toBTC}} unconfirmed &nbsp;
 
