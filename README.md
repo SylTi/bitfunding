@@ -28,6 +28,11 @@ Bitcoin Crowdfunding Platform
   This address should never touch the internet for increased security.
 * MY_SITE: domain of you site
 
+##### Client Configuration
+You can configure:
+
+* Google Analytics ID in the **/client/index.html**
+* Disquss App name in the **/client/app/app.js**
 
 ## Platform Workflow : User
 1. A user create is account
