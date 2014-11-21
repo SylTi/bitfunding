@@ -83,5 +83,26 @@ div(ng-include='"components/navbar/navbar.html"')
                 | Password must be at least 3 characters.
             p.help-block  {{ message }}
             button.btn.btn-lg.btn-danger.btn-sm.pull-right(type='submit') Save new password
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            b.text-muted Funds
+        .panel-body
+          h4.text-center {{user.balance | toBTC}} &nbsp;
+            i.fa.fa-btc
+          button.btn.btn-danger(ng-click='doCollaspe()') Request Withdraw
+          hr
+          div(collapse='isCollapsed')
+            .well.well-lg
+              form.form
+                form-group
+                  label.text-info Please provide the BTC address where you want the {{rest | toBTC}}
+                    i.fa.fa-btc &nbsp;to be sent
+                  input.form-control(type='text', ng-model='btcAddr')
+                br
+                button(type="button", ng-click='doSendFunds()').btn.btn-success Send !
+              .text-danger You will be charged an amount of {{cost | toBTC}}
+                i.fa.fa-btc.text-muted &nbsp; ({{fee}}%).
+              .label-warning {{message}}
 
 div(ng-include='"components/footer/footer.html"')

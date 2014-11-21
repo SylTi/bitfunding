@@ -22,11 +22,13 @@ Bitcoin Crowdfunding Platform
 * Set the same variables directly in your env.
 
 ##### Variables values
-* BLOCKCHAIN_API: The API code must be requested to blockchain.info
-* SECRET_KEY: Random key used to secure blockchain.info callbacks
-* BTC_ADDR: Your master Bitcoin address : every BTC send to a user address is forwarded there. 
+* BLOCKCHAIN_API: string, The API code must be requested to blockchain.info
+* SECRET_KEY: string, Random key used to secure blockchain.info callbacks
+* BTC_ADDR: string, Your master Bitcoin address : every BTC send to a user address is forwarded there. 
   This address should never touch the internet for increased security.
-* MY_SITE: domain of you site
+* MY_SITE: string, domain of you site
+* FEE_WEBSITE: number, representing fee % for the service (at withdraw when project is done)
+* FEE_WITHDRAW: number, fee % on user withdraw 
 
 
 ## Platform Workflow : User

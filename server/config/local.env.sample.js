@@ -12,6 +12,8 @@ module.exports = {
   SECRET_KEY: '', //Random key used to secure blockchain.info callbacks
   BTC_ADDR: '', // Your master Bitcoin addresse : every BTC send to user is forwarded there. This address should never touch the internet for increased security.
   MY_SITE: '', //domain of you site
+  FEE_WEBSITE: '',//number
+  FEE_WITHDRAW: '',//number
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
 };
