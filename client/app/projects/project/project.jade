@@ -63,16 +63,21 @@ div(ng-include='"components/navbar/navbar.html"')
     .row(ng-show="currentUser.name")
         .col-md-12
           h2.page-header Contribute to this project
+
         .col-md-12
           .input-group.col-md-6
             span.input-group-addon
               i.fa.fa-btc
-            input.form-control(type="text", ng-model="contribAmount" required, style="height: 37px;border-bottom-width:3px")
+            input.form-control(type="text", ng-model="contribAmount" required, style="height: 37px;border-bottom-width:3px", ng-change='changePrice()')
             span.input-group-btn
               button.btn.btn-default(type='button', ng-click="contribute()") Contribute
-          div.alert.alert-warning(style="margin-top: 10px;")
+          small.alert.alert-warning.alertProjectContrib
             i.fa.fa-exclamation-circle &nbsp;You cannot get back your pledges unless the project expire. &nbsp;
             i.fa.fa-exclamation-circle
+          div.text-danger(ng-show='currentPriceD') {{contribAmount}}
+            i.fa.fa-btc
+            | &nbsp; = &nbsp; {{currentPriceD | currency}}
+
           div.alert.alert-info(ng-show="resContrib", style="margin-top:10px;") {{resContrib}}
     //- span(class="error", ng-show="myForm.input.$error.required") Required!<br>
     .row

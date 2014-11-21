@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bitCrowdFundsApp')
-  .controller('ProjectCtrl', function ($scope, $http, $routeParams, ProjectRes, Auth, $location) {
+  .controller('ProjectCtrl', function ($scope, $http, $routeParams, ProjectRes, Auth, $location, CoindeskAPI) {
     $scope.currentUser = Auth.getCurrentUser();
     $scope.currentProject =  false;
     $scope.resContrib = '';
@@ -64,6 +64,7 @@ angular.module('bitCrowdFundsApp')
                 {
                   $scope.daysToGo = 0;
                 }
+                 $scope.currentPrices = CoindeskAPI.query();
                 //End days to go
             }, function(){
                 $location.path('/projects');
@@ -93,5 +94,10 @@ angular.module('bitCrowdFundsApp')
     	{
     		$scope.resContrib = 'Something wrong happend : ' + data;
     	});
+    };
+
+     $scope.changePrice = function()
+    {
+     $scope.currentPriceD = ($scope.contribAmount) * $scope.currentPrices.bpi.USD.rate;
     };
   });
