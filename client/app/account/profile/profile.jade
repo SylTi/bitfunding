@@ -11,8 +11,8 @@ div(ng-include='"components/navbar/navbar.html"')
       small.text-muted {{user.name}}
     h2(ng-show="user.firstname == '' && user.lastname == ''")
       div {{user.name}}
-    hr
     div#profile-infos
+      hr
       div(ng-show="user.role === 'admin'")
         i.fa.fa-user.text-muted.space-right
         span.space-right BitFunding
@@ -26,7 +26,7 @@ div(ng-include='"components/navbar/navbar.html"')
       div(ng-show="user.gravatarEmail != ''")
         i.fa.fa-envelope.text-muted.space-right
         a(href="mailto:{{user.gravatarEmail}}") {{user.gravatarEmail}}
-      hr
+      hr(ng-show="user.bitcointalkLogin != '' || user.githubLogin != '' || user.stackexchangeLogin != ''")
       div(ng-show="user.bitcointalkLogin != ''")
         i.fa.fa-comment.text-muted.space-right
         span {{user.bitcointalkLogin}} @
