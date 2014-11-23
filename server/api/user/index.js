@@ -15,7 +15,7 @@ router.put('/:id/settings', auth.isAuthenticated(), controller.changeSettings);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.get('/:id/receiveDeposit', controller.receiveDeposit);
-router.get('/:id/privateContrib', auth.isAuthenticated(), controller.privateContrib);
+router.get('/:id/privateContrib', controller.privateContrib);
 router.get('/profile/:name', controller.profile);
 router.get('/admin/:id', auth.hasRole('admin'), controller.getUserInfos);
 
