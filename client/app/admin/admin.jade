@@ -10,11 +10,12 @@ div(ng-include='"components/navbar/navbar.html"')
       ul.list-group.well
         li.list-group-item(ng-repeat='user in users | orderBy:"role"')
           span.pull-left
-            img.avatar(gravatar-src="'{{user.email}}'", width=40)
+            a.text-muted(href="/profile/{{user.name}}")
+              img.avatar(gravatar-src="'{{user.email}}'", width=40)
             &nbsp;&nbsp;&nbsp;
           span
             strong
-              span {{user.name}}
+              a.text-muted(href="/profile/{{user.name}}") {{user.name}}
               &nbsp;
               span.label.label-danger(ng-show="user.role == 'admin'") Admin
               span.label.label-info(ng-show="user.role == 'user'") User

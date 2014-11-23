@@ -13,7 +13,10 @@ div(ng-include='"components/navbar/navbar.html"')
               &nbsp;&nbsp;
               a(ng-href="/projects/{{proj.slug}}") {{proj.name}}
               &nbsp;
-              small.text-muted by {{proj.Owner}}
+              small.text-muted
+                span by
+                &nbsp;
+                a(href="/profile/{{proj.Owner}}") {{proj.Owner}}
               span.pull-right
                 div.progress
                   .progress-bar.progress-bar-success(style='width: {{100 * proj.amountRaised / proj.amountToRaise}}%;') {{100 * proj.amountRaised / proj.amountToRaise}}%

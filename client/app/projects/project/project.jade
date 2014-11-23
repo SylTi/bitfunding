@@ -9,7 +9,10 @@ div(ng-include='"components/navbar/navbar.html"')
       &nbsp;&nbsp;
       span {{currentProject.name}}
       &nbsp;
-      small by {{currentProject.Owner}}
+      small by
+      &nbsp;
+      a(href="/profile/{{currentProject.Owner}}")
+        small {{currentProject.Owner}}
       &nbsp;
       img.avatar(gravatar-src="currentProject.OwnerDatas.email", width=20)
       span.pull-right
