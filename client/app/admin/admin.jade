@@ -40,8 +40,6 @@ div(ng-include='"components/navbar/navbar.html"')
         tabset(justified='true', type="'pills'")
           tab(heading='All').tabText.label-primary
             li.list-group-item(ng-repeat='project in projects')
-              span {{$last}}
-              span {{$index}}
               strong
                 span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
                 span.label.label-warning(ng-show="project.amountRaised !== 0 && project.amountRaised < project.amountToRaise") Ongoing

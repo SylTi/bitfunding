@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var Project = require('../project/project.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -101,11 +102,37 @@ exports.getUserInfos = function (req, res, next) {
 exports.profile = function (req, res, next) {
   var userId = req.params.name;
 
+  // Retrieve user profiles.
   User.findOne({name: userId}, PRIVATE_FIELDS, function(err, user) {
     console.log(user);
     if (err) return next(err);
     if (!user) return res.json(500);
-    res.json(user);
+
+    // Retrieve projects user contributed to.
+    var o = {};
+    o.jsMode = true;
+    o.scope = {user_id : user._id};
+    o.query = { 'contributors': {$elemMatch: {contribId: user._id}} };
+    o.map = function () {
+      var projects = {
+        name : this.name,
+        description : this.description,
+        amountRaised : this.amountRaised,
+        amountToRaise : this.amountToRaise,
+        slug: this.slug
+      };
+      emit(this._id, projects);
+    }
+
+    Project.mapReduce(o, function (err, contributions) {
+      if (err) return res.json(500);
+
+      // If anonymous contributions, dont include them.
+      if (user.privateContrib === true)
+        res.json(200, {user:user, contributions:[]});
+      else
+        res.json(200, {user:user, contributions:contributions});
+    });
   });
 };
 
