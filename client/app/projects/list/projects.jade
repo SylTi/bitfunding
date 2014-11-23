@@ -6,7 +6,7 @@ div(ng-include='"components/navbar/navbar.html"')
       h1.page-header Explore projects.
       br
     .col-md-12
-      .panel.panel-default(ng-repeat="proj in projectsList")
+      .panel.panel-default(dir-paginate="proj in projectsList | itemsPerPage: 5")
         .panel-heading
             h3.panel-title
               i.fa.fa-book.text-muted
@@ -41,6 +41,8 @@ div(ng-include='"components/navbar/navbar.html"')
                 h2.text-success {{proj.amountRaised | toBTC}} BTC
                 small raised of {{proj.amountToRaise | toBTC}} BTC goal.
               a.project-fund-btn.btn.btn-block.btn-warning(ng-href="/projects/{{proj.slug}}") Fund this project.
+    div.text-center
+      dir-pagination-controls(template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html")
   .row
     .col-lg-12
       h1.page-header Any project idea you want to discuss ?
