@@ -10,7 +10,8 @@ angular.module('bitCrowdFundsApp')
     $scope.currentPrices = CoindeskAPI.query(function (data)
       {
         $scope.currentPriceD = ($scope.userData.balance / 100000000) * data.bpi.USD.rate;
-
+        $scope.currentPriceE = ($scope.userData.balance / 100000000) * data.bpi.EUR.rate;
+        $scope.currentPriceP = ($scope.userData.balance / 100000000) * data.bpi.GBP.rate;
       });
     $scope.unconfirmed = function()
     {
