@@ -104,5 +104,11 @@ div(ng-include='"components/navbar/navbar.html"')
               .text-danger You will be charged an amount of {{cost | toBTC}}
                 i.fa.fa-btc.text-muted &nbsp; ({{fee}}%).
               .label-warning {{message}}
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            b.text-muted Your bitcoin deposit address
+        .panel-body.text-center
+           code {{user.bitcoinAddr}}
 
 div(ng-include='"components/footer/footer.html"')
