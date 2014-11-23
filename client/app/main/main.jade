@@ -16,7 +16,7 @@ header#banner.hero-unit
   br
   br
   a.btn.btn-default.btn-lg(href='/addproject') Create a project
-  &nbsp;&nbsp;
+  | &nbsp;&nbsp;
   a.btn.btn-success.btn-lg(href='/projects') Explore projects
   br
   br
@@ -29,12 +29,12 @@ header#banner.hero-unit
         .panel-heading
             h3.panel-title
               i.fa.fa-book.text-muted
-              &nbsp;&nbsp;
+              | &nbsp;&nbsp;
               a(ng-href="/projects/{{proj.slug}}") {{proj.name}}
-              &nbsp;
+              | &nbsp;
               small.text-muted
                 span by
-                &nbsp;
+                | &nbsp;
                 a(href="/profile/{{proj.Owner}}") {{proj.Owner}}
               span.pull-right
                 div.progress
@@ -43,17 +43,17 @@ header#banner.hero-unit
             div.row
             .col-lg-8
               span {{proj.description | limitTo: 1000}}.
-              &nbsp;
+              | &nbsp;
               a(ng-href="/projects/{{proj.slug}}") See project page.
               br
               br
               span.text-muted
                 span Project started
-                &nbsp;
+                | &nbsp;
                 b(am-time-ago="proj.dateCreat")
-                &nbsp;
+                | &nbsp;
                 span and finishing
-                &nbsp;
+                | &nbsp;
                 b(am-time-ago="proj.dateEndCampaign")
             .col-lg-3.text-right
               div.project-state.well.text-center

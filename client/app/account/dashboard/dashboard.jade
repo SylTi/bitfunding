@@ -53,14 +53,14 @@ div(ng-include='"components/navbar/navbar.html"')
             tr(ng-repeat="proj in projects")
               td
                 i.fa.fa-book.text-muted
-                &nbsp;&nbsp;
+                | &nbsp;&nbsp;
                 a(ng-href="/projects/{{proj.slug}}") {{proj.name}}
               td
                 span.label.label-success(ng-show="proj.amountRaised >= proj.amountToRaise") Finished
                 span.label.label-warning(ng-show="proj.amountRaised !== 0 && proj.amountRaised < proj.amountToRaise") Ongoing
                 span.label.label-default(ng-show="proj.amountRaised === 0") Not started
               td
-                {{proj.amountRaised | toBTC}} / {{proj.amountToRaise | toBTC}} BTC
+                span {{proj.amountRaised | toBTC}} / {{proj.amountToRaise | toBTC}} BTC
               td.text-center
                 a(ng-href='/projects/{{proj.slug}}/edit')
                   span.glyphicon.glyphicon-pencil

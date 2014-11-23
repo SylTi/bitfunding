@@ -30,17 +30,17 @@ div(ng-include='"components/navbar/navbar.html"')
       div(ng-show="user.bitcointalkLogin != ''")
         i.fa.fa-comment.text-muted.space-right
         span {{user.bitcointalkLogin}} @
-        &nbsp;&nbsp;
+        | &nbsp;&nbsp;
         a(href="https://bitcointalk.org") BitcoinTalk
       div(ng-show="user.githubLogin != ''")
         i.fa.fa-github-alt.text-muted.space-right
         span {{user.githubLogin}} @
-        &nbsp;&nbsp;
+        | &nbsp;&nbsp;
         a(href="https://github.com/{{user.githubLogin}}") GitHub
       div(ng-show="user.stackexchangeLogin != ''")
         i.fa.fa-stack-exchange.text-muted.space-right
         span {{user.stackexchangeLogin}} @
-        &nbsp;&nbsp;
+        | &nbsp;&nbsp;
         a(href="http://stackexchange.com/") StackExchange
   .col-md-9
     .col-md-6

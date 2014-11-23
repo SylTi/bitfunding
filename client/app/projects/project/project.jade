@@ -6,34 +6,34 @@ div(ng-include='"components/navbar/navbar.html"')
   .col-md-12
     h1.page-header
       i.fa.fa-book.text-muted
-      &nbsp;&nbsp;
+      | &nbsp;&nbsp;
       span {{currentProject.name}}
-      &nbsp;
+      | &nbsp;
       small by
-      &nbsp;
+      | &nbsp;
       a(href="/profile/{{currentProject.Owner}}")
         small {{currentProject.Owner}}
-      &nbsp;
+      | &nbsp;
       img.avatar(gravatar-src="currentProject.OwnerDatas.email", width=20)
       span.pull-right
         a.btn.btn-xs.btn-default(ng-show="currentProject.OwnerDatas.name == currentUser.name", ng-href="/projects/{{currentProject.slug}}/edit")
           i.fa.fa-edit
-          &nbsp;&nbsp;
+          | &nbsp;&nbsp;
           span Edit project
-        &nbsp;&nbsp;
+        | &nbsp;&nbsp;
         a.btn.btn-xs.btn-primary(ng-href="mailto:{{currentProject.Owner}}", ng-show="currentProject.OwnerDatas.name != currentUser.name")
           i.fa.fa-envelope
-          &nbsp;&nbsp;
+          | &nbsp;&nbsp;
           span Contact
     .row
       .col-md-8
         span.text-muted
           span Project started
-          &nbsp;
+          | &nbsp;
           b(am-time-ago="currentProject.dateCreat")
-          &nbsp;
+          | &nbsp;
           span and finishing
-          &nbsp;
+          | &nbsp;
           b(am-time-ago="currentProject.dateEndCampaign")
         br
         br
@@ -94,7 +94,7 @@ div(ng-include='"components/navbar/navbar.html"')
               div(ng-repeat="contributor in filteredContributors")
                 .col-sm-4
                   span(ng-show="contributor.isPrivate == false").badge.badge-success.pull-right
-                    a(ng-href="/profile/{{contributor.userName}}", style="color: white;"){{contributor.userName}}
+                    a(ng-href="/profile/{{contributor.userName}}", style="color: white;") {{contributor.userName}}
                   span(ng-show="contributor.isPrivate == true").badge.badge-success.pull-right Private
                 .col-sm-8.pull-left
                   span &nbsp; &nbsp; Amount: &nbsp;

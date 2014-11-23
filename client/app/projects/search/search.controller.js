@@ -8,7 +8,7 @@ angular.module('bitCrowdFundsApp')
     $http.get('/api/projects/search/'+ $routeParams.name)
     .success(function (data)
     {
-      $scope.projectsList = data;
+      $scope.projectsList = data.data;
     })
     .error(function (data)
     {

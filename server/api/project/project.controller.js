@@ -202,6 +202,8 @@ exports.search = function(req, res)
   .exec(function(err, projects) {
     if (err || !projects)
       return handleError(res, err);
-    res.json(200, projects);
+    var obj = {secret: 'lol', data: projects};
+    //console.log(JSON.stringify(obj));
+    res.json(200, obj);
   });
 };

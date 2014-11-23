@@ -33,9 +33,10 @@ Bitcoin Crowdfunding Platform
 ##### Client Configuration
 You can configure:
 
-* Google Analytics ID in the **/client/index.html**
-* Addthis user ID in the **/client/index.html**
-* Disquss App name in the **/client/app/app.js**
+* Google Analytics ID in the **/client/index.html** file
+* Addthis user ID in the **/client/index.html** file
+* Disquss App name in the **/client/app/app.js** file
+* $scope.fee Withdrawal fee in the **/client/app/account/settings/settings.controller.js** file
 
 ## Platform Workflow : User
 1. A user create is account

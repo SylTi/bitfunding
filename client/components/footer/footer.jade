@@ -16,28 +16,28 @@
       .col-md-12
         a.btn.btn-warning.btn-xs(href="http://coindesk.com", target="_blank")
           img(src="http://www.coindesk.com/wp-content/themes/coindesk2/images/header-logo.png", height="15")
-        &nbsp;&nbsp;
+        | &nbsp;&nbsp;
         span real time BTC price
-        &nbsp;
+        | &nbsp;
         span.text-muted
           span (updated
-          &nbsp;
+          | &nbsp;
           span(am-time-ago="current_prices.time.updated")
           span )
         ul.list-inline
           span.label.label-primary
             span {{current_prices.bpi.USD.rate}}
-            &nbsp;&nbsp;
+            | &nbsp;&nbsp;
             i.fa.fa-dollar
-          &nbsp;&nbsp;&nbsp;
+          | &nbsp;&nbsp;&nbsp;
           span.label.label-primary
             span {{current_prices.bpi.EUR.rate}}
-            &nbsp;&nbsp;
+            | &nbsp;&nbsp;
             i.fa.fa-euro
-          &nbsp;&nbsp;&nbsp;
+          | &nbsp;&nbsp;&nbsp;
           span.label.label-primary
             span {{current_prices.bpi.GBP.rate}}
-            &nbsp;&nbsp;
+            | &nbsp;&nbsp;
             i.fa.fa-gbp
 
   br

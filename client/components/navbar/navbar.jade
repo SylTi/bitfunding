@@ -22,8 +22,19 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
 
       form.navbar-form.navbar-nav
         div#searchbar.form-group
-          input#search.form-control(type='text', name='searchInput', ng-model='valueSearch', placeholder='Search projects...')
-        &nbsp;
+          angucomplete-alt(id="search",
+                          placeholder="Search projects...",
+                          pause="100",
+                          selected-object="valueSearch",
+                          remote-url="http://localhost:9000/api/projects/search/",
+                          remote-url-data-field="data",
+                          title-field="name",
+                          description-field="description",
+                          minlength=2,
+                          override-suggestions="true",
+                          inputclass="form-control")
+          //- input#search.form-control(type='text', name='searchInput', ng-model='valueSearch', placeholder='Search projects...')
+        | &nbsp;
         button.btn.btn-warning.btn-xs(type='submit', ng-click='search()')
           i.fa.fa-search
 
@@ -39,7 +50,7 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
           p.navbar-text
             img.avatar(gravatar-src="'{{getCurrentUser().email}}'")
             a(ng-href="/profile/{{getCurrentUser().name}}") {{ getCurrentUser().name }}
-            &nbsp;&nbsp;
+            | &nbsp;&nbsp;
             span.label.label-danger(ng-show='isAdmin()') STAFF
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/addproject")}', tooltip-placement="bottom", tooltip="New project")
           a(ng-href='/addproject')

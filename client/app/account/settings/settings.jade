@@ -30,25 +30,25 @@ div(ng-include='"components/navbar/navbar.html"')
             .form-group
               label
                 span Your
-                &nbsp;
+                | &nbsp;
                 a(href="https://bitcointalk.org/", target="_blank") Bitcointalk
-                &nbsp;
+                | &nbsp;
                 span account name
               input.form-control(type='text', name='bitcointalkLogin', ng-model='user.bitcointalkLogin', mongoose-error='', placeholder='')
             .form-group
               label
                 span Your
-                &nbsp;
+                | &nbsp;
                 a(href="https://github.com", target="_blank") Github
-                &nbsp;
+                | &nbsp;
                 span account name
               input.form-control(type='text', name='githubLogin', ng-model='user.githubLogin', mongoose-error='', placeholder='')
             .form-group
               label
                 span Your
-                &nbsp;
+                | &nbsp;
                 a(href="https://stackexchange.com", target="_blank") StackExchange
-                &nbsp;
+                | &nbsp;
                 span login
               input.form-control(type='text', name='stackexchangeLogin', ng-model='user.stackexchangeLogin', mongoose-error='', placeholder='')
             hr
@@ -57,7 +57,7 @@ div(ng-include='"components/navbar/navbar.html"')
             .form-group
               label
                 input(type='checkbox', ng-model="user.privateContrib")
-                &nbsp;&nbsp;
+                | &nbsp;&nbsp;
                 b Anonymous contributions
               br
               span If you enable this option, your contributions won't be displayed with your name along.
