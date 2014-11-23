@@ -25,18 +25,18 @@ div(ng-include='"components/navbar/navbar.html"')
           i.fa.fa-envelope
           &nbsp;&nbsp;
           span Contact {{currentProject.OwnerDatas.name}}
-    span.text-muted
-      span Project started
-      &nbsp;
-      b(am-time-ago="currentProject.dateCreat")
-      &nbsp;
-      span and finishing
-      &nbsp;
-      b(am-time-ago="currentProject.dateEndCampaign")
-      br
-      br
     .row
       .col-md-8
+        span.text-muted
+          span Project started
+          &nbsp;
+          b(am-time-ago="currentProject.dateCreat")
+          &nbsp;
+          span and finishing
+          &nbsp;
+          b(am-time-ago="currentProject.dateEndCampaign")
+        br
+        br
         div.well
           span {{currentProject.description}}
         div(ng-show="currentUser.name")
@@ -76,6 +76,10 @@ div(ng-include='"components/navbar/navbar.html"')
           h2.page-header Discuss this project
           div(disqus="('project' + currentProject._id)")
       .col-md-4
+        div
+          h2 Like this project ? Share it !
+          div.addthis_sharing_toolbox
+          br
         div.project-state.well.text-center
           h2.text-info {{nbBackers}}
           small backers
