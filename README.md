@@ -34,6 +34,7 @@ Bitcoin Crowdfunding Platform
 You can configure:
 
 * Google Analytics ID in the **/client/index.html**
+* Addthis user ID in the **/client/index.html**
 * Disquss App name in the **/client/app/app.js**
 
 ## Platform Workflow : User
