@@ -99,5 +99,7 @@ angular.module('bitCrowdFundsApp')
      $scope.changePrice = function()
     {
      $scope.currentPriceD = ($scope.contribAmount) * $scope.currentPrices.bpi.USD.rate;
+     $scope.currentPriceE = ($scope.contribAmount) * $scope.currentPrices.bpi.EUR.rate;
+     $scope.currentPriceP = ($scope.contribAmount) * $scope.currentPrices.bpi.GBP.rate;
     };
   });
