@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint unused:false, camelcase:false*/
+
 angular.module('bitCrowdFundsApp', [
   'ngCookies',
   'ngResource',
@@ -11,12 +13,14 @@ angular.module('bitCrowdFundsApp', [
   'ui.gravatar',
   'angular-loading-bar',
   'ngDisqus',
-  'slugifier'
+  'slugifier',
+  'angularUtils.directives.dirPagination',
+  'angucomplete-alt'
 ])
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
   }])
-  .config(function ($routeProvider, $locationProvider, $httpProvider, $disqusProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, $disqusProvider, gravatarServiceProvider) {
     $routeProvider
       .otherwise({
         redirectTo: '/'
@@ -24,8 +28,16 @@ angular.module('bitCrowdFundsApp', [
 
     $locationProvider.hashPrefix('!');
     $locationProvider.html5Mode(true);
-    $disqusProvider.setShortname('bitfunding')
+    $disqusProvider.setShortname('bitfunding');
     $httpProvider.interceptors.push('authInterceptor');
+
+    gravatarServiceProvider.defaults = {
+      size     : 500,
+      'default': 'mm'  // Mystery man as default for missing avatars
+    };
+
+    // Use https endpoint
+    gravatarServiceProvider.secure = true;
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
@@ -53,6 +65,14 @@ angular.module('bitCrowdFundsApp', [
       }
     };
   })
+
+  //Dinamic title
+
+  .run(['$location', '$rootScope', function($location, $rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+        $rootScope.title = current.$$route.title;
+    });
+  }])
 
   .run(function ($rootScope, $location, Auth, $window) {
     $window.disqus_shortname = 'bitfunding';

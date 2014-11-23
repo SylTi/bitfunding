@@ -8,13 +8,23 @@ angular.module('bitCrowdFundsApp')
 	var currentUser = Auth.getCurrentUser();
 	$scope.currentProject = ProjectRes.get({name: $scope.nameProject});
 
+  $scope.isAdmin = function ()
+  {
+    if (currentUser.role === 'admin')
+    {
+      return true;
+    }
+    return false;
+  };
+
 	//var $scope.asAccess = false;
-	if (!(currentUser.role == 'admin') && !(currentUser.name == $scope.currentProject.name))
-		$location.path( "/projects" );
+	if ((currentUser.role !== 'admin') && (currentUser.name !== $scope.currentProject.Owner))
+  {
+		$location.path('/projects');
+  }
 
 	$scope.editProject = function ()
 	{
-		console.log($scope.currentProject);
 		/*var res = ProjectRes.update($scope.nameProject, $scope.currentProject);
 		if (!res)
 			return $scope.message = "Fail to update";
@@ -29,14 +39,30 @@ angular.module('bitCrowdFundsApp')
 			},
 			project: $scope.currentProject
 		};
-		$http.put('api/projects/'+$scope.nameProject, obj)
-		.success(function(data, status, headers, config)
+		$http.put('api/projects/'+$scope.currentProject.slug, obj)
+		.success(function()
 		{
-			$scope.message = "Project updated";
+			$scope.message = 'Project updated';
 		})
-		.error(function(data, status, headers, config)
+		.error(function()
 		{
-			$scope.message = "Fail to update";
+			$scope.message = 'Fail to update';
 		});
-	}
+	};
+
+  $scope.returnFunds = function ()
+  {
+    if (currentUser.role === 'admin')
+    {
+      $http.put('api/projects/'+$scope.currentProject.slug+'/returnFunds', {})
+      .success(function()
+      {
+        $scope.message = 'Funds returned';
+      })
+      .error(function()
+      {
+        $scope.message = 'Fail to return Funds';
+      });
+    }
+  };
  });

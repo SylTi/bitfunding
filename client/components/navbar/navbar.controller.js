@@ -20,4 +20,24 @@ angular.module('bitCrowdFundsApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+
+    $scope.valueSearch = '';
+
+    $scope.search = function ()
+    {
+      if ($scope.valueSearch === '')
+      {
+        console.log('value search empty');
+        return;
+      }
+      if (!_.isString($scope.valueSearch))
+      {
+        if (!$scope.valueSearch.title)
+        {
+          return $location.path('/projects/search/' + $scope.valueSearch.originalObject);
+        }
+        return $location.path('/projects/search/' + $scope.valueSearch.title);
+      }
+      $location.path('/projects/search/' + $scope.valueSearch);
+    };
   });

@@ -14,11 +14,30 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
           a(ng-href='{{item.link}}') {{item.title}}
 
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/dashboard")}')
+          a(ng-href='/dashboard') Dashboard
+
         li(ng-class='{active: isActive("/projects")}')
           a(ng-href='/projects') Projects
 
-        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/dashboard")}')
-          a(ng-href='/dashboard') Dashboard
+      form.navbar-form.navbar-nav
+        div#searchbar.form-group
+          angucomplete-alt(id="search",
+                          placeholder="Search projects...",
+                          pause="100",
+                          selected-object="valueSearch",
+                          remote-url="http://localhost:9000/api/projects/search/",
+                          remote-url-data-field="data",
+                          title-field="name",
+                          description-field="description",
+                          minlength=2,
+                          override-suggestions="true",
+                          inputclass="form-control")
+          //- input#search.form-control(type='text', name='searchInput', ng-model='valueSearch', placeholder='Search projects...')
+        | &nbsp;
+        button.btn.btn-warning.btn-xs(type='submit', ng-click='search()')
+          i.fa.fa-search
+
 
       ul.nav.navbar-nav.navbar-right
         li(ng-hide='isLoggedIn()', ng-class='{active: isActive("/signup")}')
@@ -30,17 +49,16 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li(ng-show='isLoggedIn()')
           p.navbar-text
             img.avatar(gravatar-src="'{{getCurrentUser().email}}'")
-            a(ng-href="/dashboard") {{ getCurrentUser().name }}
-            &nbsp;
-            span.text-muted(ng-show='isAdmin()') [admin]
-
+            a(ng-href="/profile/{{getCurrentUser().name}}") {{ getCurrentUser().name }}
+            | &nbsp;&nbsp;
+            span.label.label-danger(ng-show='isAdmin()') STAFF
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/addproject")}', tooltip-placement="bottom", tooltip="New project")
           a(ng-href='/addproject')
             span.glyphicon.glyphicon-plus.text-warning
 
         li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}', tooltip-placement="bottom", tooltip="Admin Control Panel")
           a(href='/admin')
-            span.glyphicon.glyphicon-lock.text-danger
+            span.glyphicon.glyphicon-lock
 
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}', tooltip-placement="bottom", tooltip="Settings")
           a(href='/settings')

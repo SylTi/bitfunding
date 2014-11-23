@@ -1,9 +1,12 @@
 'use strict';
 
+/*jshint eqnull:true*/
+
 var _ = require('lodash');
 var Project = require('./project.model');
 var User = require('../user/user.model');
 var bitcoin = require('bitcoin-address');
+var helper = require('./project.helper');
 //var UserC = require('../user/user.controller');
 
 
@@ -31,6 +34,15 @@ exports.myProjects = function(req, res) {
   });
 };
 
+// Get given user name projects
+exports.userProjects = function(req, res) {
+  Project.find({Owner: req.params.name}).exec(function (err, projects) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, projects);
+  });
+};
+
+
 // Get a single project
 exports.show = function(req, res) {
   Project.findOne({slug: req.params.name}).lean().exec(function (err, project) {
@@ -52,15 +64,23 @@ exports.show = function(req, res) {
 
 // Creates a new project in the DB.
 exports.create = function(req, res) {
-  var datas = req.body
+  var datas = req.body;
+  datas.amountRaised = 0;
+  datas.contributors = [];
+  console.log(datas.dateEndCampaign);
+  console.log(Date(datas.dateEndCampaign));
+  //datas.dateEndCampaign = new Date(datas.dateEndCampaign);
+  datas.dateCreat = new Date();
   datas.amountToRaise *= 100000000;
+  if (datas.name === 'search')
+    return res.json(500, {reason: 'Forbidden name'});
   Project.findOne({name: datas.name}, function (err_existing, existing) {
     if (err_existing) { return res.json(500) }
     if (existing != null)
       return res.json(500, {reason:'Existing project with this name.'});
     else
       if(!bitcoin.validate(datas.OwnerBTCKey))
-        res.json(500, 'Invalid Bitcoin Address');
+        res.json(500, {reason:'Invalid Bitcoin Address'});
       else
         Project.create(datas, function(err, project) {
           if (err) { res.json(500, {reason:'Missing parameters.'}); }
@@ -117,6 +137,7 @@ exports.contribute = function(req, res)
 {
   var toContrib = Number(req.body.amount);
   var nameProj = req.params.name;//.replace("%20", " ");
+
   User.findById(req.body.userId, function (err, user)
   {
     if (err || !user)
@@ -140,7 +161,6 @@ exports.contribute = function(req, res)
             project.contributors.push({contribId: user._id, amount: toContrib});
             project.save(function (err)
               {
-                console.log(err);
                 if (err)
                   return handleError(res, err);
                 return res.json(200, project);
@@ -153,5 +173,37 @@ exports.contribute = function(req, res)
       return handleError(res, 'Amout > Balance');
     }
   });
+};
 
-}
+exports.returnFunds = function(req, res)
+{
+  //TODO : check if project date is passed or do nothing ?
+
+  var name = req.params.name;
+  Project.findOne({slug: name}, function (err, project)
+  {
+    if (err || !project)
+      return handleError(res, err);
+    helper.hReturnFunds(project, res, true);
+  });
+};
+
+exports.search = function(req, res)
+{
+  var value = req.params.name;
+  var re = new RegExp(value, 'i');
+
+  Project.find()
+  .or([{
+    'name': { $regex: re }},
+    { 'description': { $regex: re }
+  }])
+  .sort('name')
+  .exec(function(err, projects) {
+    if (err || !projects)
+      return handleError(res, err);
+    var obj = {secret: 'lol', data: projects};
+    //console.log(JSON.stringify(obj));
+    res.json(200, obj);
+  });
+};

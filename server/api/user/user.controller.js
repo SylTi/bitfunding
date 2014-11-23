@@ -1,10 +1,14 @@
 'use strict';
 
 var User = require('./user.model');
+var Project = require('../project/project.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var http = require('http'); //for blockchain
+
+// Hidden user fields
+var PRIVATE_FIELDS = '-salt -hashedPassword -unconfirmedBalance -email -transactions -balance';
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -25,9 +29,11 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function (req, res, next) {
+  console.log()
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
+  newUser.balance = 0;
 
   // BTC powered by blockchain.info
   var secret = process.env.SECRET_KEY;
@@ -55,7 +61,7 @@ exports.create = function (req, res, next) {
     }
     else if (result.statusCode === 500)
     {
-
+      return res.send(500);
     }
     //console.log("Got response: " + res.statusCode);
   }).on('error', function(e) { return validationError(res, e);});
@@ -77,13 +83,159 @@ exports.show = function (req, res, next) {
 };
 
 /**
+ * Get a single user
+ */
+exports.getUserInfos = function (req, res, next) {
+  var userId = req.params.id;
+
+  User.findById(userId, '-salt -hashedPassword', function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.send(401);
+    res.json(user);
+  });
+};
+
+
+/**
+ * Get a single user from its unique profile name
+ */
+exports.profile = function (req, res, next) {
+  var userId = req.params.name;
+
+  // Retrieve user profiles.
+  User.findOne({name: userId}, PRIVATE_FIELDS, function(err, user) {
+    console.log(user);
+    if (err) return next(err);
+    if (!user) return res.json(500);
+
+    // Retrieve projects user contributed to.
+    var o = {};
+    o.jsMode = true;
+    o.scope = {user_id : user._id};
+    o.query = { 'contributors': {$elemMatch: {contribId: user._id}} };
+    o.map = function () {
+      var projects = {
+        name : this.name,
+        description : this.description,
+        amountRaised : this.amountRaised,
+        amountToRaise : this.amountToRaise,
+        slug: this.slug
+      };
+      emit(this._id, projects);
+    }
+
+    Project.mapReduce(o, function (err, contributions) {
+      if (err) return res.json(500);
+
+      // If anonymous contributions, dont include them.
+      if (user.privateContrib === true)
+        res.json(200, {user:user, contributions:[]});
+      else
+        res.json(200, {user:user, contributions:contributions});
+    });
+  });
+};
+
+/**
  * Deletes a user
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
-    return res.send(204);
+  // User.findByIdAndRemove(req.params.id, function(err, user) {
+  //   if(err) return res.send(500, err);
+  //   return res.send(204);
+  // });
+  console.log('here');
+  var Project = require('../project/project.model.js');
+  var helper = require('../project/project.helper');
+  var async = require('async');
+
+  User.findById(req.params.id, function (err, user)
+  {
+    if (err || !user)
+    {
+      return res.json(500, err);
+    }
+    console.log('here');
+    user.active = false;
+    user.save(function (error)
+    {
+      if (error)
+      {
+        console.log(err);
+        return res.json(500, err);
+      }
+      console.log(user.name);
+      Project.find({Owner: user.name}, function (err, projects)
+      {
+        if (err)
+        {
+          return res.json(500, err);
+        }
+        if (!projects)
+        {
+          console.log('no projects for user');
+          return res.json(200, {message: 'User deactivated'});
+        }
+        async.eachSeries(projects, function(project, callback){
+          if (!project)
+          {
+            callback('No project');
+          }
+          helper.hReturnFunds(project, callback, false);
+        },
+        function (error)
+        {
+          if (error)
+          {
+            console.log(error);
+            res.json(500, error);
+          }
+          res.json(200, {message: 'The account and is project(s) are deactivated and funds contributed to those projects have been returned'});
+        });
+
+      });
+
+      //res.send(200, {message: 'The Account has been deactivate'});
+    });
+  });
+};
+
+/**
+ * Change a users settings
+ */
+exports.changeSettings = function(req, res, next) {
+  //console.log(req.body);
+  var userId;
+  console.log(req.user._id);
+  if (req.user.role === 'admin')
+    userId = req.params.id;
+  else
+    userId = req.user._id;
+  console.log(userId);
+  var firstname = req.body.firstname;
+  var lastname = String(req.body.lastname);
+  var location = String(req.body.location);
+  var phone = String(req.body.phone);
+  var gravatarEmail = String(req.body.gravatarEmail);
+  var bitcointalkLogin = String(req.body.bitcointalkLogin);
+  var githubLogin = String(req.body.githubLogin);
+  var stackexchangeLogin = String(req.body.stackexchangeLogin);
+
+  User.findById(userId, function (err, user) {
+    user.firstname = firstname;
+    user.lastname = lastname;
+    user.location = location;
+    user.phone = phone;
+    user.gravatarEmail = gravatarEmail;
+    user.bitcointalkLogin = bitcointalkLogin;
+    user.githubLogin = githubLogin;
+    user.stackexchangeLogin = stackexchangeLogin;
+    user.privateContrib = req.body.privateContrib;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
   });
 };
 
@@ -177,4 +329,21 @@ exports.receiveDeposit = function(req, res, next)
   }
   else
     res.send(500);
+};
+
+exports.privateContrib = function (req, res)
+{
+  var id = req.params.id;
+
+  User.findById(id, function (err, user)
+  {
+    if (err || !user)
+      res.send(500, err);
+    var obj =
+    {
+      name: user.name,
+      isPrivate: user.privateContrib
+    };
+    res.send(200, obj);
+  });
 };

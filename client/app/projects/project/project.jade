@@ -6,56 +6,99 @@ div(ng-include='"components/navbar/navbar.html"')
   .col-md-12
     h1.page-header
       i.fa.fa-book.text-muted
-      &nbsp;&nbsp;
+      | &nbsp;&nbsp;
       span {{currentProject.name}}
-      &nbsp;
-      small by {{currentProject.Owner}}
-      &nbsp;
-      img.avatar(gravatar-src="'{{currentProject.OwnerDatas.email}}'", width=20)
+      | &nbsp;
+      small by
+      | &nbsp;
+      a(href="/profile/{{currentProject.Owner}}")
+        small {{currentProject.Owner}}
+      | &nbsp;
+      img.avatar(gravatar-src="currentProject.OwnerDatas.email", width=20)
       span.pull-right
         a.btn.btn-xs.btn-default(ng-show="currentProject.OwnerDatas.name == currentUser.name", ng-href="/projects/{{currentProject.slug}}/edit")
           i.fa.fa-edit
-          &nbsp;&nbsp;
+          | &nbsp;&nbsp;
           span Edit project
-        &nbsp;&nbsp;
+        | &nbsp;&nbsp;
         a.btn.btn-xs.btn-primary(ng-href="mailto:{{currentProject.Owner}}", ng-show="currentProject.OwnerDatas.name != currentUser.name")
           i.fa.fa-envelope
-          &nbsp;&nbsp;
-          span Contact {{currentProject.OwnerDatas.name}}
-    span.text-muted
-      span Project started
-      &nbsp;
-      b(am-time-ago="currentProject.dateCreat")
-      &nbsp;
-      span and finishing
-      &nbsp;
-      b(am-time-ago="currentProject.dateEndCampaign")
-      br
-      br
+          | &nbsp;&nbsp;
+          span Contact
     .row
       .col-md-8
+        span.text-muted
+          span Project started
+          | &nbsp;
+          b(am-time-ago="currentProject.dateCreat")
+          | &nbsp;
+          span and finishing
+          | &nbsp;
+          b(am-time-ago="currentProject.dateEndCampaign")
+        br
+        br
         div.well
           span {{currentProject.description}}
+        div(ng-show="currentUser.name")
+          div
+            h2.page-header Contribute to this project
+          div.alert.alert-info(ng-show="resContrib", style="margin-top:10px;") {{resContrib}}
+          div.row.well
+            .col-md-7
+              div.text-muted(ng-show="!contribAmount || contribAmount <= 0")
+                span Your current balance: {{currentUser.balance | toBTC}} BTC
+              div(ng-show="contribAmount > 0")
+                span.text-success(ng-show="((currentUser.balance | toBTC) - contribAmount) > 0") Your future balance: {{(currentUser.balance | toBTC) - contribAmount}} BTC
+                span.text-danger(ng-show="((currentUser.balance | toBTC) - contribAmount) <= 0") Your can't contribute that much (balance: {{(currentUser.balance | toBTC) - contribAmount | number:0}} BTC)
+              br
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-btc.text-muted
+                input.form-control(type="text", ng-model="contribAmount" required, style="height: 37px;border-bottom-width:3px", ng-change='changePrice()')
+                span.input-group-btn
+                  button.btn.btn-success(type='button', ng-click="contribute()") Contribute
+              br
+              span.text-warning
+                i.fa.fa-exclamation-circle &nbsp;You cannot get back your pledges unless the project expires.
+            .col-md-5.text-center
+              strong Real time estimations
+              br
+              h3.text-muted
+                span(ng-show='currentPriceD') {{currentPriceD | currency:"$ ":2}}
+                span(ng-hide='currentPriceD') $ 0.0
+                br
+                span(ng-show='currentPriceE') {{currentPriceE | currency:"€ ":2}}
+                span(ng-hide='currentPriceE') € 0.0
+                br
+                span(ng-show='currentPriceP') {{currentPriceP | currency:"£ ":2}}
+                span(ng-hide='currentPriceP') £ 0.0
+        div
+          h2.page-header Discuss this project
+          div(disqus="('project' + currentProject._id)")
       .col-md-4
+        div
+          h2 Like this project ? Share it !
+          div.addthis_sharing_toolbox
+          br
         div.project-state.well.text-center
+          h2.text-info {{nbBackers}}
+          small backers
           h2.text-success {{currentProject.amountRaised | toBTC}} BTC
           small raised of {{currentProject.amountToRaise | toBTC}} BTC goal.
-    .row(ng-show="currentUser.name")
-        .col-md-12
-          h2.page-header Contribute to this project
-        .col-md-12
-          .input-group.col-md-6
-            span.input-group-addon
-              i.fa.fa-btc
-            input.form-control(type="text", ng-model="contribAmount" required, style="height: 37px;border-bottom-width:3px")
-            span.input-group-btn
-              button.btn.btn-default(type='button', ng-click="contribute()") Contribute
-          div.alert.alert-info(ng-show="resContrib", style="margin-top:10px;") {{resContrib}}
-    //- span(class="error", ng-show="myForm.input.$error.required") Required!<br>
-    .row
-      .col-lg-12
-        h2.page-header Discuss this project
-      .col-lg-12
-        div(disqus="('project' + currentProject._id)")
+          h2.text-warning {{daysToGo}}
+          small Days to go
+        div(ng-show="filteredContributors.length != 0")
+          .panel.panel-default(style="width: 330px")
+            .panel-heading Pledgers
+            .panel-body
+              div(ng-repeat="contributor in filteredContributors")
+                .col-sm-4
+                  span(ng-show="contributor.isPrivate == false").badge.badge-success.pull-right
+                    a(ng-href="/profile/{{contributor.userName}}", style="color: white;") {{contributor.userName}}
+                  span(ng-show="contributor.isPrivate == true").badge.badge-success.pull-right Private
+                .col-sm-8.pull-left
+                  span &nbsp; &nbsp; Amount: &nbsp;
+                  span.text-warning {{contributor.total | toBTC}} &nbsp;
+                  i.fa.fa-btc
 
 div(ng-include='"components/footer/footer.html"')

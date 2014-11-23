@@ -12,6 +12,12 @@ angular.module('bitCrowdFundsApp')
           controller:'password'
         }
       },
+      changeSettings: {
+        method: 'PUT',
+        params: {
+          controller:'settings'
+        }
+      },
       get: {
         method: 'GET',
         params: {
@@ -19,4 +25,12 @@ angular.module('bitCrowdFundsApp')
         }
       }
 	  });
+  })
+  .factory('UserProfile', function ($resource) {
+    return $resource('/api/users/profile/:name', {},
+    {
+      get: {
+        method: 'GET',
+      }
+    });
   });

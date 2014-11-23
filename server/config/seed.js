@@ -36,7 +36,15 @@ User.find({}).remove(function() {
     provider: 'local',
     name: 'Claude Allegre',
     email: 'test@test.com',
-    password: 'test'
+    password: 'test',
+    firstname : '',
+    lastname : '',
+    location : '',
+    phone : '',
+    gravatarEmail : '',
+    bitcointalkLogin : '',
+    githubLogin : '',
+    stackexchangeLogin : ''
   }, {
     provider: 'local',
     role: 'admin',
@@ -44,7 +52,15 @@ User.find({}).remove(function() {
     email: 'root@gogs.fr',
     bitcoinAddr: '1Bssfhhghijfskdf',
     balance: 55325400000,
-    password: '42coin'
+    password: '42coin',
+    firstname : 'Hugo',
+    lastname : 'Lafitte',
+    location : 'Paris, France',
+    phone : '+33645895246',
+    gravatarEmail : 'root@gogs.fr',
+    bitcointalkLogin : 'gogson',
+    githubLogin : 'gogson',
+    stackexchangeLogin : 'gogson'
   }, {
     provider: 'local',
     role: 'admin',
@@ -52,7 +68,15 @@ User.find({}).remove(function() {
     email: 'admin@admin.com',
     bitcoinAddr: '1Bssfhhghijfskdf',
     balance: 25325400000,
-    password: 'admin'
+    password: 'admin',
+    firstname : '',
+    lastname : '',
+    location : '',
+    phone : '',
+    gravatarEmail : '',
+    bitcointalkLogin : '',
+    githubLogin : '',
+    stackexchangeLogin : ''
   }, {
     provider: 'local',
     role: 'admin',
@@ -60,7 +84,15 @@ User.find({}).remove(function() {
     email: 'sylti@gogs.fr',
     bitcoinAddr: '1Bssfhhghijfskdf',
     balance: 42325400000,
-    password: '42coin'
+    password: '42coin',
+    firstname : '',
+    lastname : '',
+    location : 'Paris, France',
+    phone : '',
+    gravatarEmail : '',
+    bitcointalkLogin : '',
+    githubLogin : 'SylTi',
+    stackexchangeLogin : ''
   }, function() {
       console.log('finished populating users');
     }

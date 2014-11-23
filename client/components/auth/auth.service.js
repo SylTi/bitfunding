@@ -93,6 +93,40 @@ angular.module('bitCrowdFundsApp')
       },
 
       /**
+       * Change password
+       *
+       * @param  {String}   firstname
+       * @param  {String}   lastname
+       * @param  {String}   location
+       * @param  {String}   phone
+       * @param  {String}   gravatarEmail
+       * @param  {String}   bitcointalkLogin
+       * @param  {String}   githubLogin
+       * @param  {String}   stackexchangeLogin
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      changeSettings: function(user, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeSettings({ id: user/*currentUser*/._id }, {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          location: user.location,
+          phone: user.phone,
+          gravatarEmail: user.gravatarEmail,
+          bitcointalkLogin: user.bitcointalkLogin,
+          githubLogin: user.githubLogin,
+          stackexchangeLogin: user.stackexchangeLogin,
+          privateContrib : user.privateContrib
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
        * Gets all available info on authenticated user
        *
        * @return {Object} user

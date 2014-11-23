@@ -1,1 +1,24 @@
 .trash { color:rgb(209, 91, 71); }
+
+.tabText *
+{
+  color:white !important;
+}
+
+.tabText {
+  border:1px solid white;
+  border-radius:5px 5px 0 0;
+  cursor: pointer;
+}
+
+.tabText a:hover {
+  color:black !important;
+  border:1px solid #CCC !important;
+  border-radius:5px 5px 0 0 !important;
+  background-color: #CCC !important;
+  text-decoration: underline;
+}
+
+#admin-tabs li.active a{
+  font-weight: bold;
+}

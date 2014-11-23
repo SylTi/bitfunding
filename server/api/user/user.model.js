@@ -7,15 +7,24 @@ var crypto = require('crypto');
 var UserSchema = new Schema({
   name: {type: String, required: true, unique: true},
   email: { type: String, lowercase: true, required: true, unique: true },
-  role: { type: String, default: 'user'
-  },
+  role: { type: String, default: 'user'},
   hashedPassword: String,
   provider: String,
   salt: String,
   bitcoinAddr: {type: String, default: ""},
   balance: {type: Number, default: 0},
   unconfirmedBalance: {type: Number, default: 0},
-  transactions: [{}]
+  transactions: [{}],
+  privateContrib: {type: Boolean, default: false},
+  firstname : {type: String, default: ""},
+  lastname : {type: String, default: ""},
+  location : {type: String, default: ""},
+  phone : {type: String, default: ""},
+  gravatarEmail : {type: String, default: ""},
+  bitcointalkLogin : {type: String, default: ""},
+  githubLogin : {type: String, default: ""},
+  stackexchangeLogin : {type: String, default: ""},
+  active: {type: Boolean, default: true}
 });
 
 /**

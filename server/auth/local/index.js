@@ -12,6 +12,10 @@ router.post('/', function(req, res, next) {
     if (error) return res.json(401, error);
     if (!user) return res.json(404, {message: 'Something went wrong, please try again.'});
 
+    /* Check is user is active */
+    if (!user.active)
+      return res.json(401, {message: 'You account has been deactivated please contact the administrator website.'});
+
     var token = auth.signToken(user._id, user.role);
     res.json({token: token});
   })(req, res, next)

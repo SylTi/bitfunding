@@ -2,13 +2,15 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="bitCrowdFundsApp"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
-    <title>BitFunding - bitcoin crowdfunding platform</title>
-    <meta name="description" content="">
+    <title ng-bind="'BitFunding &mdash; ' + title">Bitfunding - Bitcoin Crowdfunding Platform</title>
+    <meta name="description" content="Bitfunding - Funds your projects with Bitcoin !">
+    <meta name="keywords" content="Bitcoin,Crowdfunding,Finance,Derivative,Gold,Silver,Future,Exchange,Markets,P2P Finance">
+    <meta name="author" content="SylTi,Gogson">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
@@ -16,6 +18,7 @@
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+      <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -24,6 +27,7 @@
       <link rel="stylesheet" href="app/account/dashboard/dashboard.css">
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/admin/admin.css">
+      <link rel="stylesheet" href="app/admin/adminEditUser/adminEditUser.css">
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/bootstrap-theme.min.css">
       <link rel="stylesheet" href="app/main/main.css">
@@ -31,13 +35,14 @@
       <link rel="stylesheet" href="app/projects/addproject/addproject.css">
       <link rel="stylesheet" href="app/projects/list/projects.css">
       <link rel="stylesheet" href="app/projects/project/project.css">
+      <link rel="stylesheet" href="app/projects/search/search.css">
       <link rel="stylesheet" href="components/footer/footer.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
     <!-- endbuild -->
       <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABqT9+8ak/f/GpP3/xqT9/8ak/f/GpP3/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/wAAAAAAAAAAAAAAAAAAAAAAAAAAGpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/AAAAAAAAAAAAAAAAGpP3/xqT9/8ak/f/GpP3/xaR9/8ak/f//////xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8AAAAAAAAAABqT9/8ak/f/GpP3/xqT9/+Pyvv/GpP3///////D4/3/7/j//xuT9/8ak/f/GpP3/xqT9/8ak/f/AAAAABqT9/Aak/f/GpP3/xqT9//x+P//////////////////////////////////GpP3/xqT9/8ak/f/GpP3/xqT9/0ak/f/GpP3/xqT9/8ak/f/9fr/////////////GpP3/xqT9/86ovj//////xWQ9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8Ukff//////xqT9/8Ojff///////////8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3////////////////////////////GZL3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9////////////xqT9/8ak/f//////9ft/v8ak/f/GpP3/xqT9/8ak/f/GpP3/RqT9/8ak/f/GpP3/xqT9/8ak/f////////////2+/////////////8ak/f/GpP3/xqT9/8ak/f/GpP38AAAAAAak/f/GpP3/xqT9/8ak/f/////////////////qdf8//////8ak/f/GpP3/xqT9/8ak/f/GpP3/wAAAAAAAAAAGpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/mc/8/xeS9///////GpP3/xqT9/8ak/f/GpP3/xqT9/8AAAAAAAAAAAAAAAAak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8AAAAAAAAAAAAAAAAAAAAAAAAAABqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8ak/f/GpP3/xqT9/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABqT9/4ak/f/GpP3/xqT9/8ak/f/GpP37wAAAAAAAAAAAAAAAAAAAAAAAAAA+B8AAOAHAADAAwAAgAEAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAgAEAAMADAADgBwAA+B8AAA==" rel="icon" type="image/x-icon" />
   </head>
-  <body ng-app="bitCrowdFundsApp">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -52,9 +57,12 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-XXXXX-X');
+      ga('create', 'UA-56628621-1', 'auto');
       ga('send', 'pageview');
     </script>
+
+    <!-- AddThis Widgets -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ugolafitte" async="async"></script>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -78,6 +86,8 @@
       <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
       <script src="bower_components/angular-disqus/angular-disqus.js"></script>
       <script src="bower_components/angular-slugify/angular-slugify.js"></script>
+      <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+      <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -88,10 +98,13 @@
           <script src="app/account/account.js"></script>
           <script src="app/account/dashboard/dashboard.controller.js"></script>
           <script src="app/account/login/login.controller.js"></script>
+          <script src="app/account/profile/profile.controller.js"></script>
+          <script src="app/account/profile/profile.js"></script>
           <script src="app/account/settings/settings.controller.js"></script>
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/admin/adminEditUser/adminEditUser.controller.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/projects/EditProject/EditProject.controller.js"></script>
@@ -99,6 +112,7 @@
           <script src="app/projects/list/projects.controller.js"></script>
           <script src="app/projects/project/project.controller.js"></script>
           <script src="app/projects/projects.js"></script>
+          <script src="app/projects/search/search.controller.js"></script>
           <script src="components/Project/Project.service.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>

@@ -13,9 +13,11 @@ var ProjectSchema = new Schema({
   amountToRaise: {type: Number, required: true},
   amountRaised: {type: Number, default: 0},
   contributors: [{contribId: ObjectId, amount: Number}],
+  contributorsOld: [{contribId: ObjectId, amount: Number}],
   OwnerBTCKey: { type: String, default: "", required: true},
   Owner: {type: String, required: true},
-  active: {type: Boolean, default: true}
+  active: {type: Boolean, default: true},
+  visible: {type: Boolean, default: true}
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
