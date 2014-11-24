@@ -1,5 +1,5 @@
 'use strict';
-
+/* jshint undef:false */
 var User = require('./user.model');
 var Project = require('../project/project.model');
 var passport = require('passport');
