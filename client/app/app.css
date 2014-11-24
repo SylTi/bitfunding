@@ -60,8 +60,8 @@ a.navbar-brand img {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 .hero-unit .container h1 {
-    color:white;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  color:white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .hero-unit .container .fa-4x {
@@ -134,3 +134,49 @@ div#navbar-main button {
 div#searchbar {
     margin-top: 5px;
 }
+
+/* AJAX Loader Bar */
+#loading-bar .bar {
+  background: rgba(255, 133, 27, 1);
+}
+
+#loading-bar .peg {
+  -moz-box-shadow: rgba(255, 133, 27, .8) 1px 0 6px 1px;
+  -ms-box-shadow: rgba(255, 133, 27, .8) 1px 0 6px 1px;
+  -webkit-box-shadow: rgba(255, 133, 27, .8) 1px 0 6px 1px;
+  box-shadow: rgba(255, 133, 27, .8) 1px 0 6px 1px;
+}
+
+/* Autocomplete search bar */
+div#searchbar .angucomplete-dropdown {
+    border-color: #ececec;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    width: 500px;
+    padding: 6px 6px 3px 6px;
+    cursor: pointer;
+    z-index: 9999;
+    position: absolute;
+    /*top: 32px;
+    left: 0px;
+    */
+    margin-top: -6px;
+    background-color: #ffffff;
+}
+
+div#searchbar .angucomplete-selected-row, .angucomplete-row {
+padding:10px;
+}
+
+div#searchbar .angucomplete-selected-row, .angucomplete-row:hover {
+    background-color: #EFEFEF;
+    color: #222;
+}
+
+div#searchbar .angucomplete-description {
+  font-size: 12px;
+  color:#CCC;
+}
+
+
