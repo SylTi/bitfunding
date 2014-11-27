@@ -28,16 +28,24 @@ exports.create = function(req, res)
   if(!bitcoin.validate(req.body.addrBTC))
         res.json(500, {reason:'Invalid Bitcoin Address'});
 
+  var minus = (req.user.balance * process.env.FEE_WITHDRAW) / 100;
   var obj = {
     userId: req.user._id,
     addrBTC: req.body.addrBTC,
     beforeBalance: req.user.balance,
-    returnedAmount: (req.user.balance * process.env.FEE_WITHDRAW) / 100
+    returnedAmount: req.user.balance - minus
   };
 
   Refund.create(obj, function(err, refund) {
     if(err) { return handleError(res, err); }
-    return res.json(201, refund);
+    req.user.balance = 0;
+    req.user.save(function (err)
+    {
+      if (err)
+        return handleError(res, err);
+      return res.json(201, refund);
+    });
+
   });
 };
 
@@ -51,6 +59,23 @@ exports.update = function(req, res) {
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, refund);
+    });
+  });
+};
+
+exports.accepted = function(req, res)
+{
+  Refund.findById(req.params.id, function (err, refund)
+  {
+    if (err || !refund)
+      return res.send(404);
+    refund.accepted = true;
+    refund.active = false;
+    refund.save(function (err)
+    {
+      if(err)
+        return handleError(res, err);
+      res.json(200, refund);
     });
   });
 };

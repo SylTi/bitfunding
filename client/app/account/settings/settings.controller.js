@@ -47,9 +47,7 @@ angular.module('bitCrowdFundsApp')
 
     $scope.doSendFunds = function ()
     {
-      var obj = {};
-      obj.userId = $scope.user._id;
-      obj.addrBTC = $scope.btcAddr;
+      var obj = {addrBTC: $scope.btcAddr};
 
       $http.post('/api/refunds/', obj)
       .success(function ()
