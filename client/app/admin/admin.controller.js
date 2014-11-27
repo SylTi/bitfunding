@@ -77,10 +77,23 @@ angular.module('bitCrowdFundsApp')
 
       $scope.acceptRefund = function (refund)
       {
-        $http.put('api/refunds/' + refund._id)
+        $http.put('api/refunds/' + refund._id + '/accepted/')
         .success(function()
         {
           $scope.message = 'If it isn\'t already done you should send the funds from your offline wallet !';
+        }).error(function (err)
+        {
+          console.log(err);
+          $scope.message = 'Something wrong happend';
+        });
+      };
+
+      $scope.refuseRefund = function (refund)
+      {
+        $http.put('api/refunds/' + refund._id + '/refused/')
+        .success(function()
+        {
+          $scope.message = 'The balance has been returned to the user';
         }).error(function (err)
         {
           console.log(err);

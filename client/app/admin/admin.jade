@@ -37,7 +37,7 @@ div(ng-include='"components/navbar/navbar.html"')
         | &nbsp;
         b Refunds Management
       ul.list-group.well
-        li.list-group-item(ng-repeat='refund in refunds | orderBy:"role"')
+        li.list-group-item(ng-repeat='refund in refunds | orderBy:"role"' ng-if='refund.active')
           span.pull-left
             a.text-muted(href="/profile/{{refund.userInfos.name}}")
               img.avatar(gravatar-src="'{{refund.userInfos.email}}'", width=40)
@@ -54,8 +54,10 @@ div(ng-include='"components/navbar/navbar.html"')
               | &nbsp;&nbsp;
               | {{refund.userInfos.email}}
             div.pull-right
-              a.trash(ng-click='acceptRefund(refund)' title='Validate Refund')
+              a(ng-click='acceptRefund(refund)' title='Validate Refund')
                 span.glyphicon.glyphicon-check &nbsp;
+              a.trash(ng-click='refuseRefund(refund)' title='Reject Refund')
+                span.glyphicon.glyphicon-remove &nbsp;
 
     tab
       tab-heading
@@ -204,7 +206,7 @@ div(ng-include='"components/navbar/navbar.html"')
                 a.trash(ng-click='deleteProject(project)')
                   span.glyphicon.glyphicon-trash
 
-        span.help-block  {{ message }}
+  span.help-block  {{ message }}
 
   //- h2.page-header Manage Users
 

@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var Refund = require('./refund.model');
 var bitcoin = require('bitcoin-address');
-//var User = require('../user/user.model');
+var User = require('../user/user.model');
 
 // Get list of refunds
 exports.index = function(req, res) {
@@ -65,20 +65,65 @@ exports.update = function(req, res) {
 
 exports.accepted = function(req, res)
 {
+  console.log('WHY THE FUCK I AM HERE ???');
   Refund.findById(req.params.id, function (err, refund)
   {
     if (err || !refund)
+    {
       return res.send(404);
+    }
     refund.accepted = true;
     refund.active = false;
     refund.save(function (err)
     {
       if(err)
+      {
         return handleError(res, err);
+      }
       res.json(200, refund);
     });
   });
 };
+
+exports.refused = function(req, res)
+{
+  console.log('fuck this shit !!!');
+  Refund.findById(req.params.id, function (err, refund)
+  {
+    if (err || !refund)
+    {
+      return res.send(404);
+    }
+    refund.accepted = false;
+    refund.active = false;
+    refund.save(function (err)
+    {
+      if(err)
+      {
+        return handleError(res, err);
+      }
+      User.findById(refund.userId, function (err, user)
+      {
+        if (err || !user)
+        {
+          return res.json(404, err);
+        }
+        user.balance = refund.beforeBalance;
+        user.save(function (err)
+        {
+          if (err)
+          {
+            return handleError(res, err);
+          }
+          console.log(refund);
+          console.log(user);
+          res.json(200, refund);
+        });
+      });
+    });
+  });
+};
+
 
 // // Deletes a refund from the DB.
 // exports.destroy = function(req, res) {
