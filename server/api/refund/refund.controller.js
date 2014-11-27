@@ -65,7 +65,6 @@ exports.update = function(req, res) {
 
 exports.accepted = function(req, res)
 {
-  console.log('WHY THE FUCK I AM HERE ???');
   Refund.findById(req.params.id, function (err, refund)
   {
     if (err || !refund)
@@ -87,7 +86,6 @@ exports.accepted = function(req, res)
 
 exports.refused = function(req, res)
 {
-  console.log('fuck this shit !!!');
   Refund.findById(req.params.id, function (err, refund)
   {
     if (err || !refund)
@@ -115,8 +113,6 @@ exports.refused = function(req, res)
           {
             return handleError(res, err);
           }
-          console.log(refund);
-          console.log(user);
           res.json(200, refund);
         });
       });

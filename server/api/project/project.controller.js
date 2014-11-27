@@ -118,13 +118,15 @@ exports.update = function(req, res) {
 
 // Deletes a project from the DB.
 exports.destroy = function(req, res) {
+
   Project.findById(req.params.id, function (err, project) {
     if(err) { console.log("find error : "+ err);return handleError(res, err); }
     if(!project) { console.log("project error  ");return res.send(404); }
-    project.remove(function(err) {
+    helper.hReturnFunds(project, res, true);
+    /*project.remove(function(err) {
       if(err) { console.log('==================='); console.log(err); return handleError(res, err); }
       return res.send(204);
-    });
+    });*/
   });
 };
 
