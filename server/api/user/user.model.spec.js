@@ -1,4 +1,5 @@
 'use strict';
+/*jshint undef:false */
 
 var should = require('should');
 var app = require('../../app');

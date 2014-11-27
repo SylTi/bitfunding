@@ -4,8 +4,6 @@ angular.module('bitCrowdFundsApp')
   .controller('AdminCtrl', function ($scope, $http, Auth, User, ProjectRes, $location) {
 
     // Use the User $resource to fetch all users
-    $scope.users = User.query();
-    $scope.projects = ProjectRes.query();
     $scope.message = '';
 
     $scope.init = function ()
@@ -15,22 +13,20 @@ angular.module('bitCrowdFundsApp')
           $http.get('api/refunds/').success(function (data)
           {
             $scope.refunds = data;
-            var res = _.forEach($scope.refunds, function (refund)
+            _.forEach($scope.refunds, function (refund)
             {
               refund.userInfos = _.find($scope.users, function (user)
               {
                 return user._id === refund.userId;
               });
             });
-            console.log($scope.refunds);
-            console.log(res);
           }).error(function (err)
           {
             console.log(err);
             $scope.message = 'Something wrong happend';
           });
        });
-
+      $scope.projects = ProjectRes.query();
     };
 
     $scope.isAdmin = function ()
