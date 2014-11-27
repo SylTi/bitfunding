@@ -39,7 +39,7 @@ exports.hReturnFunds = function (project, res, flag)
       project.contributorsOld = project.contributors.concat(project.contributors);
       project.amountRaised = 0;
       project.contributors = [];
-      //project.active = false;
+      project.active = false;
       project.save(function (err)
       {
         console.log("END");

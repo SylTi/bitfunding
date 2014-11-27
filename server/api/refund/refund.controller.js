@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Refund = require('./refund.model');
+var bitcoin = require('bitcoin-address');
+//var User = require('../user/user.model');
 
 // Get list of refunds
 exports.index = function(req, res) {
@@ -21,8 +23,19 @@ exports.show = function(req, res) {
 };
 
 // Creates a new refund in the DB.
-exports.create = function(req, res) {
-  Refund.create(req.body, function(err, refund) {
+exports.create = function(req, res)
+{
+  if(!bitcoin.validate(req.body.addrBTC))
+        res.json(500, {reason:'Invalid Bitcoin Address'});
+
+  var obj = {
+    userId: req.user._id,
+    addrBTC: req.body.addrBTC,
+    beforeBalance: req.user.balance,
+    returnedAmount: (req.user.balance * process.env.FEE_WITHDRAW) / 100
+  };
+
+  Refund.create(obj, function(err, refund) {
     if(err) { return handleError(res, err); }
     return res.json(201, refund);
   });

@@ -138,7 +138,7 @@ exports.contribute = function(req, res)
   var toContrib = Number(req.body.amount);
   var nameProj = req.params.name;//.replace("%20", " ");
 
-  User.findById(req.body.userId, function (err, user)
+  User.findById(req.user._id, function (err, user)
   {
     if (err || !user)
       return handleError(res, err);
@@ -202,7 +202,7 @@ exports.search = function(req, res)
   .exec(function(err, projects) {
     if (err || !projects)
       return handleError(res, err);
-    var obj = {secret: 'lol', data: projects};
+    var obj = {data: projects};
     //console.log(JSON.stringify(obj));
     res.json(200, obj);
   });
