@@ -56,7 +56,7 @@ You can configure:
 * Fork and make pull request.
 * Use the generator to follow the app conventions doc @ https://github.com/DaftMonk/generator-angular-fullstack
 * To lunch coding webserver : `grunt serve`
-* HotFix : create a new branch from master, push it for review & then merge to master.
+* HotFix : create a new branch from master, make pull request 
 * To publish the app on Heroku : `grunt build && cd dist && grunt buildcontrol:heroku`
 
 
