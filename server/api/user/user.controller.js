@@ -145,7 +145,6 @@ exports.destroy = function(req, res) {
   //   if(err) return res.send(500, err);
   //   return res.send(204);
   // });
-  console.log('here');
   var Project = require('../project/project.model.js');
   var helper = require('../project/project.helper');
   var async = require('async');
@@ -156,7 +155,6 @@ exports.destroy = function(req, res) {
     {
       return res.json(500, err);
     }
-    console.log('here');
     user.active = false;
     user.save(function (error)
     {
