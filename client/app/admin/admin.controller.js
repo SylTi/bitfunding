@@ -5,7 +5,7 @@ angular.module('bitCrowdFundsApp')
 
     // Use the User $resource to fetch all users
     $scope.message = '';
-
+    $scope.projects = [{}];
     $scope.init = function ()
     {
        $scope.users = User.query(function ()
@@ -26,7 +26,10 @@ angular.module('bitCrowdFundsApp')
             $scope.message = 'Something wrong happend';
           });
        });
-      $scope.projects = ProjectRes.query();
+      $scope.projects = ProjectRes.query(function (err)
+        {
+          $scope.$broadcast("Data_Ready");
+        });
     };
 
     $scope.isAdmin = function ()
@@ -96,4 +99,9 @@ angular.module('bitCrowdFundsApp')
           $scope.message = 'Something wrong happend';
         });
       };
+
+    /*$scope.$watch('projects', function(projs)
+    {
+      //$scope.$digest();
+    });*/
   });
