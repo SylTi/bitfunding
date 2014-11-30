@@ -26,10 +26,7 @@ angular.module('bitCrowdFundsApp')
             $scope.message = 'Something wrong happend';
           });
        });
-      $scope.projects = ProjectRes.query(function (err)
-        {
-          $scope.$broadcast("Data_Ready");
-        });
+      $scope.projects = ProjectRes.query();
     };
 
     $scope.isAdmin = function ()

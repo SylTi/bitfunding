@@ -1,4 +1,5 @@
 'use strict';
+/*jshint unused:false*/
 
 angular.module('bitCrowdFundsApp')
   .directive('adminProjectList', function ($timeout) {
