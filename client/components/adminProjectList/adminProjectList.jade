@@ -1,22 +1,21 @@
-li.list-group-item(ng-repeat='project in projects')
-  strong
-    span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
-    span.label.label-warning(ng-show="project.amountRaised !== 0 && project.amountRaised < project.amountToRaise") Ongoing
-    span.label.label-default(ng-show="project.amountRaised === 0") Not started
-    | &nbsp;&nbsp;
-    span {{project.name}} ({{project.amountRaised | toBTC}} / {{project.amountToRaise | toBTC}})
-  br
-  small.text-muted
-    span Project created
-    | &nbsp;
-    b(am-time-ago="project.dateCreat")
-    | &nbsp;
-    span and finishing
-    | &nbsp;
-    b(am-time-ago="project.dateEndCampaign")
-  .pull-right
-    a(ng-href='/projects/{{project.slug}}/edit')
-      span.glyphicon.glyphicon-pencil
-    | &nbsp;&nbsp;&nbsp;&nbsp;
-    a.trash(ng-click='deleteProject(project)')
-      span.glyphicon.glyphicon-trash
+strong
+  span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
+  span.label.label-warning(ng-show="project.amountRaised !== 0 && project.amountRaised < project.amountToRaise") Ongoing
+  span.label.label-default(ng-show="project.amountRaised === 0") Not started
+  | &nbsp;&nbsp;
+  span {{project.name}} ({{project.amountRaised | toBTC}} / {{project.amountToRaise | toBTC}})
+br
+small.text-muted
+  span Project created
+  | &nbsp;
+  b(am-time-ago="project.dateCreat")
+  | &nbsp;
+  span and finishing
+  | &nbsp;
+  b(am-time-ago="project.dateEndCampaign")
+.pull-right
+  a(ng-href='/projects/{{project.slug}}/edit')
+    span.glyphicon.glyphicon-pencil
+  | &nbsp;&nbsp;&nbsp;&nbsp;
+  a.trash(ng-click='deleteProject(project)')
+    span.glyphicon.glyphicon-trash

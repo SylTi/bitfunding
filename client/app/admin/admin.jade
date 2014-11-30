@@ -67,7 +67,8 @@ div(ng-include='"components/navbar/navbar.html"')
       ul.list-group.well
         tabset(justified='true', type="'pills'")
           tab(heading='All').tabText.label-primary
-            span(adminProjectList projects="projects")
+            li.list-group-item(ng-repeat='project in projects')
+              admin-project-list
             //- li.list-group-item(ng-repeat='project in projects')
             //-   strong
             //-     span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished

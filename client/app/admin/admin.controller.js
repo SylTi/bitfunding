@@ -99,6 +99,11 @@ angular.module('bitCrowdFundsApp')
           $scope.message = 'Something wrong happend';
         });
       };
+      //console.log($scope.projects);
+      /*$scope.$watch('projects', function(newVal, oldVal) {
+
+                    console.log($scope.projects);
+                }, true);*/
 
     /*$scope.$watch('projects', function(projs)
     {
