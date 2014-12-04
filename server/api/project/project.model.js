@@ -17,7 +17,8 @@ var ProjectSchema = new Schema({
   OwnerBTCKey: { type: String, default: "", required: true},
   Owner: {type: String, required: true},
   active: {type: Boolean, default: true},
-  visible: {type: Boolean, default: true}
+  visible: {type: Boolean, default: true},
+  moneySent: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);

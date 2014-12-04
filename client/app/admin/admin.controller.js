@@ -96,14 +96,31 @@ angular.module('bitCrowdFundsApp')
           $scope.message = 'Something wrong happend';
         });
       };
-      //console.log($scope.projects);
-      /*$scope.$watch('projects', function(newVal, oldVal) {
 
-                    console.log($scope.projects);
-                }, true);*/
+     $scope.sendFunds = function (project)
+     {
+      $http.put('api/projects/' + project._id + '/sendFunds')
+      .success(function ()
+      {
+        $scope.message = 'Funds sent to the project Owner. <br />If you didn\'t already sent them with your offline wallet, do it now !';
+      })
+      .error(function (err)
+      {
+        console.log(err);
+        $scope.message = 'Something wrong happend';
+      });
+    };
 
-    /*$scope.$watch('projects', function(projs)
+    $scope.datePassed = function (date)
     {
-      //$scope.$digest();
-    });*/
+
+      var res = new Date(date);
+      var current = new Date();
+
+      if (res < current)
+      {
+        return true;
+      }
+      return false;
+    };
   });

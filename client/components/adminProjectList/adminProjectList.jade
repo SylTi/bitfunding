@@ -1,7 +1,9 @@
 strong
-  span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise") Finished
-  span.label.label-warning(ng-show="project.amountRaised !== 0 && project.amountRaised < project.amountToRaise") Ongoing
-  span.label.label-default(ng-show="project.amountRaised === 0") Not started
+  span.label.label-info(ng-show="project.amountRaised >= project.amountToRaise && datePassed(project.dateEndCampaign)") Done
+  span.label.label-danger(ng-show="project.amountRaised < project.amountToRaise && datePassed(project.dateEndCampaign)") Expired
+  span.label.label-success(ng-show="project.amountRaised >= project.amountToRaise && !datePassed(project.dateEndCampaign)") Finished
+  span.label.label-warning(ng-show="project.amountRaised !== 0 && project.amountRaised < project.amountToRaise && !datePassed(project.dateEndCampaign)") Ongoing
+  span.label.label-default(ng-show="project.amountRaised === 0 && !datePassed(project.dateEndCampaign)") Not started
   | &nbsp;&nbsp;
   span {{project.name}} ({{project.amountRaised | toBTC}} / {{project.amountToRaise | toBTC}})
 br
@@ -13,9 +15,4 @@ small.text-muted
   span and finishing
   | &nbsp;
   b(am-time-ago="project.dateEndCampaign")
-.pull-right
-  a(ng-href='/projects/{{project.slug}}/edit')
-    span.glyphicon.glyphicon-pencil
-  | &nbsp;&nbsp;&nbsp;&nbsp;
-  a.trash(ng-click='deleteProject(project)')
-    span.glyphicon.glyphicon-trash
+

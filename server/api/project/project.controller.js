@@ -67,8 +67,6 @@ exports.create = function(req, res) {
   var datas = req.body;
   datas.amountRaised = 0;
   datas.contributors = [];
-  console.log(datas.dateEndCampaign);
-  console.log(Date(datas.dateEndCampaign));
   //datas.dateEndCampaign = new Date(datas.dateEndCampaign);
   datas.dateCreat = new Date();
   datas.amountToRaise *= 100000000;
@@ -93,7 +91,6 @@ exports.create = function(req, res) {
 
 // Updates an existing project in the DB.
 exports.update = function(req, res) {
-  console.log(req.body);
  // if(req.body._id) { delete req.body._id; }
   Project.findById(req.body.project._id, function (err, project) {
     if (err) { return handleError(res, err); }
@@ -159,6 +156,12 @@ exports.contribute = function(req, res)
               return handleError(res, err);
             if (!project)
               return handleError(res, err);
+            if (project.active === false)
+              return handleError(res, 'project deactivated');
+            var tmp = new Date(project.dateEndCampaign);
+            var curr = new Date();
+            if (tmp <= curr)
+              return handleError(res, 'project end date is passed');
             project.amountRaised += toContrib;
             project.contributors.push({contribId: user._id, amount: toContrib});
             project.save(function (err)
@@ -207,5 +210,35 @@ exports.search = function(req, res)
     var obj = {data: projects};
     //console.log(JSON.stringify(obj));
     res.json(200, obj);
+  });
+};
+
+exports.sendFunds = function(req, res)
+{
+  if (req.user.role !== 'admin')
+  {
+    return res.send(500);
+  }
+
+  Project.find({_id: req.params.id}, function (err, project)
+  {
+    if (err || !project)
+    {
+      return handleError(res, err);
+    }
+    if (Date(project.dateEndCampaign) > Date())
+    {
+      return handleError(res, 'campaign has not ended');
+    }
+    project.active = false;
+    project.moneySent = true;
+    project.save(function (err)
+    {
+      if (err)
+      {
+        return handleError(res, err);
+      }
+      return res.send(200);
+    });
   });
 };

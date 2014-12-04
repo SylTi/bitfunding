@@ -56,7 +56,7 @@ div(ng-include='"components/navbar/navbar.html"')
                   i.fa.fa-btc.text-muted
                 input.form-control(type="text", ng-model="contribAmount" required, style="height: 37px;border-bottom-width:3px", ng-change='changePrice()')
                 span.input-group-btn
-                  button.btn.btn-success(type='button', ng-click="contribute()") Contribute
+                  button.btn.btn-success(type='button', ng-click="contribute()", ng-disabled='!currentProject.active') Contribute
               br
               span.text-warning
                 i.fa.fa-exclamation-circle &nbsp;You cannot get back your pledges unless the project expires.

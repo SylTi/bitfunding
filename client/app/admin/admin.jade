@@ -42,24 +42,45 @@ div(ng-include='"components/navbar/navbar.html"')
           tab(heading='All').tabText.label-primary
             li.list-group-item(ng-repeat='project in projects')
               admin-project-list
+              admin-project-list-right
 
           tab(heading='Not Started').label-default.tabText
-            li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised === 0')
+            li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised === 0 && !datePassed(project.dateEndCampaign)')
               admin-project-list
+              admin-project-list-right
 
           tab(heading='Ongoing').label-warning.tabText
-            admin-project-list
+            li.list-group-item(ng-repeat='project in projects', ng-if='project.amountRaised !== 0 && project.amountRaised < project.amountToRaise && !datePassed(project.dateEndCampaign)')
+              admin-project-list
+              admin-project-list-right
 
           tab(heading='Expired').label-danger.tabText
-            admin-project-list
+            li.list-group-item(ng-repeat='project in projects', ng-if='project.amountRaised < project.amountToRaise && datePassed(project.dateEndCampaign)')
+              admin-project-list
+              admin-project-list-right
 
           tab(heading='Finished').label-success.tabText
-            li.list-group-item(ng-repeat='project in projects', ng-if='project.amountRaised >= project.amountToRaise')
+            li.list-group-item(ng-repeat='project in projects', ng-if='project.amountRaised >= project.amountToRaise && !datePassed(project.dateEndCampaign)')
               admin-project-list
+              admin-project-list-right
 
           tab(heading='Done').label-info.tabText
-            li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised >= project.amountToRaise && project.dateEndCampaign <= date')
+            li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised >= project.amountToRaise && datePassed(project.dateEndCampaign)')
               admin-project-list
+              admin-project-list-right
+
+    tab
+      tab-heading
+        span.fa.fa-book.text-muted
+        | &nbsp;
+        b Projects Funded
+      ul.list-group.well
+        li.list-group-item(ng-repeat='project in projects' ng-if='project.amountRaised >= project.amountToRaise && datePassed(project.dateEndCampaign) && project.moneySent == false')
+          admin-project-list
+          .pull-right
+            a(ng-click='sendFunds(project)')
+              i.fa.fa-btc(title='Send Funds to project !')
+
 
   span.help-block  {{ message }}
 

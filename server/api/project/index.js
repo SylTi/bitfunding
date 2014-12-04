@@ -18,5 +18,6 @@ router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.put('/:name/returnFunds', auth.hasRole('admin'), controller.returnFunds);
 router.get('/search/:name', controller.search);
 router.get('/user/:name', controller.userProjects);
+router.put('/:id/sendFunds', auth.hasRole('admin'), controller.sendFunds);
 
 module.exports = router;
