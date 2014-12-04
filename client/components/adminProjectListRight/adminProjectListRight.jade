@@ -1,0 +1,6 @@
+.pull-right
+  a(ng-href='/projects/{{project.slug}}/edit')
+    span.glyphicon.glyphicon-pencil
+  | &nbsp;&nbsp;&nbsp;&nbsp;
+  a.trash(ng-click='deleteProject(project)')
+    span.glyphicon.glyphicon-trash
