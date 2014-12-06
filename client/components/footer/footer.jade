@@ -2,6 +2,27 @@
   footer.footer(ng-controller="FooterCtrl")
     .container
       p
+        ul.list-unstyled.pull-left.text-left(id='listAbout')
+          li
+            h4 About Us
+          li
+            a(ng-href='/whatisbitfunding') What is Bitfunding ?
+          li
+            a(ng-href='/press') Press
+          li
+            a(ng-href='/contact') Contact Us
+        ul.list-unstyled.pull-left.text-left
+          li
+            h4 Help
+          li
+            a(ng-href='/faq') FAQ
+          li
+            a(ng-href='/tou') Terms of Use
+          li
+            a(ng-href='/privatypolicy') Privacy Policy
+      p
+        br
+        br
         | BitFunding project is powered with MEAN stack.
         = ' '
         a(href='https://github.com/gogson') @gogson
