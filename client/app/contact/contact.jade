@@ -1,2 +1,33 @@
-.col-md-12
-    | This is the contact view.
+div(ng-include='"components/navbar/navbar.html"')
+
+.container.text-center
+  .text-danger {{resultbad}}
+  .text-success {{resultgood}}
+  form.form-horizontal(role='form', name='formMail')
+    .form-group
+      label.col-sm-2.control-label(for='inputEmail') Votre Nom
+      | &#x9;&#x9;
+      .col-sm-10
+        input#inputName.form-control(type='text', placeholder='Nom', ng-model='msg.name', required='')
+    | &#x9;
+    .form-group
+      label.col-sm-2.control-label(for='inputEmail') Votre Email
+      | &#x9;&#x9;
+      .col-sm-10
+        input#inputEmail.form-control(type='email', placeholder='Email', ng-model='msg.email', required='')
+    | &#x9;
+    .form-group
+      label.col-sm-2.control-label(for='inputSubject') Sujet
+      | &#x9;&#x9;
+      .col-sm-10
+        input#inputSubject.form-control(type='text', placeholder='La raison de votre contact', ng-model='msg.subject', required='')
+    | &#x9;
+    .form-group
+      label.col-sm-2.control-label(for='inputContent') Message (HTML Accept&eacute;)
+      | &#x9;&#x9;
+      .col-sm-10
+        textarea#inputContent.form-control(type='text', placeholder='Votre message', row='6', ng-model='msg.content', required='')
+    | &#x9;
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-default(type='submit', ng-click='send()', ng-disabled='!formMail.$valid') Envoyer
