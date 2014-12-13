@@ -1,2 +1,22 @@
-.col-md-12
-    | This is the whatisbitfunding view.
+div(ng-include='"components/navbar/navbar.html"')
+
+.container
+.col-md-1
+.col-md-11
+    h1 What is Bitfunding ?
+    .well
+      p
+        p
+          |Bitfunding is a crowdfunding platform based on Bitcoin.
+          br
+          |With it you can bring you projects to life using the collaborative economy.
+          br
+          |We allow you 4 type of crowdfunding :
+          br
+        ul
+          li Gift / Donation
+          li Pre-sales
+          li Loans
+          li Capital participation (Shares)
+
+div(ng-include='"components/footer/footer.html"')

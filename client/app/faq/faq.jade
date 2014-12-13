@@ -1,2 +1,12 @@
-.col-md-12
-    | This is the faq view.
+div(ng-include='"components/navbar/navbar.html"')
+
+.col-md-1
+.col-md-11
+  h1 FAQ
+  div(ng-controller='FaqCtrl')
+    p
+      accordion(close-others='oneAtATime')
+        accordion-group(heading='{{group.title}}', ng-repeat='group in groups')
+          | {{group.content}}
+
+div(ng-include='"components/footer/footer.html"')
